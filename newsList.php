@@ -1,6 +1,6 @@
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="news.css">
+    <link rel="stylesheet" type="text/css" href="css/news.css">
     <meta name="keywords" content="egovernment, gradjani" />
     <meta name="author" content="Ajda" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
