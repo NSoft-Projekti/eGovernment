@@ -37,26 +37,21 @@
     </div><!--header--->
     <div id="container">
         <div id="main">            <!--
-            <div="main-title">
-            <span>Dobrodosli!Jeste li spremni za registraciju na e-Goverment</span>
+                    <div="main-title">
+                    <span>Dobrodosli!Jeste li spremni za registraciju na e-Goverment</span>
             </div><!--main-title-->
             <div id="registration">
                 <form>
                     <!-- end #header -->
-                        <div id="page">
+                    <div id="page">
                             <div id="page-bgtop">
                                 <div id="page-bgbtm">
                                     <div id="content">
                                         <div class="post">
-                                            <?php
-                                            $res = mysql_query('call select_news()');
-                                            if ($res === FALSE) {
-                                            die(mysql_error());}
 
-                                            ?>
-                                            <h2 id="title"><a href="newsDetails.php"><!--NASLOV IZ VIJESTI--></a></h2>
-                                            <p class="meta"><span class="date"><!--DATUM IZ VIJESTI--></span></br>
-                                                <span class="posted">postavio/la<a href="#"><!--AUTOR IZ VIJESTI--></a></span></p>
+                                            <h2 id="title"><a href="newsDetails.php">VIJEST 1</a></h2>
+                                            <p class="meta"><span class="date">18.12.2013</span></br>
+                                                <span class="posted">postavio/la<a href="#">Admin</a></span></p>
                                             <div class="entry">
                                                 <p>Nalazite se na stranicama <strong>eGovernmenta </strong>, besplatne web platforme za upravljanje udrugom građana.</p>
                                                 <p class="links"><a href="newsDetails.php" class="button">Pročitaj više</a></p>
