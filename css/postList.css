@@ -1,0 +1,11 @@
+#title {
+    color: #717171 !important;
+    text-decoration-line: none;
+}
+.date{
+    font-style: italic;
+}
+.posted{
+    font-style: italic;
+    color: #389CEA !important;
+}
