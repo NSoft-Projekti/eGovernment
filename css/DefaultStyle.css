@@ -163,6 +163,11 @@ h6 {
     background: rgb(62,62,62);
 }
 
+#search-down {
+
+    margin-top:7px;
+}
+
 
 #container {
     width: 902px;
