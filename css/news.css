@@ -6,11 +6,7 @@ h6{margin-top:10px; font-size:14px; font-weight:normal; }
 
 #wrapper {width:982px;border: 1px solid #FFFFFF;margin: 20px auto 0 auto;background-color: #FFFFFF;}
 
-#header{
-    width:942px;
-    height:125px;
-    margin: 20px 20px 0 20px;
-}
+
 a:link
 {
     text-decoration: none; color: #414141;
@@ -25,9 +21,7 @@ a:hover
 {
     text-decoration: underline; color: #414141;
 }
-#header-title {
-    color: #389CEA !important;
-}
+
 
 .posted{
     font-style: italic;
@@ -38,24 +32,12 @@ a:active
     text-decoration: none; color: #414141;
 }
 
-#header-up{
-    width:942px;
-    height:85px;
-    margin:0;
-    background-color: #414141;
-}
 
 #login{
     margin-left: 10px;
     margin-top: 5px;
 }
-#header-logo{
-    width:400px;
-    height:68px;
-    margin-bottom:17px;
-    margin-left:14px;
-    float:left;
-}
+
 
 #reg-prijava {
     width:150px;
@@ -105,7 +87,7 @@ a:active
 
 */
 
-#header-down{width:942px;height:55px;background:url(../img/bg_hmenu.png) 100%;}
+
 
 #img-search{width:16px; height:16px; background:url(../img/icons.png); background-position:0 -29px; float:right; margin:17px 15px;}
 
