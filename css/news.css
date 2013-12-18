@@ -107,9 +107,9 @@ a:active
 
 */
 
-#header-down{width:942px;height:55px;background:url(img/bg_hmenu.png) 100%;}
+#header-down{width:942px;height:55px;background:url(../img/bg_hmenu.png) 100%;}
 
-#img-search{width:16px; height:16px; background:url(img/icons.png); background-position:0 -29px; float:right; margin:17px 15px;}
+#img-search{width:16px; height:16px; background:url(../img/icons.png); background-position:0 -29px; float:right; margin:17px 15px;}
 
 #search input {margin-top:15px; float:right;}
 
@@ -166,7 +166,7 @@ a:active
 
 .v-item:hover{color:#99cc00;}
 
-.v-arrow{  width:8px;   height:9px; margin-top:4px; cursor:pointer; float:right;  background:url(img/icons.png); background-position:-132px -36px; }
+.v-arrow{  width:8px;   height:9px; margin-top:4px; cursor:pointer; float:right;  background:url(../img/icons.png); background-position:-132px -36px; }
 
 
 
@@ -175,7 +175,7 @@ a:active
 #sign-in input{ border:1px #cdcdcd solid;   background-color:#eee; padding:0; -webkit-border-radius:3px; -moz-border-radius:3px; padding-left:10px;}
 #username{margin-bottom:12px;width:214px; height:34px;}
 #password{margin-bottom:16px;width:214px; height:34px;}
-#sign {width:93px;height:34px; background: url(img/bg-sign.png) repeat top left;}
+#sign {width:93px;height:34px; background: url(../img/bg-sign.png) repeat top left;}
 
 
 
@@ -183,7 +183,7 @@ a:active
 #pop-up p{font-size:12px; text-align:left; margin:20px 0 0 0;}
 #pop-up span{font-weight:bold;}
 #pop-up label {font-size:14px; float:left;margin-top:5px; }
-#poplink{background:url(img/popup-border.png); width:152px; height:20px; text-decoration:none;}
+#poplink{background:url(../img/popup-border.png); width:152px; height:20px; text-decoration:none;}
 
 
 #column-2{width:702px;height:851px;float:left;}
@@ -192,7 +192,7 @@ a:active
 
 #slider2{float:left; width:188px; height:367; margin-left:21px;}
 
-.box{ background:url(img/slideshow-thumb.png); width:188px; height:113px; margin-bottom:14px;}
+.box{ background:url(../img/slideshow-thumb.png); width:188px; height:113px; margin-bottom:14px;}
 
 .box:last-child{margin-bottom:0; }
 
