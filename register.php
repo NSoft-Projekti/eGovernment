@@ -14,7 +14,9 @@ if(!empty($_POST['username']) and !empty($_POST['password'])and !empty($_POST['n
     $gender=mysql_real_escape_string($_POST['gender']);
     $date_of_birth=mysql_real_escape_string($_POST['bday']);
     $telephone=mysql_real_escape_string($_POST['usrtel']);
+
     $newDate_of_birth = date("Y-m-d", strtotime($date_of_birth));
+
     $checkusername = mysql_query("SELECT * FROM user WHERE username = '".$username."'");
 
     if($gender=='M'){
