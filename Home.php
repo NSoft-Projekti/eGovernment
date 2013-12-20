@@ -1,4 +1,4 @@
- <html>
+<html>
 <head>
     <meta name="description" content="Design Android applications" />
     <meta name="keywords" content="android, design, technics" />
@@ -6,9 +6,11 @@
     <title>eGovernment :: Home</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="css/DefaultStyle.css" rel="stylesheet" type="text/css" />
-    <link href="css/postList.css" rel="stylesheet" type="text/css">
+    <link href="css/HomeStyle.css" rel="stylesheet" type="text/css" />
+    <link href="css/postList.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
 </head>
+
 <?php
 $username = "root";
 $password = "mojapraksa";
@@ -17,11 +19,10 @@ $hostname = "10.0.0.250";
 //connection to the database
 $conn = mysql_connect($hostname, $username, $password)
 or die("Unable to connect to MySQL");
-echo "Connected to MySQL AJDA MAJSTORE";
 ?>
 <?php
 //select a database to work with
-$selected = mysql_select_db("tim4",$conn)
+$db = mysql_select_db("tim4",$conn)
 or die("Could not select tim4");
 ?>
 
@@ -39,7 +40,7 @@ or die("Could not select tim4");
 
             <div id="reg-prijava">
 
-                <a title="prijava" href="#">Prijava</a>
+                <a title="prijava" href="login_popup.html">Prijava</a>
 
                 <a title="registracija" href="registracija.html">Registracija</a>
 
@@ -54,7 +55,7 @@ or die("Could not select tim4");
 
             <div id="horizontal-menu">
                 <ul>
-                    <li><a href="#footer">Home</a> </li>
+                    <li><a href="#footer" class="currentTab">Home</a> </li>
                     <li><a href="#footer">Vijesti</a> </li>
                     <li><a href="#footer">Prijedlozi</a> </li>
                     <li><a href="#footer">Odluke</a> </li>
@@ -80,7 +81,6 @@ or die("Could not select tim4");
 
 
     </div><!--header--->
-
 
     <div id="container">
         <div class="post">
@@ -193,8 +193,8 @@ or die("Could not select tim4");
 
 
     </div><!--container-->
+</br>
 
-    </div><!--container-->
 
     <div id="footer">
 
@@ -216,7 +216,7 @@ or die("Could not select tim4");
         </div><!--footer-up-->
 
         <div id="footer-down">
-            <p class="text">All design and content Copyright &copy; 2013.<span id="year"></span>. All rights reserved.</p>
+            <p class="text">All design and content Copyright &copy; 2013<span id="year"></span>. All rights reserved.</p>
         </div><!--footer-down-->
 
 
