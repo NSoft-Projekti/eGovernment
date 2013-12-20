@@ -9,3 +9,11 @@
     font-style: italic;
     color: #389CEA !important;
 }
+
+.post{
+width: 600px;
+}
+
+.right {
+float: right;
+}
