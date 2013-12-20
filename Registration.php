@@ -5,8 +5,7 @@
     <meta name="author" content="Jelena" />
     <title>E-government</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-
+    <link href="css/registration.css" rel="stylesheet" type="text/css" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
 

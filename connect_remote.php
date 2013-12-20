@@ -6,7 +6,7 @@
  * Time: 11:55
  */
 
-$dbhost = "10.0.0.250"; // ovo je server host
+$dbhost = "pip.intera.ba:13306"; // ovo je server host
 $dbname = "tim4"; // ime baze
 $dbuser = "root"; // username
 $dbpass = "mojapraksa"; // password

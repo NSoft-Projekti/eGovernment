@@ -14,7 +14,7 @@
 <?php
 $username = "root";
 $password = "mojapraksa";
-$hostname = "10.0.0.250";
+$hostname = "pip.intera.ba:13306";
 
 //connection to the database
 $conn = mysql_connect($hostname, $username, $password)

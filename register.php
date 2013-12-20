@@ -1,6 +1,7 @@
 <?php
 
-require("connect.php");
+//require("connect.php");
+require("connect_remote.php");
 
 if(!empty($_POST['username']) and !empty($_POST['password'])and !empty($_POST['name']) and !empty($_POST['lastname']) and !empty($_POST['email'])and!empty($_POST['gender'])and!empty($_POST['bday'])and !empty($_POST['usrtel']))
 {
@@ -33,7 +34,7 @@ if(!empty($_POST['username']) and !empty($_POST['password'])and !empty($_POST['n
         if($registerquery)
         {
             echo "<h1>Uspjeh</h1>";
-            echo "<p>Uspješno ste se regitrirali. Klik <a href=" login-popup.php ">ovdje za login</a>.</p>";
+            echo "<p>Uspješno ste se regitrirali. Klik <a href=''login-popup.php'>ovdje za login.</a></p>";
         }
         else
         {
