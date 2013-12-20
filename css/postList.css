@@ -12,3 +12,25 @@
 .right{
     float: right;
 }
+.post{
+    width:500px;
+}
+a:link
+{
+    text-decoration: none; color: #414141;
+}
+
+a:visited
+{
+    text-decoration: none; color: #414141;
+}
+
+a:hover
+{
+    text-decoration: underline; color: #414141;
+}
+
+a:active
+{
+    text-decoration: none; color: #414141;
+}
