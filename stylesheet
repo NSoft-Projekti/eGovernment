@@ -1,0 +1,10 @@
+.center{
+   margin: 0 auto;
+    width: 600px;
+}
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
