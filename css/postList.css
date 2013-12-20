@@ -9,11 +9,13 @@
     font-style: italic;
     color: #389CEA !important;
 }
-.right{
-    float: right;
+
+.post {
+    width: 600px;
 }
-.post{
-    width:500px;
+
+.right {
+    float: right;
 }
 a:link
 {
@@ -28,9 +30,4 @@ a:visited
 a:hover
 {
     text-decoration: underline; color: #414141;
-}
-
-a:active
-{
-    text-decoration: none; color: #414141;
 }
