@@ -5,10 +5,26 @@
     <meta name="author" content="Jelena" />
     <title>eGovernment :: Home</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link href="css/DefaultStyle.css" rel="stylesheet" type="text/css" />
     <link href="css/HomeStyle.css" rel="stylesheet" type="text/css" />
     <link href="css/postList.css" rel="stylesheet" type="text/css" />
+    <meta charset="utf-8">
 </head>
 
+<?php
+$username = "root";
+$password = "mojapraksa";
+$hostname = "10.0.0.250";
+
+//connection to the database
+$dbhandle = mysql_connect($hostname, $username, $password)
+or die("Unable to connect to MySQL");
+?>
+<?php
+//select a database to work with
+$selected = mysql_select_db("tim4",$dbhandle)
+or die("Could not select tim4");
+?>
 
 <body>
 <div id="wrapper" >
@@ -68,13 +84,20 @@
 
     <div id="container">
         <div class="post">
-            <h2 id="title"><a href="newsDetails.php">VIJEST 1</a></h2>
-            <p class="meta"><span class="date">18.12.2013</span></br>
-                <span class="posted">postavio/la<a href="#">Admin</a></span></p>
-            <div class="entry">
-                <p>Nalazite se na stranicama <strong>eGovernmenta </strong>, besplatne web platforme za upravljanje udrugom građana.</p>
-                <p class="links"><a href="newsDetails.php" class="right">Pročitaj više</a></p>
-            </div>
+            <?php
+            $query = "SELECT * FROM post inner join user on post.user_iduser = user.iduser
+             WHERE POST.post_type_idpost_type='1' LIMIT 3";
+            $result = mysql_query($query);
+            while($row = mysql_fetch_array($result)){
+
+            echo '<h2 id="title"><a href="newsDetails.php">'.$row["title"].'</a></h2>';
+            echo '<p class="meta"><span class="date">'.$row["date_time"].'</span></p>';
+            echo '<p><span class="posted">postavio/la <a href="#">'.$row["username"].'</a></span></p>';
+            echo ' <div class="entry"><p>'.$row["summary"].'</p></div>';
+            echo '<p class="links"><a href="newsDetails.php" class="right">Pročitaj više</a></p></br>';
+            }
+            ?>
+
         </div>
 
 
