@@ -55,7 +55,7 @@ or die("Could not select tim4");
 
             <div id="horizontal-menu">
                 <ul>
-                    <li><a href="#footer">Home</a> </li>
+                    <li><a href="#footer" class="currentTab">Home</a> </li>
                     <li><a href="#footer">Vijesti</a> </li>
                     <li><a href="#footer">Prijedlozi</a> </li>
                     <li><a href="#footer">Odluke</a> </li>

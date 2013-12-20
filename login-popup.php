@@ -42,7 +42,7 @@
 
 </head>
 <body>
-<div id="login-box" class="login-popup">
+<div id="login-box" class="login-popup" style="display: block; margin-top: -111.9px; margin-left: -129.9px;>
     <a href="#" class="close"><img src="img/close_pop.png" class="btn_close" title="Close Window" alt="Close" /></a>
     <form method="post" class="signin" action="#">
         <fieldset class="textbox">
@@ -65,5 +65,6 @@
         </fieldset>
     </form>
 </div>
+<div id="mask" style="display: block;"></div>
 </body>
 </html>

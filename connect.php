@@ -6,8 +6,6 @@
  * Time: 11:55
  */
 
-session_start();
-
 $dbhost = "10.0.0.250"; // ovo je server host
 $dbname = "tim4"; // ime baze
 $dbuser = "root"; // username
@@ -19,7 +17,7 @@ mysql_query("SET NAMES utf8");
 mysql_query("SET CHARACTER SET utf8");
 mysql_query("SET COLLATION_CONNECTION='utf8_unicode_ci'");
  /**
-session_start();
+
 
 $dbhost = "pip.intera.ba"; // ovo je server host
 $dbname = "tim4"; // ime baze

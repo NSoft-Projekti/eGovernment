@@ -16,6 +16,12 @@ if(!empty($_POST['username']) and !empty($_POST['password'])and !empty($_POST['n
     $newDate_of_birth = date("Y-m-d", strtotime($date_of_birth));
     $checkusername = mysql_query("SELECT * FROM user WHERE username = '".$username."'");
 
+    if($gender=='M'){
+        $gender=='M';
+    }
+    else {
+        $gender=='Ž';
+    }
     if(mysql_num_rows($checkusername) == 1)
     {
         echo "<h1>Greška</h1>";
@@ -23,7 +29,7 @@ if(!empty($_POST['username']) and !empty($_POST['password'])and !empty($_POST['n
     }
     else
     {
-        $registerquery = mysql_query("call create_user('".$name."','".$lastname."','".$username."','".$address."', '".$password."', '".$email."','".$gender."','".$newDate_of_birth."','".$tepephone."')");
+        $registerquery = mysql_query("call create_user('".$name."','".$lastname."','".$username."','".$address."', '".$password."', '".$email."','".$gender."','".$newDate_of_birth."','".$telephone."')");
         if($registerquery)
         {
             echo "<h1>Uspjeh</h1>";
