@@ -1,0 +1,38 @@
+<?php
+
+require("connect.php");
+
+if(!empty($_POST['username']) and !empty($_POST['password'])and !empty($_POST['name']) and !empty($_POST['lastname']) and !empty($_POST['email'])and!empty($_POST['gender'])and!empty($_POST['bday'])and !empty($_POST['usrtel']))
+{
+    $name=mysql_real_escape_string($_POST['name']);
+    $lastname=mysql_real_escape_string($_POST['lastname']);
+    $username = mysql_real_escape_string($_POST['username']);
+    $password = md5(mysql_real_escape_string($_POST['password']));
+    $email = mysql_real_escape_string($_POST['email']);
+    $address=mysql_real_escape_string($_POST['address']);
+    $gender=mysql_real_escape_string($_POST['gender']);
+    $date_of_birth=mysql_real_escape_string($_POST['bday']);
+    $telephone=mysql_real_escape_string($_POST['usrtel']);
+    $newDate_of_birth = date("Y-m-d", strtotime($date_of_birth));
+    $checkusername = mysql_query("SELECT * FROM user WHERE username = '".$username."'");
+
+    if(mysql_num_rows($checkusername) == 1)
+    {
+        echo "<h1>Greška</h1>";
+        echo "<p>To korisničko ime već postoji, probajte ponovno.</p>";
+    }
+    else
+    {
+        $registerquery = mysql_query("call create_user('".$name."','".$lastname."','".$username."','".$address."', '".$password."', '".$email."','".$gender."','".$newDate_of_birth."','".$tepephone."')");
+        if($registerquery)
+        {
+            echo "<h1>Uspjeh</h1>";
+            echo "<p>Uspješno ste se regitrirali. Klik <a href=" login-popup.php ">ovdje za login</a>.</p>";
+        }
+        else
+        {
+            echo "<h1>Greška</h1>";
+        }
+    }
+}
+?>
