@@ -90,14 +90,14 @@ or die("Could not select tim4");
             // find out how many rows are in the table
             $sql = "SELECT * FROM post inner join user on post.user_iduser = user.iduser
              WHERE POST.post_type_idpost_type='1'";
-            $result = mysql_query($sql, $conn) or trigger_error("SQL", E_USER_ERROR);
-            $r = mysql_fetch_row($result);
-            $numrows = $r[3];
+            $result = mysql_query($sql);
+            $r = mysql_num_rows($result);
 
             // number of rows to show per page
             $rowsperpage = 3;
             // find out total pages
-            $totalpages = ceil($numrows / $rowsperpage);
+            $totalpages = ceil($r / $rowsperpage);
+
 
             // get the current page or set a default
             if (isset($_GET['currentpage']) && is_numeric($_GET['currentpage'])) {
