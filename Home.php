@@ -40,9 +40,9 @@ or die("Could not select tim4");
 
             <div id="reg-prijava">
 
-                <a title="prijava" href="login_popup.html">Prijava</a>
+                <a title="prijava" href="login-popup.php">Prijava</a>
 
-                <a title="registracija" href="registracija.html">Registracija</a>
+                <a title="registracija" href="Registration.php">Registracija</a>
 
 
             </div><!--reg-prijava-->
@@ -57,9 +57,7 @@ or die("Could not select tim4");
                 <ul>
                     <li><a href="#footer" class="currentTab">Home</a> </li>
                     <li><a href="#footer">Vijesti</a> </li>
-                    <li><a href="#footer">Prijedlozi</a> </li>
-                    <li><a href="#footer">Odluke</a> </li>
-                    <li><a href="#footer">Korisnici</a> </li>
+
 
                 </ul>
 
