@@ -40,7 +40,7 @@ or die("Could not select tim4");
 
             <div id="reg-prijava">
 
-                <a title="prijava" href="login_popup.html">Prijava</a>
+                <a title="prijava" href="login-popup.php">Prijava</a>
 
                 <a title="registracija" href="registracija.html">Registracija</a>
 
