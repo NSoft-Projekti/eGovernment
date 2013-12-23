@@ -1,6 +1,6 @@
 <?php
-//require("connect.php");
-require("connect_remote.php");
+require("connect.php");
+//require("connect_remote.php");
 $username = $_POST['username'];
 $password = $_POST['password'];
 

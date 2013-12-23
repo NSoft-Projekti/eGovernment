@@ -5,16 +5,16 @@
     <meta name="author" content="Jelena" />
     <title>eGovernment :: Home</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <link href="css/DefaultStyle.css" rel="stylesheet" type="text/css" />
-    <link href="css/HomeStyle.css" rel="stylesheet" type="text/css" />
-    <link href="css/postList.css" rel="stylesheet" type="text/css" />
+    <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
+    <link href="style/HomeStyle.css" rel="stylesheet" type="text/css" />
+    <link href="style/postList.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
 </head>
 
 <?php
 $username = "root";
 $password = "mojapraksa";
-$hostname = "pip.intera.ba:13306";
+$hostname = "10.0.0.250";
 
 //connection to the database
 $conn = mysql_connect($hostname, $username, $password)
