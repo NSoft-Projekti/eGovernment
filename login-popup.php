@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link href="css/login-popup.css" rel="stylesheet" type="text/css">
+    <link href="style/login-popup.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
@@ -42,7 +42,7 @@
 
 </head>
 <body>
-<div id="login-box" class="login-popup" style="display: block; margin-top: -111.9px; margin-left: -129.9px;>
+<div id="login-box" class="login-popup">
     <a href="#" class="close"><img src="img/close_pop.png" class="btn_close" title="Close Window" alt="Close" /></a>
     <form method="post" class="signin" action="#">
         <fieldset class="textbox">
@@ -65,6 +65,5 @@
         </fieldset>
     </form>
 </div>
-<div id="mask" style="display: block;"></div>
 </body>
 </html>

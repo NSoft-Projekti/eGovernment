@@ -5,16 +5,16 @@
     <meta name="author" content="Jelena" />
     <title>eGovernment :: Home</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <link href="css/DefaultStyle.css" rel="stylesheet" type="text/css" />
-    <link href="css/HomeStyle.css" rel="stylesheet" type="text/css" />
-    <link href="css/postList.css" rel="stylesheet" type="text/css" />
+    <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
+    <link href="style/HomeStyle.css" rel="stylesheet" type="text/css" />
+    <link href="style/postList.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
 </head>
 
 <?php
 $username = "root";
 $password = "mojapraksa";
-$hostname = "pip.intera.ba:13306";
+$hostname = "10.0.0.250";
 
 //connection to the database
 $conn = mysql_connect($hostname, $username, $password)
@@ -40,9 +40,9 @@ or die("Could not select tim4");
 
             <div id="reg-prijava">
 
-                <a title="prijava" href="login_popup.html">Prijava</a>
+                <a title="prijava" href="login-popup.php">Prijava</a>
 
-                <a title="registracija" href="registracija.html">Registracija</a>
+                <a title="registracija" href="Registration.php">Registracija</a>
 
 
             </div><!--reg-prijava-->
@@ -57,9 +57,7 @@ or die("Could not select tim4");
                 <ul>
                     <li><a href="#footer" class="currentTab">Home</a> </li>
                     <li><a href="#footer">Vijesti</a> </li>
-                    <li><a href="#footer">Prijedlozi</a> </li>
-                    <li><a href="#footer">Odluke</a> </li>
-                    <li><a href="#footer">Korisnici</a> </li>
+
 
                 </ul>
 
