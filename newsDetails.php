@@ -1,4 +1,4 @@
-<?php
+
 <html>
 <head>
     <meta name="description" content="Design Android applications" />
@@ -7,6 +7,7 @@
     <title>eGovernment :: Home</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="css/DefaultStyle.css" rel="stylesheet" type="text/css" />
+    <meta charset="utf-8">
 </head>
 <?php
  include('connect.php');
@@ -71,20 +72,21 @@
     <div id="container">
         <div class="news_container">
             <?php
+            $idpost = $_GET['id'];
+            $result = mysql_query("select title,content,date_time from post where post.idpost = $idpost");
 
-            $idpost=$_post["idpost"];
-            $sgl="select * from post where post.post_type_idpost_type='1' and $idpost==post.idpost";
+            if($result == FALSE) {
+                die(mysql_error());
+            }
 
-
-            $result = mysql_query($sql, $conn) or trigger_error("SQL", E_USER_ERROR);
-            // while there are rows to be fetched...
-            while ($row = mysql_fetch_assoc($result)) {
-                echo '<h2 id="title">'.$row["title"].'</a></h2>';
+            while($row = mysql_fetch_array($result))
+            {
+                echo '<h2 id="title">'.$row["title"].'</h2>';
                 echo '<p class="meta"><span class="date">'.$row["date_time"].'</span></p>';
-                echo '<p><span class="posted">'.$row["content"].'</a></span></p>';
-
-            } // end while
+                echo ' <div class="entry"><p>'.$row["content"].'</p></div>';
+            }
             ?>
+
 
         </div>
 
