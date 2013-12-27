@@ -133,7 +133,7 @@ or die("Could not select tim4");
             echo '<p class="meta"><span class="date">'.$row["date_time"].'</span></p>';
             echo '<p><span class="posted">postavio/la <a href="#">'.$row["username"].'</a></span></p>';
             echo ' <div class="entry"><p>'.$row["summary"].'</p></div>';
-            echo '<p class="links"><a href="newsDetails.php" class="right">Pročitaj više</a></p></br>';
+            echo '<p class="links"><a href="newsDetails.php?id='.$idpost.'" class="right">Pročitaj više</a></p></br>';
             } // end while
 
             /******  build the pagination links ******/
