@@ -6,7 +6,7 @@
     <meta name="author" content="Jelena" />
     <title>eGovernment :: Home</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <link href="css/DefaultStyle.css" rel="stylesheet" type="text/css" />
+    <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
 </head>
 <?php
@@ -43,7 +43,7 @@
             <div id="horizontal-menu">
                 <ul>
                     <li><a href="#footer">Home</a> </li>
-                    <li><a href="#footer">Vijesti</a> </li>
+                    <li><a href="#footer" class="currentTab">Vijesti</a> </li>
                     <li><a href="#footer">Prijedlozi</a> </li>
                     <li><a href="#footer">Odluke</a> </li>
                     <li><a href="#footer">Korisnici</a> </li>
