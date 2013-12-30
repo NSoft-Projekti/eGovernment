@@ -44,7 +44,7 @@
 <body>
 <div id="login-box" class="login-popup">
     <a href="#" class="close"><img src="img/close_pop.png" class="btn_close" title="Close Window" alt="Close" /></a>
-    <form method="post" class="signin" action="login-check.php">
+    <form method="post" class="signin" action="#" form="myform">
         <fieldset class="textbox">
             <label class="username">
                 <span>Username or email</span>
@@ -56,7 +56,7 @@
                 <input id="password" name="password" value="" type="password" placeholder="Password">
             </label>
 
-            <button class="submit button" type="submit" >Sign in</button>
+            <button class="submit button" type="submit" onclick="myFunction" onclick="window.open('login.php')">Sign in</button>
 
             <p>
 <!--                <a class="forgot" href="#">Forgot your password?</a>-->
