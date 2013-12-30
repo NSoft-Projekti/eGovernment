@@ -12,19 +12,8 @@
 </head>
 
 <?php
-$username = "root";
-$password = "mojapraksa";
-$hostname = "pip.intera.ba:13306";
-
-//connection to the database
-$conn = mysql_connect($hostname, $username, $password)
-or die("Unable to connect to MySQL");
-?>
-<?php
-//select a database to work with
-$db = mysql_select_db("tim4",$conn)
-or die("Could not select tim4");
-?>
+include('connect.php');
+//include('connect_remote.php');
 
 <body>
 <div id="wrapper" >
