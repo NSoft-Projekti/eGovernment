@@ -79,7 +79,7 @@
 
             <div id="registration">
 
-                <form name="registration" method="post" onsubmit="validateForm()" action="register.php">
+                <form name="registration" method="post" onsubmit="validateForm()" action="register_proces.php">
 
                     <table>
                         <tr> <td>Ime: *</td>              <td><input type="text" name="name" ></td>  </tr>
