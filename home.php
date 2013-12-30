@@ -12,8 +12,8 @@
 </head>
 
 <?php
-include('connect.php');
-//include('connect_remote.php');
+//include('connect.php');
+include('connect_remote.php');
 ?>
 
 <body>

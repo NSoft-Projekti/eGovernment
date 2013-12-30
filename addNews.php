@@ -1,8 +1,7 @@
 <html>
 <head>
-    <meta name="description" content="Design Android applications" />
-    <meta name="keywords" content="android, design, technics" />
-    <meta name="author" content="Jelena" />
+    <meta name="description" content="eGovernment" />
+    <meta name="author" content="Ajda" />
     <title>eGovernment :: Home</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
@@ -25,9 +24,9 @@
 
             <div id="reg-prijava">
 
-                <a title="prijava" href="#">Prijava</a>
+                <a title="prijava" href="#">Korisnik</a>
 
-                <a title="registracija" href="registracija.html">Registracija</a>
+                <img class="logo" src="img/login-icon.png">
 
 
             </div><!--reg-prijava-->
@@ -68,6 +67,7 @@
     </div><!--header--->
 
     <div id="container">
+        <div class="news_container">
         <div id="title">
         <label >Unesite naslov vijesti: </label><br>
         <input type="text" name="title" id="inputTitle"/>
@@ -77,14 +77,20 @@
             <textarea name="title" id="inputContent"></textarea>
         </div>
         <div id="summary">
-            <label>Unesite kratki opis vijesti: </label>
-            <textarea name="title" id="inputSummary"></textarea>
-        </div>
+                <label>Unesite kratki opis vijesti: </label>
+                <textarea name="title" id="inputSummary"></textarea>
+            </div>
+            <div id="attachment">
+                <label>Attachment</label>
+                <input type="file" name="file" id="file">
+            </div>
+            <hr>
         <button name="submit" value="submit" class="button">Spasi</button>
 
 
 
 
+</div><!--news_container-->
 
     </div><!--container-->
 
