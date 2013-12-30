@@ -27,9 +27,10 @@
 
             <div id="reg-prijava">
 
-                <a title="prijava" href="#">Prijava</a>
 
-                <a title="registracija" href="registracija.html">Registracija</a>
+
+                <a title="prijava" href="#">Korisnik</a>
+                <img class="logo" src="img/login-icon.png">
 
 
             </div><!--reg-prijava-->

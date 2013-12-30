@@ -11,8 +11,8 @@ $dbname = "tim4"; // ime baze
 $dbuser = "root"; // username
 $dbpass = "mojapraksa"; // password
 
-mysql_connect($dbhost, $dbuser, $dbpass) or die("MySQL Error: " . mysql_error());
-mysql_select_db($dbname) or die("MySQL Error: " . mysql_error());
+$conn=mysql_connect($dbhost, $dbuser, $dbpass) or die("MySQL Error: " . mysql_error());
+$selected=mysql_select_db($dbname) or die("MySQL Error: " . mysql_error());
 mysql_query("SET NAMES utf8");
 mysql_query("SET CHARACTER SET utf8");
 mysql_query("SET COLLATION_CONNECTION='utf8_unicode_ci'");

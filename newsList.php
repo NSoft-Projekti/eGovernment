@@ -10,20 +10,10 @@
     <meta charset="utf-8">
 </head>
 <?php
-$username = "root";
-$password = "mojapraksa";
-$hostname = "pip.intera.ba:13306";
+include('connect.php');
+//*include('connect_remote.php');
+?>
 
-//connection to the database
-$conn = mysql_connect($hostname, $username, $password)
-or die("Unable to connect to MySQL");
-echo "Connected to MySQL AJDA MAJSTORE";
-?>
-<?php
-//select a database to work with
-$selected = mysql_select_db("tim4",$conn)
-or die("Could not select tim4");
-?>
 
 <body>
 <div id="wrapper" >

@@ -549,7 +549,13 @@ h1{
     text-align: center;
     margin: 0;
 }
-
+.logo{
+    float: right;
+    margin-right: 25px;
+}
 .currentTab {
 background: #555 !important;
+}
+.news_container{
+    width: 600px;
 }
