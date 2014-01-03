@@ -3,15 +3,6 @@ require("connect.php");
 
 $username = $_POST['username'];
 $password = $_POST['password'];
-
-$username2 = "root";
-$password2 = "mojapraksa";
-$hostname2 = "pip.intera.ba:13306";
-
-//connection to the database
-$conn = mysql_connect($hostname2, $username2, $password2);
-//select a database to work with
-$selected = mysql_select_db("tim4",$conn);
 ?>
 <?php
 //Start session
@@ -32,8 +23,9 @@ function clean($str) {
 }
 
 //Sanitize the POST values
-$username = clean($_POST['username']);
-$password = clean($_POST['password']);
+//using md5 hash for comparing passwords
+$username = str_replace("'", "''", $_POST['username']);
+$password = md5($_POST['password']);
 
 //Input Validations
 if($username == '') {

@@ -23,4 +23,12 @@ mysql_query("SET NAMES utf8");
 mysql_query("SET CHARACTER SET utf8");
 mysql_query("SET COLLATION_CONNECTION='utf8_unicode_ci'");
 
+ // function using md5 password hash
+ //whenever a new user completes the registration form, his password will be encrypted automatically
+ function hashLozinki($username, $password){
+ global $conn;
+ $password = md5($password);
+ $q = "INSERT INTO ".TBL_USERS." VALUES ('$username', '$password')";
+ return mysql_query($q, $conn);
+ }
 ?>
