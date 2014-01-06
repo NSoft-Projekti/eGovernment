@@ -9,20 +9,9 @@
     <link href="style/postList.css" rel="stylesheet" type="text/css">
     <meta charset="utf-8">
 </head>
-<?php
-$username = "root";
-$password = "mojapraksa";
-$hostname = "10.0.0.250";
 
-//connection to the database
-$conn = mysql_connect($hostname, $username, $password)
-or die("Unable to connect to MySQL");
-echo "Connected to MySQL AJDA MAJSTORE";
-?>
 <?php
-//select a database to work with
-$selected = mysql_select_db("tim4",$conn)
-or die("Could not select tim4");
+include('connect.php');
 ?>
 
 <body>
@@ -128,11 +117,12 @@ or die("Could not select tim4");
 
             // while there are rows to be fetched...
             while ($row = mysql_fetch_assoc($result)) {
-                echo '<h2 id="title"><a href="newsDetails.php">'.$row["title"].'</a></h2>';
+                $idpost=$row['idpost'];
+                echo '<h2 id="title"><a href="suggestionDetails.php?id='.$idpost.'">'.$row["title"].'</a></h2>';
                 echo '<p class="meta"><span class="date">'.$row["date_time"].'</span></p>';
                 echo '<p><span class="posted">postavio/la <a href="#">'.$row["username"].'</a></span></p>';
                 echo ' <div class="entry"><p>'.$row["summary"].'</p></div>';
-                echo '<p class="links"><a href="newsDetails.php" class="right">Pročitaj više</a></p></br>';
+                echo '<p class="links"><a href="suggestionDetails.php?id='.$idpost.'" class="right">Pročitaj više</a></p></br>';
             } // end while
 
             /******  build the pagination links ******/
