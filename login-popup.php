@@ -1,69 +1,73 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link href="style/login-popup.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-    <script type="text/javascript">
+
+<?php ?>
+<script type="text/javascript">
+
     $(document).ready(function() {
-    $('a.login-window').click(function() {
+        $('a.login-window').click(function() {
 
-    // Getting the variable's value from a link
-    var loginBox = $(this).attr('href');
+            // Getting the variable's value from a link
+            var loginBox = $(this).attr('href');
 
-    //Fade in the Popup and add close button
-                $(loginBox).fadeIn(300);
+            //Fade in the Popup and add close button
+            $(loginBox).fadeIn(300);
 
-    //Set the center alignment padding + border
-      var popMargTop = ($(loginBox).height() + 24) / 2;
-    var popMargLeft = ($(loginBox).width() + 24) / 2;
+            //Set the center alignment padding + border
+            var popMargTop = ($(loginBox).height() + 24) / 2;
+            var popMargLeft = ($(loginBox).width() + 24) / 2;
 
-    $(loginBox).css({
-    'margin-top' : -popMargTop,
-    'margin-left' : -popMargLeft
+            $(loginBox).css({
+                'margin-top' : -popMargTop,
+                'margin-left' : -popMargLeft
+            });
+
+            // Add the mask to body
+            $('body').append('<div id="mask"></div>');
+            $('#mask').fadeIn(300);
+
+            return false;
+        });
+
+        // When clicking on the button close or the mask layer the popup closed
+        $('a.close, #mask').live('click', function() {
+            $('#mask , .login-popup').fadeOut(300 , function() {
+                $('#mask').remove();
+            });
+            return false;
+        });
+
+//        $('#btn').onclick(function(e) {
+//            e.preventDefault();
+//            alert('clicked');
+//            return false;
+//        });
+
+
     });
-
-    // Add the mask to body
-                $('body').append('<div id="mask"></div>');
-    $('#mask').fadeIn(300);
-
-    return false;
-        });
-
-    // When clicking on the button close or the mask layer the popup closed
-            $('a.close, #mask').live('click', function() {
-    $('#mask , .login-popup').fadeOut(300 , function() {
-        $('#mask').remove();
-        });
-    return false;
-        });
-        });
-    </script>
-
-</head>
-<body>
-<div id="login-box" class="login-popup">
-    <a href="#" class="close"><img src="img/close_pop.png" class="btn_close" title="Close Window" alt="Close" /></a>
-    <form method="post" class="signin" action="login-check.php" form="myform">
+</script>
+<div class="login-popup" id="login-box">
+    <div id="btn" style="float:right">
+        <a class="close" href="#"><img alt="Close" title="Close Window" class="btn_close" src="img/close_pop.png"></a>
+    </div>
+    <!--            <a href="#" class="close"><img src="close_pop.png" class="btn_close" title="Close Window" alt="Close" /></a>-->
+    <form action=login-check.php class="signin" method="post" form="myform">
         <fieldset class="textbox">
             <label class="username">
                 <span>Username or email</span>
-                <input id="username" name="username" value="" type="text" autocomplete="on" placeholder="Username">
+                <input type="text" placeholder="Username" autocomplete="on" value="" name="username" id="username">
             </label>
 
             <label class="password">
                 <span>Password</span>
-                <input id="password" name="password" value="" type="password" placeholder="Password">
+                <input type="password" placeholder="Password" value="" name="password" id="password">
             </label>
 
-            <button class="submit button" type="submit" onclick="myFunction" onclick="window.open()">Sign in</button>
+            <button type="button" class="submit button" onclick="myFunction" onclick="window.open()">Sign in</button>
 
-            <p>
-<!--                <a class="forgot" href="#">Forgot your password?</a>-->
-            </p>
+            <!--                    <p>-->
+            <!--                        <a href="#" class="forgot">Forgot your password?</a>-->
+            <!--                    </p>-->
 
         </fieldset>
     </form>
 </div>
-</body>
-</html>
+<a class="login-window" href="#login-box">Prijava</a>
