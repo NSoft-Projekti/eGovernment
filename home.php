@@ -9,6 +9,10 @@
     <link href="style/HomeStyle.css" rel="stylesheet" type="text/css" />
     <link href="style/postList.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
+
+    <link href="style/login-popup.css" rel="stylesheet" type="text/css" />    <!--css style from a login-popup form-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script> <!--script from a login-popup form-->
+
 </head>
 
 <?php
@@ -29,7 +33,12 @@ include('connect.php');
 
             <div id="reg-prijava">
 
-                <a title="prijava" href="login-popup.php">Prijava</a>
+                <!--<a title="prijava" href="login-popup.php">Prijava</a>-->
+
+                <?php
+                include_once("login-popup.php");
+                ?>
+                <!--login-popup-->
 
                 <a title="registracija" href="Registration.php">Registracija</a>
 
@@ -55,7 +64,7 @@ include('connect.php');
             <div id="search">
                 <div id="search-down">
                     <a href="#"><div id="img-search">
-                    </div></a><!--img-search-->
+                        </div></a><!--img-search-->
 
                     <input type="text" name="search" >
 
@@ -180,7 +189,7 @@ include('connect.php');
 
 
     </div><!--container-->
-</br>
+    </br>
 
 
     <div id="footer">
