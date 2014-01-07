@@ -61,7 +61,7 @@
                 <input type="password" placeholder="Password" value="" name="password" id="password">
             </label>
 
-            <button type="button" class="submit button" onclick="myFunction" onclick="window.open()">Sign in</button>
+            <button type="submit" class="submit button">Sign in</button>
 
             <!--                    <p>-->
             <!--                        <a href="#" class="forgot">Forgot your password?</a>-->
