@@ -1,4 +1,4 @@
- <html>
+<html>
 <head>
     <meta name="description" content="Design Android applications" />
     <meta name="keywords" content="android, design, technics" />
@@ -43,9 +43,9 @@ include('connect.php');
             <div id="horizontal-menu">
                 <ul>
                     <li><a href="#footer">Home</a> </li>
-                    <li><a href="#footer" class="currentTab">Vijesti</a> </li>
+                    <li><a href="#footer">Vijesti</a> </li>
                     <li><a href="#footer">Prijedlozi</a> </li>
-                    <li><a href="#footer">Odluke</a> </li>
+                    <li><a href="#footer" class="currentTab">Odluke</a> </li>
                     <li><a href="#footer">Korisnici</a> </li>
 
                 </ul>
@@ -55,7 +55,7 @@ include('connect.php');
             <div id="search">
                 <div id="search-down">
                     <a href="#"><div id="img-search">
-                    </div></a><!--img-search-->
+                        </div></a><!--img-search-->
 
                     <input type="text" name="search" >
 
@@ -76,8 +76,7 @@ include('connect.php');
             <?php
 
             // find out how many rows are in the table
-            $sql = "SELECT * FROM post inner join user on post.user_iduser = user.iduser
-             WHERE POST.post_type_idpost_type='1'";
+            $sql = "SELECT * FROM post WHERE POST.post_type_idpost_type='2'";
             $result = mysql_query($sql);
             $r = mysql_num_rows($result);
 
@@ -111,18 +110,16 @@ include('connect.php');
             $offset = ($currentpage - 1) * $rowsperpage;
 
             // get the info from the db
-            $sql = "SELECT * FROM post inner join user on post.user_iduser = user.iduser
-             WHERE POST.post_type_idpost_type='1' LIMIT $offset, $rowsperpage";
+            $sql = "SELECT * FROM post WHERE POST.post_type_idpost_type='2' LIMIT $offset, $rowsperpage";
             $result = mysql_query($sql, $conn) or trigger_error("SQL", E_USER_ERROR);
 
             // while there are rows to be fetched...
             while ($row = mysql_fetch_assoc($result)) {
-            $idpost=$row['idpost'];
-            echo '<h2 id="title"><a href="newsDetails.php?id='.$idpost.'">'.$row["title"].'</a></h2>';
-            echo '<p class="meta"><span class="date">'.$row["date_time"].'</span></p>';
-            echo '<p><span class="posted">postavio/la <a href="#">'.$row["username"].'</a></span></p>';
-            echo ' <div class="entry"><p>'.$row["summary"].'</p></div>';
-            echo '<p class="links"><a href="newsDetails.php?id='.$idpost.'" class="right">Pročitaj više</a></p></br>';
+                $idpost=$row['idpost'];
+                echo '<h2 id="title"><a href="decisionDetails.php?id='.$idpost.'">'.$row["title"].'</a></h2>';
+                echo '<p class="meta"><span class="date">'.$row["date_time"].'</span></p>';
+                echo ' <div class="entry"><p>'.$row["summary"].'</p></div>';
+                echo '<p class="links"><a href="decisionDetails.php?id='.$idpost.'" class="right">Pročitaj više</a></p></br>';
             } // end while
 
             /******  build the pagination links ******/
@@ -183,33 +180,33 @@ include('connect.php');
 
     </div><!--container-->
 
-    </div><!--container-->
+</div><!--container-->
 
-    <div id="footer">
+<div id="footer">
 
-        <div id="footer-up">
+    <div id="footer-up">
 
-            <div id="footer-logo">
-                <h1>LOGO</h1>
-            </div><!--footer-logo-->
+        <div id="footer-logo">
+            <h1>LOGO</h1>
+        </div><!--footer-logo-->
 
-            <div id="icons">
+        <div id="icons">
 
-                <a href="http://www.flickr.com/" target="_blank" > <img title="Flick" src="img/icon-fl.png"></a>
-                <a href="https://twitter.com/" target="_blank">  <img src="img/icon-tw.png"></a>
-                <a href="https://www.facebook.com/" target="_blank"> <img src="img/icon-fb.png"></a>
-                <a href="http://www.google.ba" target="_blank"> <img src="img/icon-gp.png"></a>
-                <a href="http://dribbble.com/" target="_blank"> <img src="img/icon-db.png"></a>
-            </div><!--icons-->
+            <a href="http://www.flickr.com/" target="_blank" > <img title="Flick" src="img/icon-fl.png"></a>
+            <a href="https://twitter.com/" target="_blank">  <img src="img/icon-tw.png"></a>
+            <a href="https://www.facebook.com/" target="_blank"> <img src="img/icon-fb.png"></a>
+            <a href="http://www.google.ba" target="_blank"> <img src="img/icon-gp.png"></a>
+            <a href="http://dribbble.com/" target="_blank"> <img src="img/icon-db.png"></a>
+        </div><!--icons-->
 
-        </div><!--footer-up-->
+    </div><!--footer-up-->
 
-        <div id="footer-down">
-            <p class="text">All design and content Copyright &copy; 2013.<span id="year"></span>. All rights reserved.</p>
-        </div><!--footer-down-->
+    <div id="footer-down">
+        <p class="text">All design and content Copyright &copy; 2013.<span id="year"></span>. All rights reserved.</p>
+    </div><!--footer-down-->
 
 
-    </div><!---footer-->
+</div><!---footer-->
 
 
 

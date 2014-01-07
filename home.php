@@ -5,25 +5,18 @@
     <meta name="author" content="Jelena" />
     <title>eGovernment :: Home</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <link href="css/DefaultStyle.css" rel="stylesheet" type="text/css" />
-    <link href="css/HomeStyle.css" rel="stylesheet" type="text/css" />
-    <link href="css/postList.css" rel="stylesheet" type="text/css" />
+    <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
+    <link href="style/HomeStyle.css" rel="stylesheet" type="text/css" />
+    <link href="style/postList.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
+
+    <link href="style/login-popup.css" rel="stylesheet" type="text/css" />    <!--css style from a login-popup form-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script> <!--script from a login-popup form-->
+
 </head>
 
 <?php
-$username = "root";
-$password = "mojapraksa";
-$hostname = "pip.intera.ba:13306";
-
-//connection to the database
-$conn = mysql_connect($hostname, $username, $password)
-or die("Unable to connect to MySQL");
-?>
-<?php
-//select a database to work with
-$db = mysql_select_db("tim4",$conn)
-or die("Could not select tim4");
+include('connect.php');
 ?>
 
 <body>
@@ -40,9 +33,14 @@ or die("Could not select tim4");
 
             <div id="reg-prijava">
 
-                <a title="prijava" href="login-popup.php">Prijava</a>
+                <!--<a title="prijava" href="login-popup.php">Prijava</a>-->
 
-                <a title="registracija" href="Registration.php">Registracija</a>
+                <?php
+                include_once("login-popup.php");
+                ?>
+                <!--login-popup-->
+
+                <a title="registracija" href="registration.php">Registracija</a>
 
 
             </div><!--reg-prijava-->
@@ -66,7 +64,7 @@ or die("Could not select tim4");
             <div id="search">
                 <div id="search-down">
                     <a href="#"><div id="img-search">
-                    </div></a><!--img-search-->
+                        </div></a><!--img-search-->
 
                     <input type="text" name="search" >
 
@@ -127,11 +125,12 @@ or die("Could not select tim4");
 
             // while there are rows to be fetched...
             while ($row = mysql_fetch_assoc($result)) {
-                echo '<h2 id="title"><a href="newsDetails.php">'.$row["title"].'</a></h2>';
+                $idpost=$row['idpost'];
+                echo '<h2 id="title"><a href="newsDetails.php?id='.$idpost.'">'.$row["title"].'</a></h2>';
                 echo '<p class="meta"><span class="date">'.$row["date_time"].'</span></p>';
                 echo '<p><span class="posted">postavio/la <a href="#">'.$row["username"].'</a></span></p>';
                 echo ' <div class="entry"><p>'.$row["summary"].'</p></div>';
-                echo '<p class="links"><a href="newsDetails.php" class="right">Pročitaj više</a></p></br>';
+                echo '<p class="links"><a href="newsDetails.php?id='.$idpost.'" class="right">Pročitaj više</a></p></br>';
             } // end while
 
             /******  build the pagination links ******/
@@ -191,7 +190,7 @@ or die("Could not select tim4");
 
 
     </div><!--container-->
-</br>
+    </br>
 
 
     <div id="footer">
