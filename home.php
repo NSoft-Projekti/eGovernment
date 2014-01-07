@@ -125,11 +125,12 @@ include('connect.php');
 
             // while there are rows to be fetched...
             while ($row = mysql_fetch_assoc($result)) {
-                echo '<h2 id="title"><a href="newsDetails.php">'.$row["title"].'</a></h2>';
+                $idpost=$row['idpost'];
+                echo '<h2 id="title"><a href="newsDetails.php?id='.$idpost.'">'.$row["title"].'</a></h2>';
                 echo '<p class="meta"><span class="date">'.$row["date_time"].'</span></p>';
                 echo '<p><span class="posted">postavio/la <a href="#">'.$row["username"].'</a></span></p>';
                 echo ' <div class="entry"><p>'.$row["summary"].'</p></div>';
-                echo '<p class="links"><a href="newsDetails.php" class="right">Pročitaj više</a></p></br>';
+                echo '<p class="links"><a href="newsDetails.php?id='.$idpost.'" class="right">Pročitaj više</a></p></br>';
             } // end while
 
             /******  build the pagination links ******/
