@@ -65,11 +65,12 @@
 
 
     </div><!--header--->
-    <form name="addNews" action="addNewsStore.php" method="post">
+
     <div id="container">
 
         <div class="news_container">
         <div id="title">
+            <form name="addNews" action="addNewsStore.php" method="post">
         <label >Unesite naslov vijesti: </label><br>
         <input type="text" name="title" id="inputTitle"/>
         </div>
@@ -87,7 +88,7 @@
             </div>
             <hr>
         <input type="submit" name="button" value="submit" class="button" />
-
+            </form>
 
 
 
@@ -96,7 +97,7 @@
 
 
     </div><!--container-->
-    </form>
+
     <div id="footer">
 
         <div id="footer-up">
