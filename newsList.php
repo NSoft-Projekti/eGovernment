@@ -8,9 +8,12 @@
     <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
     <link href="style/postList.css" rel="stylesheet" type="text/css">
     <meta charset="utf-8">
+    <link href="style/login-popup.css" rel="stylesheet" type="text/css" />    <!--css style from a login-popup form-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script> <!--script from a login-popup form-->
 </head>
 <?php
 include('connect.php');
+session_start();
 ?>
 
 
@@ -28,8 +31,19 @@ include('connect.php');
 
             <div id="reg-prijava">
 
-                <a title="prijava" href="#">Korisnik</a>
-                <img class="logo" src="img/login-icon.png">
+                <?php
+                if(!isset ($_SESSION['SESS_MEMBER_ID'])){
+
+
+                    include_once("login-popup.php");
+                    echo'<a title="registracija" href="registration.php">Registracija</a>';
+                }
+                else{
+
+                    echo '<a title="prijava" href="#">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                    echo '<img class="logo" src="img/login-icon.png">';
+                }
+                ?>
 
 
             </div><!--reg-prijava-->
@@ -44,9 +58,15 @@ include('connect.php');
                 <ul>
                     <li><a href="#footer">Home</a> </li>
                     <li><a href="#footer" class="currentTab">Vijesti</a> </li>
-                    <li><a href="#footer">Prijedlozi</a> </li>
-                    <li><a href="#footer">Odluke</a> </li>
-                    <li><a href="#footer">Korisnici</a> </li>
+                    <?php
+
+                    if(isset ($_SESSION['SESS_MEMBER_ID'])){
+                        echo'<li><a href="#footer">Prijedlozi</a> </li>';
+                        echo '<li><a href="#footer">Odluke</a> </li>';
+                        echo '<li><a href="#footer">Korisnici</a> </li>';
+                    }
+
+                    ?>
 
                 </ul>
 
