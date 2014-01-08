@@ -26,6 +26,7 @@ function clean($str) {
 //using md5 hash for comparing passwords
 $username = str_replace("'", "''", $_POST['username']);
 $password = md5($_POST['password']);
+//$password = ($_POST['password']);
 
 //Input Validations
 if($username == '') {
