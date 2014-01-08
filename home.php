@@ -51,7 +51,7 @@ include('connect.php');
 
             <div id="horizontal-menu">
                 <ul>
-                    <li><a href="#footer" class="currentTab">Home</a> </li>
+                    <li><a href="home.php" class="currentTab">Home</a> </li>
                     <li><a href="#footer">Vijesti</a> </li>
 
 
