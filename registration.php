@@ -5,6 +5,8 @@
     <meta name="author" content="Jelena" />
     <title>eGovernment :: Home</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link href="style/login-popup.css" rel="stylesheet" type="text/css" />    <!--css style from a login-popup form-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script> <!--script from a login-popup form-->
 
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -18,9 +20,11 @@
 
 
 </head>
+<?php
+session_start();
+?>
 
-
-<body >
+<body onload="document.registration.reset();">
 <div id="wrapper" >
 
 <div id="header">
@@ -34,10 +38,19 @@
 
         <div id="reg-prijava">
 
-            <a title="prijava" href="#">Prijava</a>
+            <?php
+            if(!isset ($_SESSION['SESS_MEMBER_ID'])){
 
-            <a title="registracija" href="registration.php">Registracija</a>
 
+                include_once("login-popup.php");
+                echo'<a title="registracija" href="registration.php">Registracija</a>';
+            }
+            else{
+
+                echo '<a title="prijava" href="#">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                echo '<img class="logo" src="img/login-icon.png">';
+            }
+            ?>
 
         </div><!--reg-prijava-->
 
@@ -51,10 +64,15 @@
             <ul>
                 <li><a href="#footer">Home</a> </li>
                 <li><a href="#footer">Vijesti</a> </li>
-                <li><a href="#footer">Prijedlozi</a> </li>
-                <li><a href="#footer">Odluke</a> </li>
-                <li><a href="#footer">Korisnici</a> </li>
+                <?php
 
+                if(isset ($_SESSION['SESS_MEMBER_ID'])){
+                    echo'<li><a href="#footer">Prijedlozi</a> </li>';
+                    echo '<li><a href="#footer">Odluke</a> </li>';
+                    echo '<li><a href="#footer">Korisnici</a> </li>';
+                }
+
+                ?>
             </ul>
 
         </div><!--horizontal-menu-->
@@ -85,7 +103,8 @@
 
     <div id="main">
 
-     <?php
+        <?php
+
         $nameErr = $emailErr = $lastnameErr = $usernameErr = $telephonErr= $passwordErr = $rpasswordErr = "";
         $name = $email = $lastname = $username = $telephon = $password = $rpassword = $msg_sucess="";
 
@@ -184,13 +203,14 @@
 
         }
 
-        /*
+        //ovaj dio bi trebao ici za uspjesnu registraciju, dakle ako nema errora da izbrise vrijednosti value="" odnosno ako je uspjesan submit da resetira vrijednosti u poljima, ali ja to ne znam u php-u napravit
 
-        if (isset($_POST['submit'])){
+        if(isset($_POST['submit'])){
             if($nameErr=="" && $lastnameErr=="" && $usernameErr=="" && $passwordErr=="" &&  $rpasswordErr=="" && $emailErr=="" &&  $telephonErr=="" )
-                $msg_success = "You filled this form up correctly";
+            include ('register_proces.php');
+
         }
-        */
+
 
         function test_input($data)
         {
@@ -198,18 +218,29 @@
             $data = stripslashes($data);
             $data = htmlspecialchars($data);
             return $data;
-         }
+        }
+
+        /*	session_start();
+        if( strcasecmp($_SERVER['REQUEST_METHOD'],"POST") === 0) {
+            $_SESSION['postdata'] = $_POST;
+            header("Location: ".$_SERVER['PHP_SELF']."?".$_SERVER['QUERY_STRING']);
+            exit;
+        }
+        if( isset($_SESSION['postdata'])) {
+            $_POST = $_SESSION['postdata'];
+            unset($_SESSION['postdata']);
+        }
+        */
 
 
-     ?>
 
 
-
+        ?>
 
         <div id="registration">
 
 
-            <form name="registration" id="regform" method="post"  action= "register_proces.php">
+            <form name="registration" id="regform" method="post"  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"  >
 
                 <table>
                     <tr> <td>Ime: *</td>              <td><input type="text" required name="name" value="<?php echo "$name"; ?>"></td>  <td>  <span class="error"> <?php echo $nameErr;?> </span> </td>  </tr>
@@ -220,12 +251,12 @@
                     <tr> <td>E-mail: *</td>           <td><input type="text" name="email" value="<?php echo "$email"; ?>"></td> <td> <span class="error"> <?php echo $emailErr;?> </span> </td> </tr>
                     <tr> <td>Spol:</td>             <td><input type="radio" name="gender" value="M" >Muško   <input type="radio" name="gender" value="Z">Žensko</td> </tr>
                     <tr> <td>Datum rođenja:</td>    <td><input type="date" name="bday" ></td> </tr>
-                    <tr> <td>Adresa:</td>           <td><input type="text" name="address" value="" ></td> <td></td> </tr>
+                    <tr> <td>Adresa:</td>           <td><input type="text" name="address" value="<?php if (isset($_POST['adress'])) { echo "$adress"; }  ?>" ></td> <td></td> </tr>
                     <tr> <td>Telefon: *</td>          <td><input type="tel" name="telephone" value="<?php echo "$telephon"; ?>" placeholder="+38763123456"></td> <td > <span class="error">  <?php echo $telephonErr;?> </span></td> </tr>
                 </table>
 
                 <input type="submit" value="Registriraj se" name="submit" class="buttom" >
-
+                <input type="reset" value="izbrisi" name="reset"  >
 
             </form>
 

@@ -17,6 +17,7 @@
 
 <?php
 include('connect.php');
+session_start();
 ?>
 
 <body>
@@ -33,14 +34,19 @@ include('connect.php');
 
             <div id="reg-prijava">
 
-                <!--<a title="prijava" href="login-popup.php">Prijava</a>-->
-
                 <?php
-                include_once("login-popup.php");
-                ?>
-                <!--login-popup-->
+                if(!isset ($_SESSION['SESS_MEMBER_ID'])){
 
-                <a title="registracija" href="registration.php">Registracija</a>
+
+                    include_once("login-popup.php");
+                    echo'<a title="registracija" href="registration.php">Registracija</a>';
+                }
+                else{
+
+                    echo '<a title="prijava" href="#">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                    echo '<img class="logo" src="img/login-icon.png">';
+                }
+                ?>
 
 
             </div><!--reg-prijava-->
@@ -55,6 +61,16 @@ include('connect.php');
                 <ul>
                     <li><a href="#footer" class="currentTab">Home</a> </li>
                     <li><a href="#footer">Vijesti</a> </li>
+                    <?php
+
+
+                    if(isset ($_SESSION['SESS_MEMBER_ID'])){
+                        echo'<li><a href="#footer">Prijedlozi</a> </li>';
+                        echo '<li><a href="#footer">Odluke</a> </li>';
+                        echo '<li><a href="#footer">Korisnici</a> </li>';
+                    }
+
+                    ?>
 
 
                 </ul>
