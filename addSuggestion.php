@@ -9,9 +9,12 @@
     <link href="style/addSuggestion.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
 </head>
-
+<?php
+include('connect.php');
+?>
 
 <body>
+
 <div id="wrapper" >
 
     <div id="header">
@@ -71,6 +74,21 @@
         </br>
             <label class="title">Naziv  prijedloga: </label> </br></br>
         <input class="input" type="text" name="titlePrijedlog" id="titlePrijedlog"/>
+        </br></br>
+        <label class="title">Kategorija: </label> </br></br>
+        <?php
+
+
+        $sql = "SELECT * FROM category";
+        $result = mysql_query($sql);
+
+        echo "<select id='categoryDropdownList' name='categoryDropdownList'>";
+        while ($row = mysql_fetch_array($result)) {
+            echo "<option value='" . $row['idcategory'] . "'>" . $row['name'] . "</option>";
+        }
+        echo "</select>";
+
+        ?>
         </br></br>
         <label class="title">Unesite sadržaj prijedloga: </label> </br></br>
         <textarea name="contentPrijedlog" id="contentPrijedlog"></textarea>

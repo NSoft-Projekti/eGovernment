@@ -76,7 +76,7 @@ include('connect.php');
             <?php
 
             // find out how many rows are in the table
-            $sql = "SELECT * FROM post inner join user on post.user_iduser = user.iduser
+            $sql = "SELECT * FROM pst inner join user on post.user_iduser = user.iduser
              WHERE POST.post_type_idpost_type='1'";
             $result = mysql_query($sql);
             $r = mysql_num_rows($result);
