@@ -184,13 +184,7 @@
 
         }
 
-        /*
 
-        if (isset($_POST['submit'])){
-            if($nameErr=="" && $lastnameErr=="" && $usernameErr=="" && $passwordErr=="" &&  $rpasswordErr=="" && $emailErr=="" &&  $telephonErr=="" )
-                $msg_success = "You filled this form up correctly";
-        }
-        */
 
         function test_input($data)
         {
@@ -201,6 +195,13 @@
          }
 
 
+     if (isset($_POST['submit'])){
+         if($nameErr=="" && $lastnameErr=="" && $usernameErr=="" && $passwordErr=="" &&  $rpasswordErr=="" && $emailErr=="" &&  $telephonErr=="" ){
+             include 'register_proces.php';
+           }
+
+     }
+
      ?>
 
 
@@ -209,19 +210,19 @@
         <div id="registration">
 
 
-            <form name="registration" id="regform" method="post"  action= "register_proces.php">
+            <form name="registration" id="regform" method="post"  action= "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" >
 
                 <table>
-                    <tr> <td>Ime: *</td>              <td><input type="text" required name="name" value="<?php echo "$name"; ?>"></td>  <td>  <span class="error"> <?php echo $nameErr;?> </span> </td>  </tr>
-                    <tr> <td>Prezime: *</td>          <td><input type="text" name="lastname" value="<?php echo $lastname; ?>" ></td>  <td> <span class="error"> <?php echo $lastnameErr;?> </span> </td> </tr>
-                    <tr> <td>Username: *</td>         <td><input type="text" name="username" value="<?php echo "$username"; ?>" ></td> <td> <span class="error"> <?php echo $usernameErr;?> </span> </td> </tr>
-                    <tr> <td>Lozinka: *</td>         <td><input type="password" name="password" value="<?php echo "$password"; ?>" ></td> <td> <span class="error"> <?php echo $passwordErr;?> </span> </td> </tr>
-                    <tr> <td>Potrvda lozinke: *</td>  <td><input type="password" name="rpass" value="<?php echo "$rpassword"; ?>"></td>  <td> <span class="error"> <?php echo $rpasswordErr;?></span> </td></tr>
-                    <tr> <td>E-mail: *</td>           <td><input type="text" name="email" value="<?php echo "$email"; ?>"></td> <td> <span class="error"> <?php echo $emailErr;?> </span> </td> </tr>
-                    <tr> <td>Spol:</td>             <td><input type="radio" name="gender" value="M" >Muško   <input type="radio" name="gender" value="Z">Žensko</td> </tr>
-                    <tr> <td>Datum rođenja:</td>    <td><input type="date" name="bday" ></td> </tr>
-                    <tr> <td>Adresa:</td>           <td><input type="text" name="address" value="" ></td> <td></td> </tr>
-                    <tr> <td>Telefon: *</td>          <td><input type="tel" name="telephone" value="<?php echo "$telephon"; ?>" placeholder="+38763123456"></td> <td > <span class="error">  <?php echo $telephonErr;?> </span></td> </tr>
+                    <tr> <td>Ime: *</td>              <td> <input type="text" required name="name" value="<?php echo "$name"; ?>"> </td>  <td>  <span class="error"> <?php echo $nameErr;?> </span> </td>  </tr>
+                    <tr> <td>Prezime: *</td>          <td> <input type="text" name="lastname" value="<?php echo $lastname; ?>" >   </td>  <td> <span class="error"> <?php echo $lastnameErr;?> </span> </td> </tr>
+                    <tr> <td>Username: *</td>         <td> <input type="text" name="username" value="<?php echo "$username"; ?>" > </td> <td> <span class="error"> <?php echo $usernameErr;?> </span> </td> </tr>
+                    <tr> <td>Lozinka: *</td>          <td> <input type="password" name="password" value="<?php echo "$password"; ?>"> </td> <td> <span class="error"> <?php echo $passwordErr;?> </span> </td> </tr>
+                    <tr> <td>Potrvda lozinke: *</td>  <td> <input type="password" name="rpass" value="<?php echo "$rpassword"; ?>"> </td>  <td> <span class="error"> <?php echo $rpasswordErr;?></span> </td></tr>
+                    <tr> <td>E-mail: *</td>           <td> <input type="text" name="email" value="<?php echo "$email"; ?>"></td> <td> <span class="error"> <?php echo $emailErr;?> </span> </td> </tr>
+                    <tr> <td>Spol:</td>               <td> <input type="radio" name="gender" value="M" >Muško   <input type="radio" name="gender" value="Z">Žensko</td> </tr>
+                    <tr> <td>Datum rođenja:</td>      <td> <input type="date" name="bday" ></td> </tr>
+                    <tr> <td>Adresa:</td>             <td> <input type="text" name="address" value="" ></td> <td></td> </tr>
+                    <tr> <td>Telefon: *</td>          <td> <input type="tel" name="telephone" value="<?php echo "$telephon"; ?>" placeholder="+38763123456"></td> <td > <span class="error">  <?php echo $telephonErr;?> </span></td> </tr>
                 </table>
 
                 <input type="submit" value="Registriraj se" name="submit" class="buttom" >

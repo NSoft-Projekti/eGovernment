@@ -2,8 +2,7 @@
 
 require("connect.php");
 
-if(!empty($_POST['username']) and !empty($_POST['password'])and !empty($_POST['name']) and !empty($_POST['lastname']) and !empty($_POST['email'])and!empty($_POST['gender'])and!empty($_POST['bday'])and !empty($_POST['usrtel']))
-{
+
     $name=mysql_real_escape_string($_POST['name']);
     $lastname=mysql_real_escape_string($_POST['lastname']);
     $username = mysql_real_escape_string($_POST['username']);
@@ -12,7 +11,7 @@ if(!empty($_POST['username']) and !empty($_POST['password'])and !empty($_POST['n
     $address=mysql_real_escape_string($_POST['address']);
     $gender=mysql_real_escape_string($_POST['gender']);
     $date_of_birth=mysql_real_escape_string($_POST['bday']);
-    $telephone=mysql_real_escape_string($_POST['usrtel']);
+    $telephone=mysql_real_escape_string($_POST['telephone']);
 
     $newDate_of_birth = date("Y-m-d", strtotime($date_of_birth));
 
@@ -21,26 +20,37 @@ if(!empty($_POST['username']) and !empty($_POST['password'])and !empty($_POST['n
     if($gender=='M'){
         $gender=='M';
     }
-    else {
+    else if ($gender=='Ž') {
         $gender=='Ž';
     }
+else {
+    $gender == "";
+}
     if(mysql_num_rows($checkusername) == 1)
     {
-        echo "<h1>Greška</h1>";
-        echo "<p>To korisničko ime već postoji, probajte ponovno.</p>";
+        echo "<script type='text/javascript'>alert('Greska!! Korisničko ime već postoji ');</script>";
+
     }
     else
     {
         $registerquery = mysql_query("call create_user('".$name."','".$lastname."','".$username."','".$address."', '".$password."', '".$email."','".$gender."','".$newDate_of_birth."','".$telephone."')");
         if($registerquery)
         {
-            echo "<h1>Uspjeh</h1>";
-            echo "<p>Uspješno ste se regitrirali. Klik <a href=''login-popup.php'>ovdje za login.</a></p>";
+
+            /*echo "<script type='text/javascript'>alert('Uspjeh');</script>";
+            echo "<script type='text/javascript'>alert('Uspješno ste se registrirali. Klik <a href='login-popup.php'>ovdje za login</a>')</script>";*/
+
+
+            /*
+            echo "<h1>Uspjeh </h1>";
+            echo "<p>Uspješno ste se registrirali. Klik<a href='login-popup.php'>ovdje za login</a></p>";
+            */
+
         }
         else
         {
             echo "<h1>Greška</h1>";
         }
     }
-}
+
 ?>
