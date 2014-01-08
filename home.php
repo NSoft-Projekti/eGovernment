@@ -40,7 +40,7 @@ include('connect.php');
                 ?>
                 <!--login-popup-->
 
-                <a title="registracija" href="Registration.php">Registracija</a>
+                <a title="registracija" href="registration.php">Registracija</a>
 
 
             </div><!--reg-prijava-->

@@ -34,14 +34,6 @@
             });
             return false;
         });
-
-//        $('#btn').onclick(function(e) {
-//            e.preventDefault();
-//            alert('clicked');
-//            return false;
-//        });
-
-
     });
 </script>
 <div class="login-popup" id="login-box">
