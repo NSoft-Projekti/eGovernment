@@ -1,17 +1,20 @@
 <html>
 <head>
-    <meta name="description" content="Design Android applications" />
-    <meta name="keywords" content="android, design, technics" />
-    <meta name="author" content="Jelena" />
-    <title>eGovernment :: Home</title>
+    <meta name="description" content="eGovernment" />
+    <meta name="keywords" content="design, egovernment" />
+    <meta name="author" content="Tim4" />
+    <title>eGovernment :: Novi prijedlog</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
     <link href="style/addSuggestion.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
 </head>
-
+<?php
+include('connect.php');
+?>
 
 <body>
+
 <div id="wrapper" >
 
     <div id="header">
@@ -40,7 +43,7 @@
 
             <div id="horizontal-menu">
                 <ul>
-                    <li><a href="#footer">Home</a> </li>
+                    <li><a href="home.php">Home</a> </li>
                     <li><a href="#footer">Vijesti</a> </li>
                     <li><a href="#footer">Prijedlozi</a> </li>
                     <li><a href="#footer">Odluke</a> </li>
@@ -71,6 +74,21 @@
         </br>
             <label class="title">Naziv  prijedloga: </label> </br></br>
         <input class="input" type="text" name="titlePrijedlog" id="titlePrijedlog"/>
+        </br></br>
+        <label class="title">Kategorija: </label> </br></br>
+        <?php
+
+
+        $sql = "SELECT * FROM category";
+        $result = mysql_query($sql);
+
+        echo "<select id='categoryDropdownList' name='categoryDropdownList'>";
+        while ($row = mysql_fetch_array($result)) {
+            echo "<option value='" . $row['idcategory'] . "'>" . $row['name'] . "</option>";
+        }
+        echo "</select>";
+
+        ?>
         </br></br>
         <label class="title">Unesite sadržaj prijedloga: </label> </br></br>
         <textarea name="contentPrijedlog" id="contentPrijedlog"></textarea>

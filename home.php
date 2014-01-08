@@ -1,8 +1,8 @@
 <html>
 <head>
-    <meta name="description" content="Design Android applications" />
-    <meta name="keywords" content="android, design, technics" />
-    <meta name="author" content="Jelena" />
+    <meta name="description" content="eGovernment" />
+    <meta name="keywords" content="design, egovernment" />
+    <meta name="author" content="Tim4" />
     <title>eGovernment :: Home</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
@@ -59,7 +59,7 @@ session_start();
 
             <div id="horizontal-menu">
                 <ul>
-                    <li><a href="#footer" class="currentTab">Home</a> </li>
+                    <li><a href="home.php" class="currentTab">Home</a> </li>
                     <li><a href="#footer">Vijesti</a> </li>
                     <?php
 
