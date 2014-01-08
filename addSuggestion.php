@@ -1,11 +1,13 @@
 <html>
 <head>
-    <meta name="description" content="Design Android applications" />
-    <meta name="keywords" content="android, design, technics" />
-    <meta name="author" content="Jelena" />
-    <title>eGovernment :: Home</title>
+    <meta name="description" content="eGovernment" />
+    <meta name="keywords" content="design, egovernment" />
+    <meta name="author" content="Tim4" />
+    <title>eGovernment :: Novi prijedlog</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
+    <link href="style/addSuggestion.css" rel="stylesheet" type="text/css" />
+    <meta charset="utf-8">
 </head>
 
 
@@ -51,7 +53,7 @@
             <div id="search">
                 <div id="search-down">
                     <a href="#"><div id="img-search">
-                    </div></a><!--img-search-->
+                        </div></a><!--img-search-->
 
                     <input type="text" name="search" >
 
@@ -66,10 +68,17 @@
     </div><!--header--->
 
     <div id="container">
+        </br>
+            <label class="title">Naziv  prijedloga: </label> </br></br>
+        <input class="input" type="text" name="titlePrijedlog" id="titlePrijedlog"/>
+        </br></br>
+        <label class="title">Unesite sadržaj prijedloga: </label> </br></br>
+        <textarea name="contentPrijedlog" id="contentPrijedlog"></textarea>
 
+        </br> </br>
 
-
-
+        <hr>
+        <button id="button" name="submit" value="submit">Pošalji</button>
 
     </div><!--container-->
 
