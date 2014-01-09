@@ -43,10 +43,10 @@ include('connect.php');
 
             <div id="horizontal-menu">
                 <ul>
-                    <li><a href="#footer">Home</a> </li>
-                    <li><a href="#footer" >Vijesti</a> </li>
-                    <li><a href="#footer"class="currentTab">Prijedlozi</a> </li>
-                    <li><a href="#footer">Odluke</a> </li>
+                    <li><a href="home.php">Home</a> </li>
+                    <li><a href="newsList.php" >Vijesti</a> </li>
+                    <li><a href="suggestionList.php"class="currentTab">Prijedlozi</a> </li>
+                    <li><a href="decisionList.php">Odluke</a> </li>
                     <li><a href="#footer">Korisnici</a> </li>
 
                 </ul>

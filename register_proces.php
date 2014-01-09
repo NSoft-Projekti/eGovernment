@@ -34,7 +34,7 @@ else {
     else
     {
         $registerquery = mysql_query("call create_user('".$name."','".$lastname."','".$username."','".$address."', '".$password."', '".$email."','".$gender."','".$newDate_of_birth."','".$telephone."')");
-        if($registerquery)
+        if($registerquery )
         {
 
             /*echo "<script type='text/javascript'>alert('Uspjeh');</script>";

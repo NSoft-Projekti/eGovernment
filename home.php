@@ -28,7 +28,7 @@ session_start();
         <div id="header-up">
 
             <div id="header-logo">
-                <h1>LOGO STRANICE</h1>
+                <a href="home.php"><img src="img/logo.png"></a>
             </div><!--header-logo-->
 
 
@@ -60,13 +60,13 @@ session_start();
             <div id="horizontal-menu">
                 <ul>
                     <li><a href="home.php" class="currentTab">Home</a> </li>
-                    <li><a href="#footer">Vijesti</a> </li>
+                    <li><a href="newsList.php">Vijesti</a> </li>
                     <?php
 
 
                     if(isset ($_SESSION['SESS_MEMBER_ID'])){
-                        echo'<li><a href="#footer">Prijedlozi</a> </li>';
-                        echo '<li><a href="#footer">Odluke</a> </li>';
+                        echo'<li><a href="suggestionList.php">Prijedlozi</a> </li>';
+                        echo '<li><a href="decisionList.php">Odluke</a> </li>';
                         echo '<li><a href="#footer">Korisnici</a> </li>';
                     }
 
@@ -214,7 +214,7 @@ session_start();
         <div id="footer-up">
 
             <div id="footer-logo">
-                <h1>LOGO</h1>
+                <img src="img/logo.png">
             </div><!--footer-logo-->
 
             <div id="icons">
