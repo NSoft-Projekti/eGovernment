@@ -51,3 +51,25 @@
 #contentPrijedlog:focus {
     outline: none;
 }
+
+#categoryDropdownList {
+    border-radius: 3px;
+    color: rgb(113,113,113);
+    width: 360px;
+    height: 40px;
+    border: 1px solid;
+    font-size: 17px;
+    padding: 5px;
+}
+
+#contentSummary {
+    border-radius: 3px;
+    resize: none;
+    width: 500px;
+    height: 100px;
+    border-style: solid;
+    color: rgb(113,113,113);
+    font-size: 17px;
+    padding: 5px;
+    font-family: open sans;
+}

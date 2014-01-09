@@ -67,30 +67,34 @@
     </div><!--header--->
 
     <div id="container">
+
         <div class="news_container">
         <div id="title">
+            <form name="addNews" action="addNewsStore.php" method="post">
         <label >Unesite naslov vijesti: </label><br>
         <input type="text" name="title" id="inputTitle"/>
         </div>
         <div id="content">
             <label>Unesite sadržaj vijesti: </label>
-            <textarea name="title" id="inputContent"></textarea>
+            <textarea name="content" id="inputContent"></textarea>
         </div>
         <div id="summary">
                 <label>Unesite kratki opis vijesti: </label>
-                <textarea name="title" id="inputSummary"></textarea>
+                <textarea name="summary" id="inputSummary"></textarea>
             </div>
             <div id="attachment">
                 <label>Attachment</label>
                 <input type="file" name="file" id="file">
             </div>
             <hr>
-        <button name="submit" value="submit" class="button">Spasi</button>
-
+        <input type="submit" name="button" value="submit" class="button" />
+            </form>
 
 
 
 </div><!--news_container-->
+
+
 
     </div><!--container-->
 
