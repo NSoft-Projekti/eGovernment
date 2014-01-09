@@ -1,8 +1,8 @@
 <html>
 <head>
-    <meta name="description" content="Design Android applications" />
-    <meta name="keywords" content="android, design, technics" />
-    <meta name="author" content="Jelena" />
+    <meta name="description" content="eGovernment" />
+    <meta name="keywords" content="design, egovernment" />
+    <meta name="author" content="Tim4" />
     <title>eGovernment :: Home</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
@@ -17,6 +17,7 @@
 
 <?php
 include('connect.php');
+session_start();
 ?>
 
 <body>
@@ -33,14 +34,19 @@ include('connect.php');
 
             <div id="reg-prijava">
 
-                <!--<a title="prijava" href="login-popup.php">Prijava</a>-->
-
                 <?php
-                include_once("login-popup.php");
-                ?>
-                <!--login-popup-->
+                if(!isset ($_SESSION['SESS_MEMBER_ID'])){
 
-                <a title="registracija" href="registration.php">Registracija</a>
+
+                    include_once("login-popup.php");
+                    echo'<a title="registracija" href="registration.php">Registracija</a>';
+                }
+                else{
+
+                    echo '<a title="prijava" href="#">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                    echo '<img class="logo" src="img/login-icon.png">';
+                }
+                ?>
 
 
             </div><!--reg-prijava-->
@@ -53,8 +59,18 @@ include('connect.php');
 
             <div id="horizontal-menu">
                 <ul>
-                    <li><a href="#footer" class="currentTab">Home</a> </li>
+                    <li><a href="home.php" class="currentTab">Home</a> </li>
                     <li><a href="#footer">Vijesti</a> </li>
+                    <?php
+
+
+                    if(isset ($_SESSION['SESS_MEMBER_ID'])){
+                        echo'<li><a href="#footer">Prijedlozi</a> </li>';
+                        echo '<li><a href="#footer">Odluke</a> </li>';
+                        echo '<li><a href="#footer">Korisnici</a> </li>';
+                    }
+
+                    ?>
 
 
                 </ul>
@@ -125,7 +141,8 @@ include('connect.php');
 
             // while there are rows to be fetched...
             while ($row = mysql_fetch_assoc($result)) {
-                echo '<h2 id="title"><a href="newsDetails.php">'.$row["title"].'</a></h2>';
+                $idpost=$row['idpost'];
+                echo '<h2 id="title"><a href="newsDetails.php?id='.$idpost.'">'.$row["title"].'</a></h2>';
                 echo '<p class="meta"><span class="date">'.$row["date_time"].'</span></p>';
                 echo '<p><span class="posted">postavio/la <a href="#">'.$row["username"].'</a></span></p>';
                 echo ' <div class="entry"><p>'.$row["summary"].'</p></div>';
