@@ -22,7 +22,7 @@ include('connect.php');
         <div id="header-up">
 
             <div id="header-logo">
-                <h1>LOGO STRANICE</h1>
+                <a href="home.php"><img src="img/logo.png"></a>
             </div><!--header-logo-->
 
 
@@ -190,7 +190,7 @@ include('connect.php');
     <div id="footer-up">
 
         <div id="footer-logo">
-            <h1>LOGO</h1>
+            <img src="img/logo.png">
         </div><!--footer-logo-->
 
         <div id="icons">

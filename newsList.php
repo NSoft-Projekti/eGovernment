@@ -25,7 +25,7 @@ session_start();
         <div id="header-up">
 
             <div id="header-logo">
-                <h1>LOGO STRANICE</h1>
+                <a href="home.php"><img src="img/logo.png"></a>
             </div><!--header-logo-->
 
 
@@ -96,7 +96,7 @@ session_start();
             <?php
 
             // find out how many rows are in the table
-            $sql = "SELECT * FROM pst inner join user on post.user_iduser = user.iduser
+            $sql = "SELECT * FROM post inner join user on post.user_iduser = user.iduser
              WHERE POST.post_type_idpost_type='1'";
             $result = mysql_query($sql);
             $r = mysql_num_rows($result);
@@ -210,7 +210,7 @@ session_start();
         <div id="footer-up">
 
             <div id="footer-logo">
-                <h1>LOGO</h1>
+                <img src="img/logo.png">
             </div><!--footer-logo-->
 
             <div id="icons">

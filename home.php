@@ -28,7 +28,7 @@ session_start();
         <div id="header-up">
 
             <div id="header-logo">
-                <a href="#"><img src="img/logo.png"></a>
+                <a href="home.php"><img src="img/logo.png"></a>
             </div><!--header-logo-->
 
 
@@ -214,7 +214,7 @@ session_start();
         <div id="footer-up">
 
             <div id="footer-logo">
-                <img src="img/logo.png"></a>
+                <img src="img/logo.png">
             </div><!--footer-logo-->
 
             <div id="icons">
