@@ -50,7 +50,7 @@ session_start();
                 echo '<a title="prijava" href="#">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
                 echo '<img class="logo" src="img/login-icon.png">';
                 echo '</br>';
-                echo'<a title="registracija" href="logout.php">Odjava</a>';
+                echo'<a title="odjava" href="logout.php">Odjava</a>';
             }
             ?>
 

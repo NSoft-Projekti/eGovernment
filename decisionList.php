@@ -11,6 +11,7 @@
 </head>
 <?php
 include('connect.php');
+session_start();
 ?>
 
 
@@ -28,9 +29,12 @@ include('connect.php');
 
             <div id="reg-prijava">
 
-                <a title="prijava" href="profile.php">Korisnik</a>
-                <img class="logo" src="img/login-icon.png">
-
+                <?php
+                echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                echo '<img class="logo" src="img/login-icon.png">';
+                echo '</br>';
+                echo'<a title="odjava" href="logout.php">Odjava</a>';
+                ?>
 
             </div><!--reg-prijava-->
 
