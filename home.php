@@ -43,8 +43,10 @@ session_start();
                 }
                 else{
 
-                    echo '<a title="prijava" href="#">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                    echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
                     echo '<img class="logo" src="img/login-icon.png">';
+                    echo '</br>';
+                    echo'<a title="registracija" href="logout.php">Odjava</a>';
                 }
                 ?>
 
@@ -214,7 +216,7 @@ session_start();
         <div id="footer-up">
 
             <div id="footer-logo">
-                <img src="img/logo.png">
+                <a href="home.php"><img src="img/logo.png"></a>
             </div><!--footer-logo-->
 
             <div id="icons">

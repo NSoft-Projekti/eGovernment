@@ -6,7 +6,7 @@
     <title>eGovernment :: Home</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
-    <link href="style/postList.css" rel="stylesheet" type="text/css">
+    <link href="style/postList.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
 </head>
 <?php
@@ -28,7 +28,7 @@ include('connect.php');
 
             <div id="reg-prijava">
 
-                <a title="prijava" href="#">Korisnik</a>
+                <a title="prijava" href="profile.php">Korisnik</a>
                 <img class="logo" src="img/login-icon.png">
 
 
@@ -187,7 +187,7 @@ include('connect.php');
     <div id="footer-up">
 
         <div id="footer-logo">
-            <img src="img/logo.png">
+            <a href="home.php"><img src="img/logo.png"></a>
         </div><!--footer-logo-->
 
         <div id="icons">

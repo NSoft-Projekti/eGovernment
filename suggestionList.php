@@ -12,6 +12,7 @@
 
 <?php
 include('connect.php');
+session_start();
 ?>
 
 <body>
@@ -27,10 +28,13 @@ include('connect.php');
 
 
             <div id="reg-prijava">
+                <?php
 
-                <a title="prijava" href="#">Korisnik</a>
-                <img class="logo" src="img/login-icon.png">
-
+                echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                echo '<img class="logo" src="img/login-icon.png">';
+                echo '</br>';
+                echo'<a title="registracija" href="logout.php">Odjava</a>';
+                ?>
 
             </div><!--reg-prijava-->
 
@@ -190,7 +194,7 @@ include('connect.php');
     <div id="footer-up">
 
         <div id="footer-logo">
-            <img src="img/logo.png">
+            <a href="home.php"><img src="img/logo.png"></a>
         </div><!--footer-logo-->
 
         <div id="icons">
