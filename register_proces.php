@@ -37,8 +37,8 @@ else {
         if($registerquery )
         {
 
-            /*echo "<script type='text/javascript'>alert('Uspjeh');</script>";
-            echo "<script type='text/javascript'>alert('Uspješno ste se registrirali. Klik <a href='login-popup.php'>ovdje za login</a>')</script>";*/
+            echo "<script type='text/javascript'>alert('Uspjeh');</script>";
+          /*  echo "<script type='text/javascript'>alert('Uspješno ste se registrirali. Klik <a href='login-popup.php'>ovdje za login</a>')</script>";*/
 
 
             /*
