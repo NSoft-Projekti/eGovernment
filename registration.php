@@ -256,7 +256,7 @@ session_start();
                 </table>
 
                 <input type="submit" value="Registriraj se" name="submit" class="buttom" >
-                <input type="reset" value="izbrisi" name="reset"  >
+
 
             </form>
 
