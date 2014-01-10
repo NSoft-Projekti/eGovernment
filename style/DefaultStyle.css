@@ -205,5 +205,11 @@ h1{
     text-align: center;
     margin: 0;
 }
-
+.currentTab{
+    background: #555 !important;
+    color: rgb(255, 255, 255) !important;
+}
+img{
+   border: none;
+ }
 
