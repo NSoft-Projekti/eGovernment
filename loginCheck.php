@@ -41,7 +41,13 @@ if($password == '') {
 if($errflag) {
     $_SESSION['ERRMSG_ARR'] = $errmsg_arr;
     session_write_close();
-    echo("Greska pri logiranju");
+
+    echo ("<script language='JavaScript'>
+    window.alert('Greska pri logiranju')
+    window.location.href='home.php';
+    </script>");
+//    echo("<script>alert.('Greska pri logiranju.')</script>");
+//    echo("Greska pri logiranju");
     exit();
 }
 
