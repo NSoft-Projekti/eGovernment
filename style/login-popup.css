@@ -102,7 +102,7 @@ form.signin input::-webkit-input-placeholder { color:#bbb; text-shadow:0 0 2px #
     padding:6px 6px 4px;
     margin-top:10px;
     font:12px;
-    width:214px;
+    width:200px;
 }
 
 .button:hover { background:#ddd; }
