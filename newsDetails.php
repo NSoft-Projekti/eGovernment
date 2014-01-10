@@ -110,6 +110,23 @@ session_start();
             ?>
 
         </div><!--news_container-->
+        <div class="comments_container">
+            <div class="existingComments_container">
+                <?php
+                $sql = mysql_query("SELECT content, username, date_time FROM comment inner join user on comment.iduser = user.iduser
+            WHERE comment.idpost=$idpost");
+                if(mysql_num_rows($sql) > 0)
+                    echo("Komentari povuceni iz baze.");
+         while($row2 = mysql_fetch_array($sql)){
+                echo '<h2>'.$row2["content"].'</h2>';
+             echo '<h3>'.$row2["username"].'</h3>';
+             echo '<h3>'.$row2["date_time"].'</h3>';
+                }
+
+                ?>
+
+            </div><!--existingComments_container-->
+        </div><!--comments_container-->
 
 
     </div><!--container-->
