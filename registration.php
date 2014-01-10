@@ -205,7 +205,7 @@ session_start();
 
         }
 
-        //ovaj dio bi trebao ici za uspjesnu registraciju, dakle ako nema errora da izbrise vrijednosti value="" odnosno ako je uspjesan submit da resetira vrijednosti u poljima, ali ja to ne znam u php-u napravit
+
 
         if(isset($_POST['submit'])){
             if($nameErr=="" && $lastnameErr=="" && $usernameErr=="" && $passwordErr=="" &&  $rpasswordErr=="" && $emailErr=="" &&  $telephonErr=="" )
@@ -221,19 +221,6 @@ session_start();
             $data = htmlspecialchars($data);
             return $data;
         }
-
-        /*	session_start();
-        if( strcasecmp($_SERVER['REQUEST_METHOD'],"POST") === 0) {
-            $_SESSION['postdata'] = $_POST;
-            header("Location: ".$_SERVER['PHP_SELF']."?".$_SERVER['QUERY_STRING']);
-            exit;
-        }
-        if( isset($_SESSION['postdata'])) {
-            $_POST = $_SESSION['postdata'];
-            unset($_SESSION['postdata']);
-        }
-        */
-
 
 
 
