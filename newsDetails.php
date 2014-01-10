@@ -25,7 +25,7 @@ session_start();
         <div id="header-up">
 
             <div id="header-logo">
-                <a href="home.php"><img src="img/logo.png"></a>
+                <a href="index.php"><img src="img/logo.png"></a>
             </div><!--header-logo-->
 
 
@@ -35,7 +35,7 @@ session_start();
                     if(!isset ($_SESSION['SESS_MEMBER_ID'])){
 
 
-                        include_once("login-popup.php");
+                        include_once("loginPopup.php");
                         echo'<a title="registracija" href="registration.php">Registracija</a>';
                     }
                     else{
@@ -55,7 +55,7 @@ session_start();
 
             <div id="horizontal-menu">
                 <ul>
-                    <li><a href="home.php">Home</a> </li>
+                    <li><a href="index.php">Home</a> </li>
                     <li><a href="newsList.php" class="currentTab">Vijesti</a> </li>
                     <?php
 
@@ -109,8 +109,25 @@ session_start();
             }
             ?>
 
+        </div><!--news_container-->
+        <div class="comments_container">
+            <div class="existingComments_container">
+                <?php
+                $sql = mysql_query("SELECT content, username, date_time FROM comment inner join user on comment.iduser = user.iduser
+            WHERE comment.idpost=$idpost");
+                if(mysql_num_rows($sql) > 0)
+                    echo("Komentari povuceni iz baze.");
+         while($row2 = mysql_fetch_array($sql)){
+                echo '<h2>'.$row2["content"].'</h2>';
+             echo '<h3>'.$row2["username"].'</h3>';
+             echo '<h3>'.$row2["date_time"].'</h3>';
+                }
 
-        </div>
+                ?>
+
+            </div><!--existingComments_container-->
+        </div><!--comments_container-->
+
 
     </div><!--container-->
 
@@ -119,7 +136,7 @@ session_start();
         <div id="footer-up">
 
             <div id="footer-logo">
-                <a href="home.php"><img src="img/logo.png"></a>
+                <a href="index.php"><img src="img/logo.png"></a>
             </div><!--footer-logo-->
 
             <div id="icons">

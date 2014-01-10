@@ -66,7 +66,7 @@ if($result) {
         $_SESSION['SESS_PASSWORD'] = $member['password'];
         session_write_close();
         if(isset($_SESSION['SESS_MEMBER_ID'])and isset($_SESSION['SESS_FIRST_NAME'])) {
-            header("location: home.php");
+            header("location: index.php");
         }
         exit();
     }else {
@@ -76,7 +76,8 @@ if($result) {
         if($errflag) {
             $_SESSION['ERRMSG_ARR'] = $errmsg_arr;
             session_write_close();
-            echo("Greska pri logiranju");
+            echo "<script type='text/javascript'>alert('Greska!! Korisničko ime već postoji ');</script>";
+//            echo("Greska pri logiranju");
             exit();
         }
     }
