@@ -81,9 +81,11 @@ session_start();
 
         $iduser=$_SESSION['SESS_MEMBER_ID'];
 
-        $result=mysql_query( "SELECT * FROM user WHERE iduser=$iduser ");
 
-        while($row=mysql_fetch_array($result) ){
+
+        $result=mysql_query( "SELECT * FROM user WHERE iduser=$iduser ");
+        $row=mysql_fetch_array($result);
+
         $firstname=$row['name'];
         $lastname=$row['lastname'];
         $username=$row['username'];
@@ -92,10 +94,10 @@ session_start();
         $address=$row['address'];
         $telephone=$row['telephone'];
         $convert_date=date("d.m.Y",strtotime($bday));
-        }
 
-        if(isset($_post['change']))
+        if(isset($_POST['submit']))
         {
+
             $usr_name=$_POST['usr_name'];
             $usr_lname=$_POST['usr_lname'];
             $usr_usern=$_POST['usr_usern'];
@@ -104,12 +106,29 @@ session_start();
             $usr_add=$_POST['usr_add'];
             $usr_tel=$_POST['usr_tel'];
 
-            $sql = "UPDATE user ".
+            $updatesql =mysql_query( "UPDATE user".
                 "SET name =  $usr_name ,lastname=$usr_lname,username=$usr_usern,email=$usr_email,date_of_birth=$usr_bday,address=$usr_add,telephone=$usr_tel".
-                "WHERE iduser= $iduser" ;
+                "WHERE iduser= $iduser") ;
+
+            $retval = mysql_query( $updatesql, $conn );
+            if(! $retval )
+            {
+                die('Could not update data: ' . mysql_error());
+            }
+            echo "Updated data successfully\n";
+
+
+
+            if($updatesql){
+
             echo "<script type='text/javascript'>alert('Uspjeh');</script>";
+            }
+            else{
+                echo "error";
+            }
 
         }
+
 
 
         ?>
@@ -121,7 +140,8 @@ session_start();
 
         <div id="cleft-data">
 
-            <form action="">
+
+            <form action="" method="post">
 
            <table>
                <tr> <td>Ime:</td>       <td> <input  type="text" name="usr_name"  value=" <?php echo $firstname;?>">  </td> </tr>
@@ -134,9 +154,12 @@ session_start();
 
             </table>
 
-            <input type="submit" name="change" value="Izmjena podataka">
+            <input type="submit" name="submit" value="Izmjena podataka">
 
             </form>
+
+
+
 
 
 
