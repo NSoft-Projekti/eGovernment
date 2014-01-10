@@ -22,13 +22,13 @@ include('connect.php');
         <div id="header-up">
 
             <div id="header-logo">
-                <h1>LOGO STRANICE</h1>
+                <a href="home.php"><img src="img/logo.png"></a>
             </div><!--header-logo-->
 
 
             <div id="reg-prijava">
 
-                <a title="prijava" href="#">Korisnik</a>
+                <a title="prijava" href="profile.php">Korisnik</a>
                 <img class="logo" src="img/login-icon.png">
 
 
@@ -107,7 +107,7 @@ include('connect.php');
         <div id="footer-up">
 
             <div id="footer-logo">
-                <h1>LOGO</h1>
+                <a href="home.php"><img src="img/logo.png"></a>
             </div><!--footer-logo-->
 
             <div id="icons">

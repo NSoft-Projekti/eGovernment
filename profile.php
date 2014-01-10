@@ -33,6 +33,8 @@ session_start();
 
                     echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
                     echo '<img class="logo" src="img/login-icon.png">';
+                echo '</br>';
+                echo'<a title="odjava" href="logout.php">Odjava</a>';
 
                 ?>
 
@@ -47,10 +49,10 @@ session_start();
 
             <div id="horizontal-menu">
                 <ul>
-                    <li><a href="#footer">Home</a> </li>
-                    <li><a href="#footer">Vijesti</a> </li>
-                    <li><a href="#footer">Prijedlozi</a> </li>
-                    <li><a href="#footer">Odluke</a> </li>
+                    <li><a href="home.php">Home</a> </li>
+                    <li><a href="newsList.php">Vijesti</a> </li>
+                    <li><a href="suggestionList.php">Prijedlozi</a> </li>
+                    <li><a href="decisionList.php">Odluke</a> </li>
                     <li><a href="#footer">Korisnici</a> </li>
 
                 </ul>

@@ -6,11 +6,12 @@
     <title>eGovernment :: Home</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
-    <link href="style/postList.css" rel="stylesheet" type="text/css">
+    <link href="style/postList.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
 </head>
 <?php
 include('connect.php');
+session_start();
 ?>
 
 
@@ -28,9 +29,12 @@ include('connect.php');
 
             <div id="reg-prijava">
 
-                <a title="prijava" href="#">Korisnik</a>
-                <img class="logo" src="img/login-icon.png">
-
+                <?php
+                echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                echo '<img class="logo" src="img/login-icon.png">';
+                echo '</br>';
+                echo'<a title="odjava" href="logout.php">Odjava</a>';
+                ?>
 
             </div><!--reg-prijava-->
 
@@ -187,7 +191,7 @@ include('connect.php');
     <div id="footer-up">
 
         <div id="footer-logo">
-            <img src="img/logo.png">
+            <a href="home.php"><img src="img/logo.png"></a>
         </div><!--footer-logo-->
 
         <div id="icons">

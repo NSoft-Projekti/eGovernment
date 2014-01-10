@@ -7,6 +7,7 @@
     <title>eGovernment :: Home</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
+    <link href="style/postList.css" rel="stylesheet" type="text/css" />
     <link href="style/login-popup.css" rel="stylesheet" type="text/css" />    <!--css style from a login-popup form-->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script> <!--script from a login-popup form-->
     <meta charset="utf-8">
@@ -24,7 +25,7 @@ session_start();
         <div id="header-up">
 
             <div id="header-logo">
-                <h1>LOGO STRANICE</h1>
+                <a href="home.php"><img src="img/logo.png"></a>
             </div><!--header-logo-->
 
 
@@ -39,8 +40,10 @@ session_start();
                     }
                     else{
 
-                        echo '<a title="prijava" href="#">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                        echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
                         echo '<img class="logo" src="img/login-icon.png">';
+                        echo '</br>';
+                        echo'<a title="odjava" href="logout.php">Odjava</a>';
                     }
                 ?>
             </div><!--reg-prijava-->
@@ -109,11 +112,6 @@ session_start();
 
         </div>
 
-
-
-
-
-
     </div><!--container-->
 
     <div id="footer">
@@ -121,7 +119,7 @@ session_start();
         <div id="footer-up">
 
             <div id="footer-logo">
-                <h1>LOGO</h1>
+                <a href="home.php"><img src="img/logo.png"></a>
             </div><!--footer-logo-->
 
             <div id="icons">

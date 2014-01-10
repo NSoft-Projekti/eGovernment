@@ -32,7 +32,7 @@ session_start();
     <div id="header-up">
 
         <div id="header-logo">
-            <h1>LOGO STRANICE</h1>
+            <a href="home.php"><img src="img/logo.png"></a>
         </div><!--header-logo-->
 
 
@@ -49,6 +49,8 @@ session_start();
 
                 echo '<a title="prijava" href="#">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
                 echo '<img class="logo" src="img/login-icon.png">';
+                echo '</br>';
+                echo'<a title="odjava" href="logout.php">Odjava</a>';
             }
             ?>
 
@@ -274,7 +276,7 @@ session_start();
     <div id="footer-up">
 
         <div id="footer-logo">
-            <h1>LOGO</h1>
+            <a href="home.php"><img src="img/logo.png"></a>
         </div><!--footer-logo-->
 
         <div id="icons">
