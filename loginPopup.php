@@ -40,7 +40,7 @@
         <a class="close" href="#"><img alt="Close" title="Close Window" class="btn_close" src="img/close_pop.png"></a>
     </div>
     <!--            <a href="#" class="close"><img src="close_pop.png" class="btn_close" title="Close Window" alt="Close" /></a>-->
-    <form action=login-check.php class="signin" method="post" form="myform">
+    <form action=loginCheck.php class="signin" method="post" form="myform">
         <fieldset class="textbox">
             <label class="username">
                 <span>Username or email</span>
