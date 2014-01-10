@@ -57,7 +57,7 @@ if($result) {
         $member = mysql_fetch_assoc($result);
         $_SESSION['SESS_MEMBER_ID'] = $member['iduser'];
         $_SESSION['SESS_FIRST_NAME'] = $member['username'];
-        $_SESSION['SESS_LAST_NAME'] = $member['password'];
+        $_SESSION['SESS_PASSWORD'] = $member['password'];
         session_write_close();
         if(isset($_SESSION['SESS_MEMBER_ID'])and isset($_SESSION['SESS_FIRST_NAME'])) {
             header("location: home.php");
