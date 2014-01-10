@@ -13,7 +13,7 @@ echo ("Pozvan addNewsStore.php");
     $inputContent=mysql_real_escape_string($_POST['content']);
     $inputSummary=mysql_real_escape_string($_POST['summary']);
     echo ("Izvrsena pohrana u varijable");
-    mysql_query("INSERT INTO post (title, content, summary, post_type_idpost_type, user_iduser)
+    mysql_query("INSERT INTO post (title, content, summary, idpost_type, iduser)
     VALUES ('".$inputTitle."', '".$inputContent."','".$inputSummary."', 1, 10)");
 echo mysql_error();
 

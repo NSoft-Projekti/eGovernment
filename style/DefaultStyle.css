@@ -209,5 +209,7 @@ h1{
     background: #555 !important;
     color: rgb(255, 255, 255) !important;
 }
-
+img{
+   border: none;
+ }
 

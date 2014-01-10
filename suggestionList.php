@@ -80,8 +80,8 @@ session_start();
             <?php
 
             // find out how many rows are in the table
-            $sql = "SELECT * FROM post inner join user on post.user_iduser = user.iduser
-             WHERE POST.post_type_idpost_type='3'";
+            $sql = "SELECT * FROM post inner join user on post.iduser = user.iduser
+             WHERE POST.idpost_type='3'";
             $result = mysql_query($sql);
             $r = mysql_num_rows($result);
 
@@ -115,8 +115,8 @@ session_start();
             $offset = ($currentpage - 1) * $rowsperpage;
 
             // get the info from the db
-            $sql = "SELECT * FROM post inner join user on post.user_iduser = user.iduser
-             WHERE POST.post_type_idpost_type='3' LIMIT $offset, $rowsperpage";
+            $sql = "SELECT * FROM post inner join user on post.iduser = user.iduser
+             WHERE POST.idpost_type='3' LIMIT $offset, $rowsperpage";
             $result = mysql_query($sql, $conn) or trigger_error("SQL", E_USER_ERROR);
 
             // while there are rows to be fetched...
