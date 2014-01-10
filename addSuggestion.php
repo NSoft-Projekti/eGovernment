@@ -22,7 +22,7 @@ include('connect.php');
         <div id="header-up">
 
             <div id="header-logo">
-                <a href="home.php"><img src="img/logo.png"></a>
+                <a href="index.php"><img src="img/logo.png"></a>
             </div><!--header-logo-->
 
 
@@ -42,7 +42,7 @@ include('connect.php');
 
             <div id="horizontal-menu">
                 <ul>
-                    <li><a href="home.php">Home</a> </li>
+                    <li><a href="index.php">Home</a> </li>
                     <li><a href="newsList.php">Vijesti</a> </li>
                     <li><a href="suggestionList.php">Prijedlozi</a> </li>
                     <li><a href="decisionList.php">Odluke</a> </li>
@@ -107,7 +107,7 @@ include('connect.php');
         <div id="footer-up">
 
             <div id="footer-logo">
-                <a href="home.php"><img src="img/logo.png"></a>
+                <a href="index.php"><img src="img/logo.png"></a>
             </div><!--footer-logo-->
 
             <div id="icons">
