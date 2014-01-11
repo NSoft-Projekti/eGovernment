@@ -35,7 +35,7 @@ session_start();
                 if(!isset ($_SESSION['SESS_MEMBER_ID'])){
 
 
-                    include_once("login-popup.php");
+                    include_once("loginPopup.php");
                     echo'<a title="registracija" href="registration.php">Registracija</a>';
                 }
                 else{

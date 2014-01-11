@@ -1,4 +1,3 @@
-
 <html>
 <head>
     <meta name="description" content="Design Android applications" />
@@ -25,7 +24,7 @@ session_start();
         <div id="header-up">
 
             <div id="header-logo">
-                <a href="index.php"><img src="img/logo.png"></a>
+                <a href="home.php"><img src="img/logo.png"></a>
             </div><!--header-logo-->
 
 
@@ -96,7 +95,7 @@ session_start();
             <?php
             $idpost = $_GET['id'];
             $result = mysql_query("select title,content,date_time from post where post.idpost = $idpost");
-
+            $_SESSION['SESS_IDPOST']=$idpost;
             if($result == FALSE) {
                 die(mysql_error());
             }
@@ -109,24 +108,32 @@ session_start();
             }
             ?>
 
-        </div><!--news_container-->
-        <div class="comments_container">
-            <div class="existingComments_container">
-                <?php
-                $sql = mysql_query("SELECT content, username, date_time FROM comment inner join user on comment.iduser = user.iduser
-            WHERE comment.idpost=$idpost");
-                if(mysql_num_rows($sql) > 0)
-                    echo("Komentari povuceni iz baze.");
-         while($row2 = mysql_fetch_array($sql)){
-                echo '<h2>'.$row2["content"].'</h2>';
-             echo '<h3>'.$row2["username"].'</h3>';
-             echo '<h3>'.$row2["date_time"].'</h3>';
-                }
 
-                ?>
+        </div>
+        <?php
 
-            </div><!--existingComments_container-->
-        </div><!--comments_container-->
+        if(isset ($_SESSION['SESS_MEMBER_ID'])){
+        ?>
+
+        <div class="comment_container">
+
+            <div  id="comment">
+
+               <form action="addcomment.php" method="post"><br />
+
+               <textarea name="comment_text" id="comment_text" cols="50" rows="7">Napisite komentar!</textarea>
+
+               <input type="submit" value="Submit" />
+
+                </form>
+
+            </div><!-- exit comment -->
+
+        </div>
+        <?php
+        }
+        ?>
+
 
 
     </div><!--container-->
@@ -136,7 +143,7 @@ session_start();
         <div id="footer-up">
 
             <div id="footer-logo">
-                <a href="index.php"><img src="img/logo.png"></a>
+                <a href="home.php"><img src="img/logo.png"></a>
             </div><!--footer-logo-->
 
             <div id="icons">
