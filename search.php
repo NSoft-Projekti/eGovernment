@@ -6,13 +6,9 @@
     <title>eGovernment :: Home</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
-    <link href="style/postList.css" rel="stylesheet" type="text/css" />
-    <meta charset="utf-8">
+    <link href="style/search.css" rel="stylesheet" type="text/css">
 </head>
-<?php
-include('connect.php');
-session_start();
-?>
+
 
 <body>
 <div id="wrapper" >
@@ -22,18 +18,16 @@ session_start();
         <div id="header-up">
 
             <div id="header-logo">
-                <a href="index.php"><img src="img/logo.png"></a>
+                <h1>LOGO STRANICE</h1>
             </div><!--header-logo-->
 
 
             <div id="reg-prijava">
-                <?php
 
-                echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
-                echo '<img class="logo" src="img/login-icon.png">';
-                echo '</br>';
-                echo'<a title="odjava" href="logout.php">Odjava</a>';
-                ?>
+                <a title="prijava" href="#">Prijava</a>
+
+                <a title="registracija" href="registracija.html">Registracija</a>
+
 
             </div><!--reg-prijava-->
 
@@ -45,10 +39,10 @@ session_start();
 
             <div id="horizontal-menu">
                 <ul>
-                    <li><a href="index.php">Home</a> </li>
-                    <li><a href="newsList.php" >Vijesti</a> </li>
-                    <li><a href="suggestionList.php">Prijedlozi</a> </li>
-                    <li><a href="decisionList.php" class="currentTab">Odluke</a> </li>
+                    <li><a href="home.php">Home</a> </li>
+                    <li><a href="#footer">Vijesti</a> </li>
+                    <li><a href="#footer">Prijedlozi</a> </li>
+                    <li><a href="#footer">Odluke</a> </li>
                     <li><a href="#footer">Korisnici</a> </li>
 
                 </ul>
@@ -73,30 +67,15 @@ session_start();
     </div><!--header--->
 
     <div id="container">
-        <div class="news_container">
-            <?php
-            $idpost = $_GET['id'];
-            $result = mysql_query("select title,content,date_time from post where post.idpost = $idpost");
+        <div id="searching">
+            <form name="input" method="post">
 
-            if($result == FALSE) {
-                die(mysql_error());
-            }
+              <p>Pretraga sadrzaja za :</p>
+                <input type="text" name="fname">
+                <input name="subject" type="submit" value="Pretraga">
+            </form>
 
-            while($row = mysql_fetch_array($result))
-            {
-                echo '<h2 id="title">'.$row["title"].'</h2>';
-                echo '<p class="meta"><span class="date">'.$row["date_time"].'</span></p>';
-                echo ' <div class="entry"><p>'.$row["content"].'</p></div>';
-            }
-            ?>
-
-
-        </div>
-
-
-
-
-
+         </div>
 
     </div><!--container-->
 
@@ -105,7 +84,7 @@ session_start();
         <div id="footer-up">
 
             <div id="footer-logo">
-                <a href="index.php"><img src="img/logo.png"></a>
+                <h1>LOGO</h1>
             </div><!--footer-logo-->
 
             <div id="icons">
