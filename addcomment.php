@@ -11,7 +11,7 @@ $result =mysql_query("INSERT INTO comment (content, date_time,iduser, idpost)
                             VALUES ('".$content."','".$date_time."','".$iduser."','".$idpost."')");
 if($result){
     echo ("Zahvaljujemo na komentaru!!");
-    header("location: newsDetails.php");
+    header("location: newsDetails.php?id=$idpost");
 }
 else{
     echo mysql_error();

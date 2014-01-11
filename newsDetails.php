@@ -95,7 +95,7 @@ session_start();
             <?php
             $idpost = $_GET['id'];
             $result = mysql_query("select title,content,date_time from post where post.idpost = $idpost");
-            $_SESSION['SES_IDPOST']=$idpost;
+            $_SESSION['SESS_IDPOST']=$idpost;
             if($result == FALSE) {
                 die(mysql_error());
             }
