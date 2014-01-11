@@ -110,23 +110,30 @@ session_start();
 
 
         </div>
+        <?php
+
+        if(isset ($_SESSION['SESS_MEMBER_ID'])){
+        ?>
+
         <div class="comment_container">
 
             <div  id="comment">
 
-                <form action="addcomment.php" method="post"><br />
+               <form action="addcomment.php" method="post"><br />
 
-                    <textarea name="comment_text" id="comment_text" cols="50" rows="7">Napisite komentar!</textarea>
+               <textarea name="comment_text" id="comment_text" cols="50" rows="7">Napisite komentar!</textarea>
 
-                    <input type="submit" value="Submit" />
+               <input type="submit" value="Submit" />
 
                 </form>
 
             </div><!-- exit comment -->
 
-
-
         </div>
+        <?php
+        }
+        ?>
+
 
 
     </div><!--container-->
