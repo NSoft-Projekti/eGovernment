@@ -35,13 +35,13 @@ session_start();
                     if(!isset ($_SESSION['SESS_MEMBER_ID'])){
 
 
-                        include_once("login-popup.php");
+                        include_once("loginPopup.php");
                         echo'<a title="registracija" href="registration.php">Registracija</a>';
                     }
                     else{
 
                         echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
-                        echo '<img class="logo" src="img/login-icon.png">';
+                        echo '.<img class="logo" src="img/login-icon.png">.';
                         echo '</br>';
                         echo'<a title="odjava" href="logout.php">Odjava</a>';
                     }
@@ -96,7 +96,7 @@ session_start();
             <?php
             $idpost = $_GET['id'];
             $result = mysql_query("select title,content,date_time from post where post.idpost = $idpost");
-
+            $_SESSION['SESS_IDPOST']=$idpost;
             if($result == FALSE) {
                 die(mysql_error());
             }
@@ -111,6 +111,18 @@ session_start();
 
 
         </div>
+        <div class="comment_container">
+            <div  id="comment">
+                <form action="addcomment.php" method="post"><br />
+
+                <textarea name="comment_text" id="comment_text" cols="50" rows="7">Napisite komentar!</textarea>
+                    <input type="submit" value="Submit" />
+
+            </form>
+            </div><!-- exit comment -->
+
+        </div>
+
 
     </div><!--container-->
 
