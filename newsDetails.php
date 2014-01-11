@@ -96,7 +96,7 @@ session_start();
             <?php
             $idpost = $_GET['id'];
             $result = mysql_query("select title,content,date_time from post where post.idpost = $idpost");
-
+            $_SESSION['SES_IDPOST']=$idpost;
             if($result == FALSE) {
                 die(mysql_error());
             }
@@ -111,6 +111,24 @@ session_start();
 
 
         </div>
+        <div class="comment_container">
+
+            <div  id="comment">
+
+                <form action="addcomment.php" method="post"><br />
+
+                    <textarea name="comment_text" id="comment_text" cols="50" rows="7">Napisite komentar!</textarea>
+
+                    <input type="submit" value="Submit" />
+
+                </form>
+
+            </div><!-- exit comment -->
+
+
+
+        </div>
+
 
     </div><!--container-->
 
