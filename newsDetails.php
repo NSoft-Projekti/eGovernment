@@ -1,4 +1,3 @@
-
 <html>
 <head>
     <meta name="description" content="Design Android applications" />
@@ -35,7 +34,7 @@ session_start();
                     if(!isset ($_SESSION['SESS_MEMBER_ID'])){
 
 
-                        include_once("login-popup.php");
+                        include_once("loginPopup.php");
                         echo'<a title="registracija" href="registration.php">Registracija</a>';
                     }
                     else{
@@ -55,7 +54,7 @@ session_start();
 
             <div id="horizontal-menu">
                 <ul>
-                    <li><a href="home.php">Home</a> </li>
+                    <li><a href="index.php">Home</a> </li>
                     <li><a href="newsList.php" class="currentTab">Vijesti</a> </li>
                     <?php
 
