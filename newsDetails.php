@@ -1,3 +1,4 @@
+
 <html>
 <head>
     <meta name="description" content="Design Android applications" />
@@ -12,7 +13,7 @@
     <meta charset="utf-8">
 </head>
 <?php
- include('connect.php');
+include('connect.php');
 session_start();
 ?>
 
@@ -24,26 +25,26 @@ session_start();
         <div id="header-up">
 
             <div id="header-logo">
-                <a href="home.php"><img src="img/logo.png"></a>
+                <a href="index.php"><img src="img/logo.png"></a>
             </div><!--header-logo-->
 
 
             <div id="reg-prijava">
 
                 <?php
-                    if(!isset ($_SESSION['SESS_MEMBER_ID'])){
+                if(!isset ($_SESSION['SESS_MEMBER_ID'])){
 
 
-                        include_once("loginPopup.php");
-                        echo'<a title="registracija" href="registration.php">Registracija</a>';
-                    }
-                    else{
+                    include_once("loginPopup.php");
+                    echo'<a title="registracija" href="registration.php">Registracija</a>';
+                }
+                else{
 
-                        echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
-                        echo '<img class="logo" src="img/login-icon.png">';
-                        echo '</br>';
-                        echo'<a title="odjava" href="logout.php">Odjava</a>';
-                    }
+                    echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                    echo '<img class="logo" src="img/login-icon.png">';
+                    echo '</br>';
+                    echo'<a title="odjava" href="logout.php">Odjava</a>';
+                }
                 ?>
             </div><!--reg-prijava-->
 
@@ -60,23 +61,19 @@ session_start();
 
 
                     if(isset ($_SESSION['SESS_MEMBER_ID'])){
-                    echo'<li><a href="suggestionList.php">Prijedlozi</a> </li>';
-                    echo '<li><a href="decisionList.php">Odluke</a> </li>';
-                    echo '<li><a href="#footer">Korisnici</a> </li>';
+                        echo'<li><a href="suggestionList.php">Prijedlozi</a> </li>';
+                        echo '<li><a href="decisionList.php">Odluke</a> </li>';
+                        echo '<li><a href="#footer">Korisnici</a> </li>';
                     }
 
                     ?>
-
-
-
                 </ul>
-
             </div><!--horizontal-menu-->
 
             <div id="search">
                 <div id="search-down">
                     <a href="#"><div id="img-search">
-                    </div></a><!--img-search-->
+                        </div></a><!--img-search-->
 
                     <input type="text" name="search" >
 
@@ -95,7 +92,7 @@ session_start();
             <?php
             $idpost = $_GET['id'];
             $result = mysql_query("select title,content,date_time from post where post.idpost = $idpost");
-            $_SESSION['SESS_IDPOST']=$idpost;
+
             if($result == FALSE) {
                 die(mysql_error());
             }
@@ -108,32 +105,40 @@ session_start();
             }
             ?>
 
+        </div><!--news_container-->
+        <div class="existingComments_container">
+            <?php
+            $sql = mysql_query("SELECT content, username, date_time FROM comment inner join user on comment.iduser = user.iduser
+            WHERE comment.idpost=$idpost");
+            if(mysql_num_rows($sql) > 0)
+                echo("Komentari povuceni iz baze.");
+            while($row2 = mysql_fetch_array($sql)){
+                echo '<span>'.$row2["content"].'<span></br>';
+                echo '<span>'.$row2["username"].'</span></br>';
+                echo '<span>'.$row2["date_time"].'</span></br></br>';
+            }
 
-        </div>
-        <?php
+            ?>
+            <?php
 
-        if(isset ($_SESSION['SESS_MEMBER_ID'])){
-        ?>
-
+            $idpost = $_GET['id'];
+            $result = mysql_query("select title,content,date_time from post where post.idpost = $idpost");
+                        $_SESSION['SESS_IDPOST']=$idpost;
+            if($result == FALSE) {
+                die(mysql_error());
+            }
+            ?>
+        </div><!--existingComments_container-->
         <div class="comment_container">
-
             <div  id="comment">
-
-               <form action="addcomment.php" method="post"><br />
-
-               <textarea name="comment_text" id="comment_text" cols="50" rows="7">Napisite komentar!</textarea>
-
-               <input type="submit" value="Submit" />
-
+                <form action="addComment.php" method="post"><br />
+                    <textarea name="comment_text" id="comment_text" cols="50" rows="7">Napisite komentar!</textarea>
+                    <input type="submit" value="Submit" />
                 </form>
 
             </div><!-- exit comment -->
 
-        </div>
-        <?php
-        }
-        ?>
-
+        </div><!--comments_container-->
 
 
     </div><!--container-->
@@ -143,7 +148,7 @@ session_start();
         <div id="footer-up">
 
             <div id="footer-logo">
-                <a href="home.php"><img src="img/logo.png"></a>
+                <a href="index.php"><img src="img/logo.png"></a>
             </div><!--footer-logo-->
 
             <div id="icons">

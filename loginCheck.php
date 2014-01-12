@@ -13,7 +13,7 @@ $errmsg_arr = array();
 //Validation error flag
 $errflag = false;
 
-//Function to sanitize values received from the form. Prevents SQL injection
+//Function to that prevents SQL injection
 function clean($str) {
     $str = @trim($str);
     if(get_magic_quotes_gpc()) {
