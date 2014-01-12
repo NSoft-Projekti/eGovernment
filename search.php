@@ -7,8 +7,13 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
     <link href="style/search.css" rel="stylesheet" type="text/css">
+
 </head>
 
+<?php
+include('connect.php');
+session_start();
+?>
 
 <body>
 <div id="wrapper" >
@@ -68,13 +73,17 @@
 
     <div id="container">
         <div id="searching">
-            <form name="input" method="post">
-
-              <p>Pretraga sadrzaja za :</p>
-                <input type="text" name="fname">
-                <input name="subject" type="submit" value="Pretraga">
+            <h2>Pretraga</h2>
+            <form name="search" method="post" action="searchC.php">
+                Seach for: <input type="text" name="find" /> in
+                <Select NAME="field">
+                    <Option VALUE="name">First Name</option>
+                    <Option VALUE="lastname">Last Name</option>
+                    
+                </Select>
+                <input type="hidden" name="searching" value="yes" />
+                <input type="submit" name="search" value="Search" />
             </form>
-
          </div>
 
     </div><!--container-->
