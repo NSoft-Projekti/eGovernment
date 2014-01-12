@@ -107,10 +107,10 @@ session_start();
             $usr_tel=$_POST['usr_tel'];
 
             $updatesql =mysql_query( "UPDATE user".
-                "SET name =  $usr_name ,lastname=$usr_lname,username=$usr_usern,email=$usr_email,date_of_birth=$usr_bday,address=$usr_add,telephone=$usr_tel".
+                "SET name =  '$usr_name' ,lastname='$usr_lname',username='$usr_usern',email='$usr_email',date_of_birth='$usr_bday',address='$usr_add',telephone='$usr_tel'".
                 "WHERE iduser= $iduser") ;
 
-            $retval = mysql_query( $updatesql, $conn );
+            $retval = mysql_query($updatesql );
             if(! $retval )
             {
                 die('Could not update data: ' . mysql_error());
