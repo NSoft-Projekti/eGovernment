@@ -79,7 +79,7 @@ session_start();
                 <Select NAME="field">
                     <Option VALUE="name">First Name</option>
                     <Option VALUE="lastname">Last Name</option>
-                    
+
                 </Select>
                 <input type="hidden" name="searching" value="yes" />
                 <input type="submit" name="search" value="Search" />
