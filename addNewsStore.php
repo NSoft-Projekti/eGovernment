@@ -16,9 +16,10 @@ session_start();
     $date_time=date("Y-m-d H:i:s");
     $iduser=mysql_real_escape_string($_SESSION['SESS_MEMBER_ID']);
 
+
     echo ("Izvrsena pohrana u varijable");
-    mysql_query("INSERT INTO post (title, content,date_time ,summary, idpost_type, iduser)
-    VALUES ('".$inputTitle."', '".$inputContent."','".$date_time."','".$inputSummary."', 1,'".$iduser."')");
+    mysql_query("INSERT INTO post (title, content,date_time ,summary, iduser ,idcategory ,idpost_type)
+    VALUES ('".$inputTitle."', '".$inputContent."','".$date_time."','".$inputSummary."','".$iduser."',1,1)");
 
     header("location: newsList.php");
 echo mysql_error();

@@ -9,7 +9,9 @@
     <meta charset="utf-8">
 </head>
 
-
+<?php
+session_start();
+?>
 <body>
 <div id="wrapper" >
 
@@ -24,9 +26,9 @@
 
             <div id="reg-prijava">
 
-                <a title="prijava" href="#">Korisnik</a>
+                <a title="prijava" href="profile.php"><?php echo $_SESSION["SESS_FIRST_NAME"] ?> <img class="logo" src="img/login-icon.png"></a>
 
-                <img class="logo" src="img/login-icon.png">
+
 
 
             </div><!--reg-prijava-->
