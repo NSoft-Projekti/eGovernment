@@ -69,8 +69,8 @@ session_start();
                 <?php
 
                 if(isset ($_SESSION['SESS_MEMBER_ID'])){
-                    echo'<li><a href="#footer">Prijedlozi</a> </li>';
-                    echo '<li><a href="#footer">Odluke</a> </li>';
+                    echo'<li><a href="suggestionList.php">Prijedlozi</a> </li>';
+                    echo '<li><a href="decisionList.php">Odluke</a> </li>';
                     echo '<li><a href="#footer">Korisnici</a> </li>';
                 }
 
