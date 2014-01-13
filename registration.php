@@ -47,7 +47,7 @@ session_start();
             }
             else{
 
-                echo '<a title="prijava" href="#">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
                 echo '<img class="logo" src="img/login-icon.png">';
                 echo '</br>';
                 echo'<a title="odjava" href="logout.php">Odjava</a>';
@@ -64,8 +64,8 @@ session_start();
 
         <div id="horizontal-menu">
             <ul>
-                <li><a href="#footer">Home</a> </li>
-                <li><a href="#footer">Vijesti</a> </li>
+                <li><a href="index.php">Home</a> </li>
+                <li><a href="newsList.php">Vijesti</a> </li>
                 <?php
 
                 if(isset ($_SESSION['SESS_MEMBER_ID'])){
