@@ -93,41 +93,8 @@ session_start();
         $bday=$row['date_of_birth'];
         $address=$row['address'];
         $telephone=$row['telephone'];
-        $convert_date=date("d.m.Y",strtotime($bday));
+       // $convert_date=date("d.m.Y",strtotime($bday));
 
-        if(isset($_POST['submit']))
-        {
-
-            $usr_name=$_POST['usr_name'];
-            $usr_lname=$_POST['usr_lname'];
-            $usr_usern=$_POST['usr_usern'];
-            $usr_email=$_POST['usr_email'];
-            $usr_bday=$_POST['usr_bday'];
-            $usr_add=$_POST['usr_add'];
-            $usr_tel=$_POST['usr_tel'];
-
-            $updatesql =mysql_query( "UPDATE user".
-                "SET name =  '$usr_name' ,lastname='$usr_lname',username='$usr_usern',email='$usr_email',date_of_birth='$usr_bday',address='$usr_add',telephone='$usr_tel'".
-                "WHERE iduser= $iduser") ;
-
-            $retval = mysql_query($updatesql );
-            if(! $retval )
-            {
-                die('Could not update data: ' . mysql_error());
-            }
-            echo "Updated data successfully\n";
-
-
-
-            if($updatesql){
-
-            echo "<script type='text/javascript'>alert('Uspjeh');</script>";
-            }
-            else{
-                echo "error";
-            }
-
-        }
 
 
 
@@ -141,14 +108,14 @@ session_start();
         <div id="cleft-data">
 
 
-            <form action="" method="post">
+            <form action="" method="get">
 
            <table>
                <tr> <td>Ime:</td>       <td> <input  type="text" name="usr_name"  value=" <?php echo $firstname;?>">  </td> </tr>
                <tr> <td>Prezime:</td>   <td> <input type="text" name="usr_lname" value=" <?php echo $lastname;?>">      </td> </tr>
                <tr> <td>Username:</td>   <td> <input type="text" name="usr_usern" value=" <?php echo $username;?>">  </td> </tr>
                <tr> <td>E-mail:</td>     <td> <input type="text" name="usr_email" value=" <?php echo $email;?>">  </td> </tr>
-               <tr> <td>Datum rođenja:</td> <td> <input type="text" name="usr_bday" value=" <?php echo $convert_date;?>">    </td> </tr>
+               <tr> <td>Datum rođenja:</td> <td> <input type="text" name="usr_bday" value=" <?php echo $bday;?>">    </td> </tr>
                <tr> <td>Adresa:</td>     <td> <input type="text" name="usr_add" value=" <?php echo $address;?>">   </td> </tr>
                <tr> <td>Telefon:</td>    <td> <input type="tel" name="usr_tel" value=" <?php echo $telephone;?>">   </td> </tr>
 
@@ -159,7 +126,39 @@ session_start();
             </form>
 
 
+<?php
+if(isset($_GET['submit']))
+{
 
+    $usr_name=$_GET['usr_name'];
+    $usr_lname=$_GET['usr_lname'];
+    $usr_usern=$_GET['usr_usern'];
+    $usr_email=$_GET['usr_email'];
+    $usr_bday=$_GET['usr_bday'];
+    $usr_add=$_GET['usr_add'];
+    $usr_tel=$_GET['usr_tel'];
+   // $convert_bday=date("d.m.Y",strtotime($usr_bday));
+
+
+
+
+    $query2 = "UPDATE user SET name ='$usr_name', lastname='$usr_lname' , username='$usr_usern',email='$usr_email',date_of_birth='$usr_bday', address='$usr_add'
+    WHERE iduser='$iduser'";
+
+    $result2 = mysql_query ( $query2 ) or die ( "Query Failed : " . mysql_error () );
+
+    if($query2){ echo "<script type='text/javascript'>alert('Uspješna promjena');</script>";}
+    else{
+        echo "<script type='text/javascript'>alert('Greska');</script>";
+
+    }
+
+
+
+
+}
+
+?>
 
 
 
