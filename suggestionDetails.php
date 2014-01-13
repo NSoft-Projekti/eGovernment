@@ -93,9 +93,31 @@ session_start();
                 echo ' <div class="entry"><p>'.$row["content"].'</p></div>';
             }
             ?>
-
-
         </div>
+        <div class="existingComments_container">
+            <?php
+            $sql = mysql_query("SELECT content, username, date_time FROM comment inner join user on comment.iduser = user.iduser
+            WHERE comment.idpost=$idpost");
+            if(mysql_num_rows($sql) > 0)
+                echo("Komentari povuceni iz baze.");
+            while($row2 = mysql_fetch_array($sql)){
+                echo '<span>'.$row2["content"].'<span></br>';
+                echo '<span>'.$row2["username"].'</span></br>';
+                echo '<span>'.$row2["date_time"].'</span></br></br>';
+            }
+
+            ?>
+            <?php
+
+            $idpost = $_GET['id'];
+            $result = mysql_query("select title,content,date_time from post where post.idpost = $idpost");
+            $_SESSION['SESS_IDPOST']=$idpost;
+            if($result == FALSE) {
+                die(mysql_error());
+            }
+            ?>
+        </div><!--existingComments_container-->
+
         <?php
         if(isset ($_SESSION['SESS_MEMBER_ID'])){
             ?>
