@@ -154,7 +154,9 @@ if(isset($_GET['submit']))
 
     $result2 = mysql_query ( $query2 ) or die ( "Query Failed : " . mysql_error () );
 
-    if($query2){ echo "<script type='text/javascript'>alert('Uspješna promjena');</script>";}
+    if($query2){
+        echo "<script type='text/javascript'>alert('Uspješna promjena');</script>";
+    }
     else{
         echo "<script type='text/javascript'>alert('Greska');</script>";
 
