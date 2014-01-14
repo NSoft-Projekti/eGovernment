@@ -142,7 +142,7 @@ session_start();
 
                <form action="addcomment.php?id=<?php echo $idpost ?>" method="post"><br />
 
-               <textarea name="comment_text" id="comment_text" cols="50" rows="7">Napisite komentar!</textarea>
+               <textarea name="comment_text" id="comment_text" cols="50" rows="7" placeholder="Unesite komentar"></textarea>
 
                <input type="submit" value="Submit" />
 
@@ -158,6 +158,7 @@ session_start();
 
 
     </div><!--container-->
+</div><!--wrapper-->
 
     <div id="footer">
 
@@ -185,7 +186,7 @@ session_start();
 
     </div><!---footer-->
 
-</div><!--wrapper-->
+
 
 
 
