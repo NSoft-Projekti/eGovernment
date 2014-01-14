@@ -142,7 +142,7 @@ if(isset($_GET['submit']))
 
 
 
-    $query2 = "UPDATE user SET name ='$usr_name', lastname='$usr_lname' , username='$usr_usern',email='$usr_email',date_of_birth='$usr_bday', address='$usr_add'
+    $query2 = "UPDATE user SET name ='$usr_name', lastname='$usr_lname' , username='$usr_usern',email='$usr_email',date_of_birth='$usr_bday', address='$usr_add', telephone='$usr_tel'
     WHERE iduser='$iduser'";
 
     $result2 = mysql_query ( $query2 ) or die ( "Query Failed : " . mysql_error () );
@@ -152,9 +152,6 @@ if(isset($_GET['submit']))
         echo "<script type='text/javascript'>alert('Greska');</script>";
 
     }
-
-
-
 
 }
 
