@@ -36,10 +36,12 @@ else {
         $registerquery = mysql_query("call create_user('".$name."','".$lastname."','".$username."','".$address."', '".$password."', '".$email."','".$gender."','".$newDate_of_birth."','".$telephone."')");
         if($registerquery )
         {
+            $redirecturl='Uspješno ste se registrirali. Klik <a href="login-popup.php">ovdje za login</a>';
 
-            echo "<script type='text/javascript'>alert('Uspjeh');</script>";
-          /*  echo "<script type='text/javascript'>alert('Uspješno ste se registrirali. Klik <a href='login-popup.php'>ovdje za login</a>')</script>";*/
-            header("location:index.php");
+
+
+            echo "<script type='text/javascript'>alert('{$redirecturl}');</script>";
+
 
             /*
             echo "<h1>Uspjeh </h1>";
