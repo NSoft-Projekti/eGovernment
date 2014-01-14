@@ -156,15 +156,21 @@ if(isset($_GET['submit']))
 
     if($query2){
         echo "<script type='text/javascript'>alert('Uspješna promjena');</script>";
+
     }
     else{
         echo "<script type='text/javascript'>alert('Greska');</script>";
 
     }
 
+    header("location:profile.php");
+
+
 }
 
+
 ?>
+
 
 
 
