@@ -32,8 +32,8 @@ session_start();
 
 
                     echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
-                    echo '<img class="logo" src="img/login-icon.png">';
-                echo '</br>';
+                   // echo '<img class="logo" src="img/login-icon.png">';
+                //echo '</br>';
                 echo'<a title="odjava" href="logout.php">Odjava</a>';
 
                 ?>
@@ -111,13 +111,13 @@ session_start();
             <form action="" method="get">
 
            <table>
-               <tr> <td>Ime:</td>       <td> <input  type="text" name="usr_name"  value=" <?php echo $firstname;?>">  </td> </tr>
+               <tr> <td>Ime:</td>       <td> <input  type="text" name="usr_name"  value=" <?php echo htmlentities($firstname);?>">  </td> </tr>
                <tr> <td>Prezime:</td>   <td> <input type="text" name="usr_lname" value=" <?php echo $lastname;?>">      </td> </tr>
                <tr> <td>Username:</td>   <td> <input type="text" name="usr_usern" value=" <?php echo $username;?>">  </td> </tr>
                <tr> <td>E-mail:</td>     <td> <input type="text" name="usr_email" value=" <?php echo $email;?>">  </td> </tr>
                <tr> <td>Datum rođenja:</td> <td> <input type="text" name="usr_bday" value=" <?php echo $bday;?>">    </td> </tr>
                <tr> <td>Adresa:</td>     <td> <input type="text" name="usr_add" value=" <?php echo $address;?>">   </td> </tr>
-               <tr> <td>Telefon:</td>    <td> <input type="tel" name="usr_tel" value=" <?php echo $telephone;?>">   </td> </tr>
+               <tr> <td>Telefon:</td>    <td> <input type="tel" name="usr_tel" value=" <?php echo htmlentities($telephone);?>">   </td> </tr>
 
             </table>
 
@@ -129,21 +129,28 @@ session_start();
 <?php
 if(isset($_GET['submit']))
 {
+    function test_input($data)
+    {
+        $data = trim($data);
+        return $data;
+    }
 
-    $usr_name=$_GET['usr_name'];
-    $usr_lname=$_GET['usr_lname'];
-    $usr_usern=$_GET['usr_usern'];
-    $usr_email=$_GET['usr_email'];
-    $usr_bday=$_GET['usr_bday'];
-    $usr_add=$_GET['usr_add'];
-    $usr_tel=$_GET['usr_tel'];
+
+    $usr_name=test_input( $_GET['usr_name']);
+    $usr_lname=test_input( $_GET['usr_lname']);
+    $usr_usern=test_input( $_GET['usr_usern']);
+    $usr_email=test_input( $_GET['usr_email']);
+    $usr_bday=test_input( $_GET['usr_bday']);
+    $usr_add=test_input( $_GET['usr_add']);
+    $usr_tel=test_input($_GET['usr_tel']);
    // $convert_bday=date("d.m.Y",strtotime($usr_bday));
 
 
 
 
-    $query2 = "UPDATE user SET name ='$usr_name', lastname='$usr_lname' , username='$usr_usern',email='$usr_email',date_of_birth='$usr_bday', address='$usr_add', telephone='$usr_tel'
+    $query2 = "UPDATE user SET name='$usr_name',lastname='$usr_lname',username='$usr_usern',email='$usr_email',date_of_birth='$usr_bday',address='$usr_add',telephone='$usr_tel'
     WHERE iduser='$iduser'";
+
 
     $result2 = mysql_query ( $query2 ) or die ( "Query Failed : " . mysql_error () );
 
