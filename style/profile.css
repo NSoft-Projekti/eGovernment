@@ -52,10 +52,10 @@ input[type=submit] {
 
 #column-right{
     float: left;
-    width: 261px;
+    width: 241px;
     height: 811px;
     border-left: 1px solid #cfcfcf;
-    padding: 20px;
+    padding: 20px 0 0 20px;
 
 }
 #column-right ul{
