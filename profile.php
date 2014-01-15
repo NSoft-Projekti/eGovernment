@@ -102,6 +102,10 @@ session_start();
 
     <div id="column-left">
         <div id="cleft-picture">
+            <form action="" method="">
+                <input type="file">
+                <input type="submit" value="Odaberite sliku">
+            </form>
 
         </div> <!--cleft-picture-->
 
@@ -111,13 +115,13 @@ session_start();
             <form action="" method="get">
 
            <table>
-               <tr> <td>Ime:</td>       <td> <input  type="text" name="usr_name"  value=" <?php echo htmlentities($firstname);?>">  </td> </tr>
+               <tr> <td>Ime:</td>       <td> <input  type="text" name="usr_name"  value=" <?php echo $firstname;?>">  </td> </tr>
                <tr> <td>Prezime:</td>   <td> <input type="text" name="usr_lname" value=" <?php echo $lastname;?>">      </td> </tr>
                <tr> <td>Username:</td>   <td> <input type="text" name="usr_usern" value=" <?php echo $username;?>">  </td> </tr>
                <tr> <td>E-mail:</td>     <td> <input type="text" name="usr_email" value=" <?php echo $email;?>">  </td> </tr>
                <tr> <td>Datum rođenja:</td> <td> <input type="text" name="usr_bday" value=" <?php echo $bday;?>">    </td> </tr>
                <tr> <td>Adresa:</td>     <td> <input type="text" name="usr_add" value=" <?php echo $address;?>">   </td> </tr>
-               <tr> <td>Telefon:</td>    <td> <input type="tel" name="usr_tel" value=" <?php echo htmlentities($telephone);?>">   </td> </tr>
+               <tr> <td>Telefon:</td>    <td> <input type="tel" name="usr_tel" value=" <?php echo $telephone;?>">   </td> </tr>
 
             </table>
 
@@ -129,6 +133,7 @@ session_start();
 <?php
 if(isset($_GET['submit']))
 {
+
     function test_input($data)
     {
         $data = trim($data);
@@ -163,11 +168,10 @@ if(isset($_GET['submit']))
 
     }
 
-    header("location:profile.php");
+    echo "<script type='text/javascript'>window.location.href='profile.php'</script>";
 
 
 }
-
 
 ?>
 
@@ -180,9 +184,9 @@ if(isset($_GET['submit']))
 
         <div id="column-right">
             <ul>
-                <li> <a href="">Moje vijesti</a> </li>
-                <li> <a href="">Moji prijedlozi</a> </li>
-                <li> <a href="">Moji komentari</a> </li>
+                <li> <a href="myNews.php">Moje vijesti</a> </li>
+                <li> <a href="mySuggestion.php">Moji prijedlozi</a> </li>
+                <li> <a href="myComment.php">Moji komentari</a> </li>
 
             </ul>
 
