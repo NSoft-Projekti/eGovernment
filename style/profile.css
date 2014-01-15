@@ -51,7 +51,7 @@ input[type=submit] {
 }
 
 #column-right{
-    float: left;
+    float: right;
     width: 261px;
     height: 811px;
     border-left: 1px solid #cfcfcf;
