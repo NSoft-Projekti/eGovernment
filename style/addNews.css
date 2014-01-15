@@ -97,3 +97,50 @@
     width: 600px;
     margin-top: 15px;
 }
+#datumP {
+    border-radius: 3px;
+    color: rgb(113,113,113);
+    width: 360px;
+    height: 40px;
+    border: 1px solid;
+    font-size: 17px;
+    padding: 5px;
+}
+#datumPocetka{
+    margin-right: 5px;
+    font-family:open sans;
+    font-size: 20px;
+    color: #717171;
+    font-weight:normal ;
+    padding:5px 0;
+    width: 600px;
+    margin-top: 15px;
+}
+#inputName{
+    border-radius: 3px;
+    color: rgb(113,113,113);
+    width: 360px;
+    height: 40px;
+    border: 1px solid;
+    font-size: 17px;
+    padding: 5px;
+}
+#datumZavrsetka{
+    margin-right: 5px;
+    font-family:open sans;
+    font-size: 20px;
+    color: #717171;
+    font-weight:normal ;
+    padding:5px 0;
+    width: 600px;
+    margin-top: 15px;
+}
+#datumK {
+    border-radius: 3px;
+    color: rgb(113,113,113);
+    width: 360px;
+    height: 40px;
+    border: 1px solid;
+    font-size: 17px;
+    padding: 5px;
+}

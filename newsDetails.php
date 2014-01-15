@@ -109,15 +109,15 @@ session_start();
             ?>
         </div>
         <div class="existingComments_container">
+        <h2>Komentari</h2></br>
             <?php
             $sql = mysql_query("SELECT content, username, date_time FROM comment inner join user on comment.iduser = user.iduser
             WHERE comment.idpost=$idpost");
-            if(mysql_num_rows($sql) > 0)
-                echo("Komentari povuceni iz baze.");
             while($row2 = mysql_fetch_array($sql)){
                 echo '<span>'.$row2["content"].'<span></br>';
                 echo '<span>'.$row2["username"].'</span></br>';
                 echo '<span>'.$row2["date_time"].'</span></br></br>';
+                echo '<hr>';
             }
 
             ?>
@@ -142,7 +142,7 @@ session_start();
 
                <form action="addcomment.php?id=<?php echo $idpost ?>" method="post"><br />
 
-               <textarea name="comment_text" id="comment_text" cols="50" rows="7" placeholder="Unesite komentar"></textarea>
+               <textarea name="comment_text" id="comment_text" cols="30" rows="7" placeholder="Unesite komentar"></textarea>
 
                <input type="submit" value="Submit" />
 
