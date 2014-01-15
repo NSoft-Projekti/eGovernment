@@ -6,7 +6,7 @@
  * Time: 11:55
  */
 
-$useRemote = true ;
+$useRemote = false ;
 
 $dbhost = "10.0.0.250"; // ovo je server host
 $dbname = "tim4"; // ime baze
