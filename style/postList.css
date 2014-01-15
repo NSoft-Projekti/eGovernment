@@ -80,6 +80,6 @@ a:hover
     margin-top:0px;
     float: right;
 }
-#comment form{
-
+.user_post{
+    width: 560px;
 }

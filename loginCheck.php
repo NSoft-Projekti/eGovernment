@@ -76,7 +76,7 @@ if($result) {
         if($errflag) {
             $_SESSION['ERRMSG_ARR'] = $errmsg_arr;
             session_write_close();
-            echo "<script type='text/javascript'>alert('Greska!! Korisničko ime već postoji ');</script>";
+            echo "<script type='text/javascript'>alert('Greska! Podaci nisu ispravni');</script>";
 //            echo("Greska pri logiranju");
             exit();
         }

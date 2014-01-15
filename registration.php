@@ -240,7 +240,7 @@ session_start();
                     <tr> <td>E-mail: *</td>           <td><input type="text" name="email" value="<?php echo "$email"; ?>"></td> <td> <span class="error"> <?php echo $emailErr;?> </span> </td> </tr>
                     <tr> <td>Spol:</td>             <td><input type="radio" name="gender" value="M" >Muško   <input type="radio" name="gender" value="Z">Žensko</td> </tr>
                     <tr> <td>Datum rođenja:</td>    <td><input type="date" name="bday" ></td> </tr>
-                    <tr> <td>Adresa:</td>           <td><input type="text" name="address" value="<?php if (isset($_POST['adress'])) { echo "$adress"; }  ?>" ></td> <td></td> </tr>
+                    <tr> <td>Adresa:</td>           <td><input type="text" name="address" value="<?php if (isset($_POST['address'])) { echo "$address"; }  ?>" ></td> <td></td> </tr>
                     <tr> <td>Telefon: *</td>          <td><input type="tel" name="telephone" value="<?php echo "$telephon"; ?>" placeholder="+38763123456"></td> <td > <span class="error">  <?php echo $telephonErr;?> </span></td> </tr>
                 </table>
 
