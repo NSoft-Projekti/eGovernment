@@ -107,8 +107,8 @@ session_start();
 
         <?php
 
-        $nameErr = $emailErr = $lastnameErr = $usernameErr = $telephonErr= $passwordErr = $rpasswordErr = "";
-        $name = $email = $lastname = $username = $telephon = $password = $rpassword = $msg_sucess="";
+        $nameErr = $emailErr = $lastnameErr = $usernameErr = $telephonErr= $passwordErr = $rpasswordErr =$genderErr= "";
+        $name = $email = $lastname = $username = $telephon = $password = $rpassword = $gender="";
 
 
         if (isset($_POST['submit']))
@@ -201,6 +201,13 @@ session_start();
 
             }
 
+            if(empty($_POST["gender"])){
+                $genderErr="Odaberite spol";
+            }
+            else{
+                $gender=test_input($_POST["gender"]);
+            }
+
 
 
         }
@@ -208,7 +215,7 @@ session_start();
 
 
         if(isset($_POST['submit'])){
-            if($nameErr=="" && $lastnameErr=="" && $usernameErr=="" && $passwordErr=="" &&  $rpasswordErr=="" && $emailErr=="" &&  $telephonErr=="" )
+            if($nameErr=="" && $lastnameErr=="" && $usernameErr=="" && $passwordErr=="" &&  $rpasswordErr=="" && $emailErr=="" &&  $telephonErr=="" && $genderErr=="")
             include ('register_proces.php');
 
         }
@@ -238,7 +245,7 @@ session_start();
                     <tr> <td>Lozinka: *</td>         <td><input type="password" name="password" value="<?php echo "$password"; ?>" ></td> <td> <span class="error"> <?php echo $passwordErr;?> </span> </td> </tr>
                     <tr> <td>Potrvda lozinke: *</td>  <td><input type="password" name="rpass" value="<?php echo "$rpassword"; ?>"></td>  <td> <span class="error"> <?php echo $rpasswordErr;?></span> </td></tr>
                     <tr> <td>E-mail: *</td>           <td><input type="text" name="email" value="<?php echo "$email"; ?>"></td> <td> <span class="error"> <?php echo $emailErr;?> </span> </td> </tr>
-                    <tr> <td>Spol:</td>             <td><input type="radio" name="gender" value="M" >Muško   <input type="radio" name="gender" value="Z">Žensko</td> </tr>
+                    <tr> <td>Spol: *</td>             <td><input type="radio" name="gender" value="M" >Muško   <input type="radio" name="gender" value="Z">Žensko</td> <td> <span class="error"> <?php echo $genderErr;?> </span> </td>  </tr>
                     <tr> <td>Datum rođenja:</td>    <td><input type="date" name="bday" ></td> </tr>
                     <tr> <td>Adresa:</td>           <td><input type="text" name="address" value="<?php if (isset($_POST['address'])) { echo "$address"; }  ?>" ></td> <td></td> </tr>
                     <tr> <td>Telefon: *</td>          <td><input type="tel" name="telephone" value="<?php echo "$telephon"; ?>" placeholder="+38763123456"></td> <td > <span class="error">  <?php echo $telephonErr;?> </span></td> </tr>
