@@ -115,8 +115,8 @@ session_start();
             WHERE comment.idpost=$idpost");
             while($row2 = mysql_fetch_array($sql)){
                 echo '<span>'.$row2["content"].'<span></br>';
-                echo '<span>'.$row2["username"].'</span></br>';
-                echo '<span>'.$row2["date_time"].'</span></br></br>';
+                echo '<span id="username">'.$row2["username"].'</span></br>';
+                echo '<span>'.date("d.\tm.\tY. \tH:\ti", strtotime($row2["date_time"])).'</span></br></br>';
                 echo '<hr>';
             }
 
