@@ -22,6 +22,10 @@
     float: right;
 }
 
+button::-moz-focus-inner { border: 0; }
+
+button:focus {outline:none;}
+
 .input {
     border-radius: 3px;
     color: rgb(113,113,113);
@@ -62,6 +66,10 @@
     padding: 5px;
 }
 
+#categoryDropdownList:focus {
+    outline: none;
+}
+
 #contentSummary {
     border-radius: 3px;
     resize: none;
@@ -72,4 +80,8 @@
     font-size: 17px;
     padding: 5px;
     font-family: open sans;
+}
+
+#contentSummary:focus {
+    outline: none;
 }

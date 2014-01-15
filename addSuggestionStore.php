@@ -1,14 +1,17 @@
 <?php
 require("connect.php");
-if(!empty($_POST['title']) and !empty($_POST['content'])and !empty($_POST['summary']))
+session_start();
+
+if(!empty($_POST['contentPrijedlog']))
 {
-    echo ("If uslov");
-    $inputTitle=mysql_real_escape_string($_POST['titlePrijedlog']);
-    $inputContent=mysql_real_escape_string($_POST['inputContent']);
-    $inputSummary=mysql_real_escape_string($_POST['inputSummary']);
-    echo ("Izvrsena pohrana u varijable");
-    mysql_query($conn,"INSERT INTO post (title, content, summary, idpost_type, iduser)
-    VALUES ('".$inputTitle."', '".$inputContent."','".$inputSummary."', 1, 10)");
+
+    $iduser = mysql_real_escape_string($_SESSION['SESS_MEMBER_ID']);//** gets iduser using session */
+    $idsubcategory = mysql_real_escape_string( $_GET['id']);//** gets idpost using URL */
+    $date_time= date("Y-m-d H:i:s");
+    $inputContent=mysql_real_escape_string($_POST['contentPrijedlog']);
+    mysql_query("INSERT INTO post (content, date_time, iduser, idpost_type, idsubcategory)
+    VALUES ('".$inputContent."','".$date_time."', 39, 3, 2)");
+    header("location: suggestionList.php");
     echo mysql_error();
 }
 ?>

@@ -11,6 +11,7 @@
 </head>
 <?php
 include('connect.php');
+session_start();
 ?>
 
 <body>
@@ -70,36 +71,20 @@ include('connect.php');
     </div><!--header--->
 
     <div id="container">
-        </br>
-            <label class="title">Naziv  prijedloga: </label> </br></br>
-        <input class="input" type="text" name="titlePrijedlog" id="titlePrijedlog"/>
-        </br></br>
-        <label class="title">Kategorija: </label> </br></br>
+
         <?php
-
-
-        $sql = "SELECT * FROM category";
-        $result = mysql_query($sql);
-
-        echo "<select id='categoryDropdownList' name='categoryDropdownList'>";
-        echo "<option value='0'></option>";
-        while ($row = mysql_fetch_array($result)) {
-            echo "<option value='" . $row['idcategory'] . "'>" . $row['name'] . "</option>";
-        }
-        echo "</select>";
-
+        $idsubcategory = mysql_real_escape_string( $_GET['id']);//** gets idpost using URL */
         ?>
-        </br></br>
+
+        <form name="addSuggestion" action="addSuggestionStore.php?id=<?php echo $idsubcategory ?>" method="post">
+
         <label class="title">Unesite sadržaj prijedloga: </label> </br></br>
         <textarea name="contentPrijedlog" id="contentPrijedlog"></textarea>
 
         </br> </br>
-        <label class="title">Unesite kratki opis prijedloga: </label> </br></br>
-        <textarea name="contentPrijedlog" id="contentSummary"></textarea>
-        </br> </br>
         <hr>
-        <button id="button" name="submit" value="submit" formaction="addSuggestionStore.php" formmethod="post">Pošalji</button>
-
+        <button id="button" name="submit" value="submit">Pošalji</button>
+        </form>
     </div><!--container-->
 
     <div id="footer">
