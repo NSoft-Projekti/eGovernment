@@ -85,7 +85,7 @@ session_start();
             <?php
             $iduser=$_SESSION["SESS_MEMBER_ID"];
             // find out how many rows are in the table
-            $sql = "SELECT * FROM post WHERE POST.idpost_type='1'AND iduser=$iduser";
+            $sql = "SELECT * FROM post WHERE POST.idpost_type='3'AND iduser=$iduser";
             $result = mysql_query($sql);
             $r = mysql_num_rows($result);
 
@@ -119,7 +119,7 @@ session_start();
             $offset = ($currentpage - 1) * $rowsperpage;
 
             // get the info from the db
-            $sql = "SELECT * FROM post WHERE POST.idpost_type='1'AND iduser=$iduser LIMIT $offset, $rowsperpage";
+            $sql = "SELECT * FROM post WHERE POST.idpost_type='3'AND iduser=$iduser LIMIT $offset, $rowsperpage";
 
             $result = mysql_query($sql, $conn) or trigger_error("SQL", E_USER_ERROR);
 

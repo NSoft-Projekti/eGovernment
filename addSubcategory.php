@@ -1,21 +1,18 @@
 <html>
 <head>
     <meta name="description" content="eGovernment" />
-    <meta name="keywords" content="design, egovernment" />
-    <meta name="author" content="Tim4" />
-    <title>eGovernment :: Novi prijedlog</title>
+    <meta name="author" content="Ajda" />
+    <title>eGovernment :: Home</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
-    <link href="style/addSuggestion.css" rel="stylesheet" type="text/css" />
+    <link href="style/addNews.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
 </head>
+
 <?php
-include('connect.php');
 session_start();
 ?>
-
 <body>
-
 <div id="wrapper" >
 
     <div id="header">
@@ -29,8 +26,9 @@ session_start();
 
             <div id="reg-prijava">
 
-                <a title="prijava" href="profile.php">Korisnik</a>
-                <img class="logo" src="img/login-icon.png">
+                <a title="prijava" href="profile.php"><?php echo $_SESSION["SESS_FIRST_NAME"] ?> <img class="logo" src="img/login-icon.png"></a>
+
+
 
 
             </div><!--reg-prijava-->
@@ -44,7 +42,7 @@ session_start();
             <div id="horizontal-menu">
                 <ul>
                     <li><a href="index.php">Home</a> </li>
-                    <li><a href="newsList.php">Vijesti</a> </li>
+                    <li><a href="newsList.php" class="currentTab">Vijesti</a> </li>
                     <li><a href="suggestionList.php">Prijedlozi</a> </li>
                     <li><a href="decisionList.php">Odluke</a> </li>
                     <li><a href="#footer">Korisnici</a> </li>
@@ -72,19 +70,30 @@ session_start();
 
     <div id="container">
 
-        <?php
-        $idsubcategory = mysql_real_escape_string( $_GET['id']);//** gets idpost using URL */
-        ?>
+        <div class="news_container">
+            <div id="title">
+                <form name="addSubcategory" action="addSubcategoryStore.php" method="post">
+                    <label >Unesite naslov podkategorije: </label><br>
+                    <input type="text" name="name" id="inputName"/>
+            </div>
+            <div id="datumPocetka">
+                <label>Datum početka:</label></br>
+                <input type="date" name="datumP" id="datumP">
+            </div>
+            <div id="datumZavrsetka">
+                <label>Datum završetka:</label></br>
+                <input type="date" name="datumK" id="datumK">
+            </div>
+            <hr>
+            <input type="submit" name="button" value="submit" class="button" />
+            </form>
 
-        <form name="addSuggestion" action="addSuggestionStore.php?id=<?php echo $idsubcategory ?>" method="post">
 
-        <label class="title">Unesite sadržaj prijedloga: </label> </br></br>
-        <textarea name="contentPrijedlog" id="contentPrijedlog"></textarea>
 
-        </br> </br>
-        <hr>
-        <button id="button" name="submit" value="submit">Pošalji</button>
-        </form>
+        </div><!--news_container-->
+
+
+
     </div><!--container-->
 
     <div id="footer">
