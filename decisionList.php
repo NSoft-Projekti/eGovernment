@@ -114,7 +114,7 @@ session_start();
             $offset = ($currentpage - 1) * $rowsperpage;
 
             // get the info from the db
-            $sql = "SELECT * FROM post WHERE POST.idpost_type='2' LIMIT $offset, $rowsperpage";
+            $sql = "SELECT * FROM post WHERE POST.idpost_type='2' ORDER BY date_time DESC LIMIT $offset, $rowsperpage";
             $result = mysql_query($sql, $conn) or trigger_error("SQL", E_USER_ERROR);
 
             // while there are rows to be fetched...

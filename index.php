@@ -67,7 +67,31 @@ session_start();
 
 
                     if(isset ($_SESSION['SESS_MEMBER_ID'])){
-                        echo'<li><a href="suggestionList.php">Prijedlozi</a> </li>';
+                        echo'<li><a href="suggestionList.php">Prijedlozi</a>
+                        <ul>';
+
+                        $sqlCat = "SELECT idcategory, name FROM category WHERE idcategory != '1'";
+                        $resultCat=mysql_query($sqlCat, $conn);
+                        while($rowCat = mysql_fetch_assoc($resultCat))
+                        {
+                            echo '<li>';
+                            echo '<a href="suggestionList.php?id='.$rowCat['idcategory'].'">'.$rowCat["name"].'</a>';
+                            echo '<ul>';
+                            $idCat = $rowCat['idcategory'];
+                            $sqlSub = "SELECT idsubcategory, name FROM subcategory WHERE name != 'Vijest' AND subcategory.idcategory = $idCat";
+                            $resultSub=mysql_query($sqlSub, $conn);
+                            while($rowSub = mysql_fetch_assoc($resultSub))
+                            {
+                                echo '<li>';
+                                echo '<a href="suggestionList.php?id='.$rowSub['idsubcategory'].'">'.$rowSub["name"].'</a>';
+                                echo '</li>';
+                            }
+                            echo '</ul>';
+                            echo '</li>';
+                        }
+
+                        echo '</ul>
+                        </li>';
                         echo '<li><a href="decisionList.php">Odluke</a> </li>';
                         echo '<li><a href="#footer">Korisnici</a> </li>';
                     }
