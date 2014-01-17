@@ -1,10 +1,10 @@
 
 <html>
 <head>
-    <meta name="description" content="Design Android applications" />
-    <meta name="keywords" content="android, design, technics" />
-    <meta name="author" content="Jelena" />
-    <title>eGovernment :: Home</title>
+    <meta name="description" content="eGovernment" />
+    <meta name="keywords" content="design, egovernment" />
+    <meta name="author" content="Tim4" />
+    <title>eGovernment :: Profile</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
@@ -22,7 +22,7 @@ session_start();
         <div id="header-up">
 
             <div id="header-logo">
-                <h1>LOGO STRANICE</h1>
+                <a href="index.php"><img src="img/logo.png"></a>
             </div><!--header-logo-->
 
 
@@ -201,7 +201,7 @@ if(isset($_GET['submit']))
         <div id="footer-up">
 
             <div id="footer-logo">
-                <h1>LOGO</h1>
+                <a href="index.php"><img src="img/logo.png"></a>
             </div><!--footer-logo-->
 
             <div id="icons">
