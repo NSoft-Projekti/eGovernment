@@ -125,8 +125,9 @@ session_start();
                 echo '<h2 id="title"><a href="suggestionDetails.php?id='.$idpost.'">'.$row["title"].'</a></h2>';
                 echo '<p class="meta"><span class="date">'.$row["date_time"].'</span></p>';
                 echo '<p><span class="posted">postavio/la <a href="#">'.$row["username"].'</a></span></p>';
-                echo ' <div class="entry"><p>'.$row["summary"].'</p></div>';
+                echo ' <div class="entry"><p>'.$row["content"].'</p></div>';
                 echo '<p class="links"><a href="suggestionDetails.php?id='.$idpost.'" class="right">Pročitaj više</a></p></br>';
+                echo '<button id="voteButton" name="submit" value="submit">Glasaj</button> </br>';
             } // end while
 
             /******  build the pagination links ******/
