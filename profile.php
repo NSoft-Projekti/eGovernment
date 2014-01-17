@@ -96,14 +96,13 @@ session_start();
        // $convert_date=date("d.m.Y",strtotime($bday));
 
 
-
-
         ?>
 
     <div id="column-left">
         <div id="cleft-picture">
-            <form action="" method="">
-                <input type="file">
+            <form action="" method="" enctype="multipart/form-data">
+                <input type="file" accept="image/*">
+                <img id="user_img" src="#">
                 <input type="submit" value="Odaberite sliku">
             </form>
 
