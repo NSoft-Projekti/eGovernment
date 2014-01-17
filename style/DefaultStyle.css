@@ -219,3 +219,12 @@ img{
    border: none;
  }
 
+.hide {
+    display: none;
+}
+.show {
+    display: inline-block !important;
+    position: fixed;
+}
+
+
