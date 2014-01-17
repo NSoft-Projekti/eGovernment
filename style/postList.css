@@ -11,7 +11,8 @@
 }
 
 .post {
-    width: 600px;
+    width: 540px;
+    float: left;
 }
 
 .right {
