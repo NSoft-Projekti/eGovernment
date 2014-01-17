@@ -127,7 +127,9 @@ session_start();
                 echo '<p><span class="posted">postavio/la <a href="#">'.$row["username"].'</a></span></p>';
                 echo ' <div class="entry"><p>'.$row["content"].'</p></div>';
                 echo '<p class="links"><a href="suggestionDetails.php?id='.$idpost.'" class="right">Pročitaj više</a></p></br>';
+                echo '<form name="addVote" action="addVoteStore.php?id=<?php echo $idpost ?>" method="post">';
                 echo '<button id="voteButton" name="submit" value="submit">Glasaj</button> </br>';
+                echo '</form>';
             } // end while
 
             /******  build the pagination links ******/
@@ -181,7 +183,6 @@ session_start();
                 echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$prevpage'><</a> ";
             } // end if
             ?>
-
         </div>
 
 
