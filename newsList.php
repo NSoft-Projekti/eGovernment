@@ -134,7 +134,7 @@ session_start();
 
             // get the info from the db
             $sql = "SELECT * FROM post inner join user on post.iduser = user.iduser
-             WHERE POST.idpost_type='1' LIMIT $offset, $rowsperpage";
+             WHERE POST.idpost_type='1' ORDER BY post.date_time DESC LIMIT $offset, $rowsperpage";
             $result = mysql_query($sql, $conn) or trigger_error("SQL", E_USER_ERROR);
 
             // while there are rows to be fetched...

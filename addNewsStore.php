@@ -18,8 +18,10 @@ session_start();
 
 
     echo ("Izvrsena pohrana u varijable");
-    mysql_query("INSERT INTO post (title, content,date_time ,summary, iduser ,idcategory ,idpost_type)
-    VALUES ('".$inputTitle."', '".$inputContent."','".$date_time."','".$inputSummary."','".$iduser."',1,1)");
+
+    mysql_query("INSERT INTO post (title, content,date_time ,summary, iduser ,idsubcategory ,idpost_type)
+    VALUES ('".$inputTitle."', '".$inputContent."','".$date_time."','".$inputSummary."','".$iduser."',4,1)");
+echo mysql_error();
 
     header("location: newsList.php");
 echo mysql_error();
