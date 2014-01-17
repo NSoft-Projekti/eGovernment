@@ -67,23 +67,23 @@ session_start();
 
 
                     if(isset ($_SESSION['SESS_MEMBER_ID'])){
-                        echo'<li><a href="suggestionList.php">Prijedlozi</a>
-                        <ul>';
+                        echo'<li><a href="suggestionList.php" id="category" >Prijedlozi</a>
+                        <ul id="ulCategory" class="hide">';
 
                         $sqlCat = "SELECT idcategory, name FROM category WHERE idcategory != '1'";
                         $resultCat=mysql_query($sqlCat, $conn);
                         while($rowCat = mysql_fetch_assoc($resultCat))
                         {
                             echo '<li>';
-                            echo '<a href="suggestionList.php?id='.$rowCat['idcategory'].'">'.$rowCat["name"].'</a>';
-                            echo '<ul>';
+                            echo '<a href="suggestionList.php?id='.$rowCat['idcategory'].'"  id="liCategory" class="hide">'.$rowCat["name"].'</a>';
+                            echo '<ul id="ulSubcategory" class="hide">';
                             $idCat = $rowCat['idcategory'];
                             $sqlSub = "SELECT idsubcategory, name FROM subcategory WHERE name != 'Vijest' AND subcategory.idcategory = $idCat";
                             $resultSub=mysql_query($sqlSub, $conn);
                             while($rowSub = mysql_fetch_assoc($resultSub))
                             {
-                                echo '<li>';
-                                echo '<a href="suggestionList.php?id='.$rowSub['idsubcategory'].'">'.$rowSub["name"].'</a>';
+                                echo '<li >';
+                                echo '<a href="suggestionList.php?id='.$rowSub['idsubcategory'].'" id="liSubcategory" class="hide">'.$rowSub["name"].'</a>>';
                                 echo '</li>';
                             }
                             echo '</ul>';
@@ -162,7 +162,7 @@ session_start();
 
             // get the info from the db
             $sql = "SELECT * FROM post inner join user on post.iduser = user.iduser
-             WHERE POST.idpost_type='1' LIMIT $offset, $rowsperpage";
+             WHERE POST.idpost_type='1' ORDER BY date_time DESC LIMIT $offset, $rowsperpage";
             $result = mysql_query($sql, $conn) or trigger_error("SQL", E_USER_ERROR);
 
             // while there are rows to be fetched...
@@ -264,6 +264,7 @@ session_start();
 </div><!--wrapper-->
 
 
-
+<script src="dropDownMenu.js" type="text/javascript"></script>
 </body>
+
 </html>
