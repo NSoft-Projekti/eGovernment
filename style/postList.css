@@ -91,3 +91,6 @@ hr{
 #username{
     font-style: italic;
 }
+.user_post a:hover {
+    color: rgb(82,139,197);
+}
