@@ -1,3 +1,4 @@
+
 <html>
 <head>
     <meta name="description" content="Design Android applications" />
@@ -5,88 +6,92 @@
     <meta name="author" content="Jelena" />
     <title>eGovernment :: Home</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
+    <link href="style/profile.css" rel="stylesheet" type="text/css" />
     <link href="style/postList.css" rel="stylesheet" type="text/css">
-    <meta charset="utf-8">
 </head>
-
 <?php
-include('connect.php');
+include 'connect.php';
 session_start();
 ?>
-
 <body>
 <div id="wrapper" >
 
-    <div id="header">
+<div id="header">
 
-        <div id="header-up">
+    <div id="header-up">
 
-            <div id="header-logo">
-                <a href="index.php"><img src="img/logo.png"></a>
-            </div><!--header-logo-->
-
-
-            <div id="reg-prijava">
-                <?php
-
-                echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
-                echo '<img class="logo" src="img/login-icon.png">';
-                echo '</br>';
-                echo'<a title="odjava" href="logout.php">Odjava</a>';
-                ?>
-
-            </div><!--reg-prijava-->
+        <div id="header-logo">
+            <h1>LOGO STRANICE</h1>
+        </div><!--header-logo-->
 
 
-
-        </div><!--header-up-->
-
-        <div id="header-down">
-
-            <div id="horizontal-menu">
-                <ul>
-                    <li><a href="index.php">Home</a> </li>
-                    <li><a href="newsList.php">Vijesti</a> </li>
-                    <li><a href="suggestionList.php" class="currentTab">Prijedlozi</a> </li>
-                    <li><a href="decisionList.php">Odluke</a> </li>
-                    <li><a href="#footer">Korisnici</a> </li>
-
-                </ul>
-
-            </div><!--horizontal-menu-->
-
-            <div id="search">
-                <div id="search-down">
-                    <a href="#"><div id="img-search">
-                        </div></a><!--img-search-->
-
-                    <input type="text" name="search" >
-
-
-                </div>
-
-            </div><!--search-->
-
-        </div><!--header-down-->
-
-
-    </div><!--header--->
-
-
-    <div id="container">
-        <div class="post">
+        <div id="reg-prijava">
 
             <?php
 
+
+            echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+            // echo '<img class="logo" src="img/login-icon.png">';
+            //echo '</br>';
+            echo'<a title="odjava" href="logout.php">Odjava</a>';
+
+            ?>
+
+
+        </div><!--reg-prijava-->
+
+
+
+    </div><!--header-up-->
+
+    <div id="header-down">
+
+        <div id="horizontal-menu">
+            <ul>
+                <li><a href="index.php">Home</a> </li>
+                <li><a href="newsList.php">Vijesti</a> </li>
+                <li><a href="suggestionList.php">Prijedlozi</a> </li>
+                <li><a href="decisionList.php">Odluke</a> </li>
+                <li><a href="#footer">Korisnici</a> </li>
+
+            </ul>
+
+        </div><!--horizontal-menu-->
+
+        <div id="search">
+            <div id="search-down">
+                <a href="#"><div id="img-search">
+                    </div></a><!--img-search-->
+
+                <input type="text" name="search" >
+
+
+            </div>
+
+        </div><!--search-->
+
+    </div><!--header-down-->
+
+
+</div><!--header--->
+
+<div id="container">
+
+    <div id="column-left">
+        <div class="user_post">
+
+            <?php
+            $iduser=$_SESSION["SESS_MEMBER_ID"];
             // find out how many rows are in the table
-            $sql = "SELECT * FROM post inner join user on post.iduser = user.iduser
-             WHERE POST.idpost_type='3'";
+            $sql = "SELECT comment.content , comment.date_time, post.content
+             FROM comment inner join post on comment.idpost = post.idpost WHERE comment.iduser=$iduser";
             $result = mysql_query($sql);
             $r = mysql_num_rows($result);
 
             // number of rows to show per page
-            $rowsperpage = 3;
+            $rowsperpage = 7;
             // find out total pages
             $totalpages = ceil($r / $rowsperpage);
 
@@ -115,22 +120,23 @@ session_start();
             $offset = ($currentpage - 1) * $rowsperpage;
 
             // get the info from the db
-            $sql = "SELECT * FROM post inner join user on post.iduser = user.iduser
-             WHERE POST.idpost_type='3' ORDER BY date_time DESC LIMIT $offset, $rowsperpage";
-            $result = mysql_query($sql, $conn) or trigger_error("SQL", E_USER_ERROR);
 
-            // while there are rows to be fetched...
-            while ($row = mysql_fetch_assoc($result)) {
-                $idpost=$row['idpost'];
-                echo '<h2 id="title"><a href="suggestionDetails.php?id='.$idpost.'">'.$row["title"].'</a></h2>';
-                echo '<p class="meta"><span class="date">'.$row["date_time"].'</span></p>';
-                echo '<p><span class="posted">postavio/la <a href="#">'.$row["username"].'</a></span></p>';
-                echo ' <div class="entry"><p>'.$row["content"].'</p></div>';
-                echo '<p class="links"><a href="suggestionDetails.php?id='.$idpost.'" class="right">Pročitaj više</a></p></br>';
-                echo '<form name="addVote" action="addVoteStore.php?id=<?php echo $idpost ?>" method="post">';
-                echo '<button id="voteButton" name="submit" value="submit">Glasaj</button> </br>';
-                echo '</form>';
-            } // end while
+            $sql = mysql_query("SELECT comment.content , comment.date_time,comment.idpost ,post.title FROM comment inner join post on comment.idpost = post.idpost
+            WHERE comment.iduser=$iduser");
+            if(mysql_num_rows($sql) > 0){
+
+            while($row2 = mysql_fetch_array($sql)){
+                $idpost=$row2["idpost"];
+
+                echo '<span>Komentirani teksta:</span></br></br>';
+                echo '<span><a href="newsDetails.php?id='.$idpost.'">'.$row2["title"].'</span></a></br></br>';
+                echo '<span>Vaš komentar:</span></br></br>';
+                echo '<span>'.$row2["content"].'</span></br>';
+                echo '<span>'.$row2["date_time"].'</span></br></br>';
+            }}
+            else{
+                echo 'Još nista niste komentirali';
+            }
 
             /******  build the pagination links ******/
             // range of num links to show
@@ -183,11 +189,26 @@ session_start();
                 echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$prevpage'><</a> ";
             } // end if
             ?>
-        </div>
 
 
 
-    </div><!--container-->
+
+        </div> <!--cleft-data-->
+
+    </div> <!--column-left-->
+
+    <div id="column-right">
+        <ul>
+            <li> <a href="myNews.php">Moje vijesti</a> </li>
+            <li> <a href="mySuggestion.php">Moji prijedlozi</a> </li>
+            <li> <a href="myComment.php">Moji komentari</a> </li>
+
+        </ul>
+
+
+    </div> <!--column-right-->
+
+
 
 </div><!--container-->
 
@@ -196,7 +217,7 @@ session_start();
     <div id="footer-up">
 
         <div id="footer-logo">
-            <a href="index.php"><img src="img/logo.png"></a>
+            <h1>LOGO</h1>
         </div><!--footer-logo-->
 
         <div id="icons">
@@ -217,9 +238,9 @@ session_start();
 
 </div><!---footer-->
 
-
-
 </div><!--wrapper-->
+
+
 
 
 
