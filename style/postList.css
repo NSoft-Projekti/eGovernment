@@ -7,7 +7,12 @@
 }
 .posted{
     font-style: italic;
-    color: #389CEA !important;
+    color: #414141 !important;
+    /*color: #389CEA !important;*/
+}
+
+.user_link{
+    color:#389CEA !important;
 }
 
 .post {
@@ -34,7 +39,8 @@ a:hover
 }
 .logo{
     float: right;
-    margin-right: 45px;
+    margin-right: 20px;
+    /*margin-bottom: 60px;*/
 }
 .news_container{
     width: 650px;
