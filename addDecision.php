@@ -91,19 +91,19 @@ session_start();
                 <select name="subcategory">
 
                     <?php
-                    $getAllSubcategory = mysql_query("SELECT idsubcategory,name,endDate FROM subcategory ;");
+                    $getAllSubcategory = mysql_query("SELECT idsubcategory,name,endDate FROM subcategory where subcategory.idcategory!='1';");
                     $curentDate=date("Y-m-d");
-                    $viewAllSubcategory=mysql_fetch_array($getAllSubcategory);
 
-                    while($viewAllSubcategory){
+
+                    while($viewAllSubcategory=mysql_fetch_assoc($getAllSubcategory)){
 
                        $endDate=$viewAllSubcategory['endDate'];
 
-                        if(strtotime($curentdate) > strtotime($endDate)){
-                        echo '<option value='.$viewAllSubcategory['idsubcategory'].' selected>'.$viewAllSubcategory['name']. '</option>';
+                        if(strtotime($curentdate) < strtotime($endDate)){
+                        echo '<option value='.$viewAllSubcategory['idsubcategory'].'>'.$viewAllSubcategory['name']. '</option>';
                         }
                         else{
-                        echo '<option value='.$viewAllSubcategory['idsubcategory'].' >'.$viewAllSubcategory['name']. '</option>';
+                        echo '';
                     }
                     }
                     ?>
