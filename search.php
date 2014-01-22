@@ -1,7 +1,9 @@
+//
 <html>
 <head>
     <meta name="description" content="Design Android applications" />
     <meta name="keywords" content="android, design, technics" />
+    <meta charset="UTF-8">
     <meta name="author" content="Jelena" />
     <title>eGovernment :: Home</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
@@ -12,7 +14,7 @@
 
 <?php
 include('connect.php');
-session_start();
+
 ?>
 
 <body>
@@ -54,6 +56,7 @@ session_start();
 
             </div><!--horizontal-menu-->
 
+
             <div id="search">
                 <div id="search-down">
                     <a href="#"><div id="img-search">
@@ -71,20 +74,58 @@ session_start();
 
     </div><!--header--->
 
+
     <div id="container">
         <div id="searching">
-            <h2>Pretraga</h2>
-            <form name="search" method="post" action="searchC.php">
-                Seach for: <input type="text" name="find" /> in
-                <Select NAME="field">
-                    <Option VALUE="name">First Name</option>
-                    <Option VALUE="lastname">Last Name</option>
 
-                </Select>
-                <input type="hidden" name="searching" value="yes" />
-                <input type="submit" name="search" value="Search" />
+            <?php
+
+            error_reporting(E_ALL);
+            ini_set('display_errors', '1');
+            $search_output = "";
+            if(isset($_POST['searchquery']) && $_POST['searchquery'] != ""){
+            $searchquery = preg_replace('#[^a-z 0-9?!]#i', '', $_POST['searchquery']);
+
+                $searchquery=$_POST['searchquery'];
+                $sqlCommand=("SELECT * FROM post WHERE (`title` LIKE '%$searchquery%' ) OR (`content` LIKE '%$searchquery%' )");
+                $query = mysql_query($sqlCommand) or die(mysql_error());
+                $count = mysql_num_rows($query);
+                if($count > 1){
+                    $search_output .= "<hr />$count results for <strong>$searchquery</strong><hr />$sqlCommand<hr />";
+                    while($row = mysql_fetch_array($query)){
+
+                        $idpost = $row["idpost"];
+                        $title = $row["title"];
+                        $search_output .= "$idpost - <a href='newsDetails.php?id=$idpost'>$title</a><br />";
+
+                    } // close while
+                } else {
+                    $search_output = "<hr />0 results for <strong> $searchquery</strong><hr />$sqlCommand";
+                }
+            }
+
+
+
+            ?>
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                Search For:
+                <input name="searchquery" type="text" size="44" maxlength="88">
+                Within:
+                <select name="filter1">
+                    <option value="title">Naslov</option>
+                    <option value="content">Sadrzaj</option>
+
+                </select>
+                <input name="myBtn" type="submit">
+                <br />
             </form>
-         </div>
+            <div>
+                <?php echo $search_output; ?>
+            </div>
+
+
+        </div>
+
 
     </div><!--container-->
 
@@ -122,3 +163,4 @@ session_start();
 
 </body>
 </html>
+

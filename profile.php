@@ -93,6 +93,7 @@ session_start();
         $bday=$row['date_of_birth'];
         $address=$row['address'];
         $telephone=$row['telephone'];
+        $gender=$row['gender'];
        // $convert_date=date("d.m.Y",strtotime($bday));
 
 
@@ -100,16 +101,19 @@ session_start();
 
     <div id="column-left">
         <div id="cleft-picture">
-            <form action="" method="" enctype="multipart/form-data">
-                <input type="file" accept="image/*">
-                <img id="user_img" src="#">
-                <input type="submit" value="Odaberite sliku">
-            </form>
+<?php
+            if($gender=='M'){
+            echo "<img src='img/male.png'>";
+            }
+            else{
+            echo"<img src='img/female.png'>";
+
+            }
+?>
 
         </div> <!--cleft-picture-->
 
         <div id="cleft-data">
-
 
             <form action="" method="get">
 
@@ -132,6 +136,7 @@ session_start();
 <?php
 if(isset($_GET['submit']))
 {
+
 
     function test_input($data)
     {
@@ -223,7 +228,6 @@ if(isset($_GET['submit']))
     </div><!---footer-->
 
 </div><!--wrapper-->
-
 
 
 
