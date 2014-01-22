@@ -74,7 +74,7 @@ input[type=submit] {
     line-height: 20px;
     text-decoration: none;
     font-family: open sans;
-    font-size: 14px;
+    font-size: 16px;
     color: #717171;
     margin:0;
     font-weight: bold;
@@ -83,5 +83,29 @@ input[type=submit] {
 #column-right ul li a:hover{
     color: #389CEA;
 
+}
+.error{
+    font-size:10px;
+    color: rgb(82,139,197);
+
+}
+.posttitle a{
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+ display: block;
+    color:rgb(62,62,62);
+
+}
+
+.usercomment{
+
+    font-style:italic;
+    color: #717171;
+
+}
+
+.posttitle a:hover {
+    color: rgb(82,139,197);
 }
 
