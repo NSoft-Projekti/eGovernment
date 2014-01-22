@@ -146,7 +146,7 @@ body {
 
 #container {
     width: 902px;
-    height: 851px;
+    height: 870px;
     padding: 30px 20px;
     background: white;
     margin: 0 auto;
@@ -225,6 +225,65 @@ img{
 .show {
     display: inline-block !important;
     position: fixed;
+}
+
+
+#column-right{
+    float: right;
+    width: 251px;
+    height: 845px;
+    border-left: 1px solid #cfcfcf;
+    padding-top: 0px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+
+}
+
+#column-right ul{
+
+    list-style-type: none;
+    margin:0;
+    padding:0;
+}
+
+#column-right ul li{
+    margin-bottom:15px;
+
+}
+
+#column-right ul li a{
+    padding: 0;
+    display: block;
+    line-height: 20px;
+    text-decoration: none;
+    font-family: open sans;
+    font-size: 14px;
+    color: #717171;
+    margin:0;
+    font-weight: bold;
+
+}
+#column-right p {
+    margin:0;
+}
+
+#column-right ul li a:hover{
+    color: #389CEA;
+}
+
+.right-title{
+    border-bottom: 1px solid #cfcfcf;
+    /*padding-top: 20px;*/
+    /*padding-right: 20px;*/
+    /*padding-bottom: 20px;*/
+    /*padding-left: 0px;*/
+    padding:0px;
+    color: #414141;
+}
+
+.right-title h2{
+    margin-top: 0px;
 }
 
 
