@@ -91,7 +91,7 @@ session_start();
                 <select name="subcategory">
 
                     <?php
-                    $getAllSubcategory = mysql_query("SELECT idsubcategory,name,endDate FROM subcategory where subcategory.idcategory!='1';");
+                    $getAllSubcategory = mysql_query("SELECT idsubcategory,name,endDate FROM subcategory where subcategory.idcategory!='1'and subcategory.decision= false ;");
                     $curentDate=date("Y-m-d");
 
 
