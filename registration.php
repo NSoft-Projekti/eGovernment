@@ -1,8 +1,8 @@
 <html>
 <head>
-    <meta name="description" content="Design Android applications" />
-    <meta name="keywords" content="android, design, technics" />
-    <meta name="author" content="Jelena" />
+    <meta name="description" content="eGovernment" />
+    <meta name="keywords" content="design, egovernment" />
+    <meta name="author" content="Tim4" />
     <title>eGovernment :: Home</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="style/login-popup.css" rel="stylesheet" type="text/css" />    <!--css style from a login-popup form-->
@@ -47,9 +47,9 @@ session_start();
             }
             else{
 
-                echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
-                echo '<img class="logo" src="img/login-icon.png">';
-                echo '</br>';
+                echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'<img class="logo" src="img/login-icon.png"></a>';
+               // echo '<img class="logo" src="img/login-icon.png">';
+                //echo '</br>';
                 echo'<a title="odjava" href="logout.php">Odjava</a>';
             }
             ?>
@@ -119,7 +119,7 @@ session_start();
             {
                 $name = test_input($_POST["name"]);
 
-                if (!preg_match("/^[a-zA-Z ]*$/",$name))
+                if (!preg_match("/^[a-zA-ZČĆŠĐŽčćšđž ]*$/",$name))
                 {
                     $nameErr = "Dozvoljena su samo slova i razmak";
                 }
@@ -131,7 +131,7 @@ session_start();
             {
                 $lastname = test_input($_POST["lastname"]);
 
-                if (!preg_match("/^[a-zA-Z ]*$/",$lastname))
+                if (!preg_match("/^[a-zA-ZČĆŠĐŽčćšđž ]*$/",$lastname))
                 {
                     $lastnameErr = "Dozvoljena su samo slova i razmak";
                 }
@@ -247,7 +247,7 @@ session_start();
                     <tr> <td>E-mail: *</td>           <td><input type="text" name="email" value="<?php echo "$email"; ?>"></td> <td> <span class="error"> <?php echo $emailErr;?> </span> </td> </tr>
                     <tr> <td>Spol: *</td>             <td><input type="radio" name="gender" value="M" >Muško   <input type="radio" name="gender" value="Z">Žensko</td> <td> <span class="error"> <?php echo $genderErr;?> </span> </td>  </tr>
                     <tr> <td>Datum rođenja:</td>    <td><input type="date" name="bday" ></td> </tr>
-                    <tr> <td>Adresa:</td>           <td><input type="text" name="address" value="<?php if (isset($_POST['address'])) { echo "$address"; }  ?>" ></td> <td></td> </tr>
+                    <tr> <td>Adresa:</td>           <td><input type="text" name="address" value="" ></td> <td></td> </tr>
                     <tr> <td>Telefon: *</td>          <td><input type="tel" name="telephone" value="<?php echo "$telephon"; ?>" placeholder="+38763123456"></td> <td > <span class="error">  <?php echo $telephonErr;?> </span></td> </tr>
                 </table>
 
