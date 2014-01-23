@@ -39,8 +39,8 @@ a:hover
 }
 .logo{
     float: right;
-    margin-right: 20px;
-    /*margin-bottom: 60px;*/
+    margin-right: 10px;
+    margin-top: -7px;
 }
 .news_container{
     width: 650px;
