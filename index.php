@@ -6,7 +6,6 @@
     <title>eGovernment :: Home</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
-    <link href="style/HomeStyle.css" rel="stylesheet" type="text/css" />
     <link href="style/postList.css" rel="stylesheet" type="text/css" />
     <link href="style/userList.css" rel="stylesheet" type="text/css" />
 
@@ -107,7 +106,7 @@ session_start();
                         echo '</ul>
                         </li>';
                         echo '<li><a href="decisionList.php">Odluke</a> </li>';
-                        echo '<li><a href="#footer">Korisnici</a> </li>';
+                        echo '<li><a href="userList.php">Korisnici</a> </li>';
                     }
 
                     ?>
@@ -248,6 +247,12 @@ session_start();
 
             <div class="post-right">
 
+                <!--checks if user is logged in-->
+                <?php
+                if(isset ($_SESSION['SESS_MEMBER_ID'])){
+                ?>
+
+                <!--if the session exists (the user is logged in) display the suggestions-->
                 <div class="right-title"><h2>Prijedlozi</h2></div>
 
                 <?php
@@ -296,7 +301,7 @@ session_start();
                 while ($row = mysql_fetch_assoc($result)) {
                     $idpost=$row['idpost'];
                     echo '<h3 id="title"><a href="suggestionDetails.php?id='.$idpost.'">'.$row["title"].'</a></h3>';
-                    echo '<p><span>'.$row["date_time"].'</span></p>';
+                    echo '<p><span class="date">'.$row["date_time"].'</span></p>';
                     echo '<p><span class="posted">postavio/la <a class="user_link" href="#">'.$row["username"].'</a></span></p><br>';
 //                  echo ' <div class="entry"><p>'.$row["content"].'</p></div>';
 //                    echo '<p class="links"><a href="suggestionDetails.php?id='.$idpost.'" class="right">Pročitaj više</a></p></br>';
@@ -355,7 +360,7 @@ session_start();
                     // show < link to go back to 1 page
                     echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$prevpage'><</a> ";
                 } // end if
-
+                }
                 ?>
 
             </div> <!--class post-->
