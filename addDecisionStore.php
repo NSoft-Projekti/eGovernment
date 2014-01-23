@@ -12,6 +12,7 @@ $idsubcategory=mysql_real_escape_string($_POST['subcategory']);
 
 $result=mysql_query("INSERT INTO post (title, content,date_time ,summary, iduser ,idsubcategory ,idpost_type)
     VALUES ('".$title."', '".$content."','".$date_time."','".$inputSummary."','".$iduser."','".$idsubcategory."',2)");
+$update=mysql_query("UPDATE subcategory SET decision=true where idsubcategory=$idsubcategory ");
 if($result){
 
     header("location: decisionList.php");

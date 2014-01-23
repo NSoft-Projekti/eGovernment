@@ -9,7 +9,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
     <link href="style/profile.css" rel="stylesheet" type="text/css" />
-    <link href="style/postList.css" rel="stylesheet" type="text/css">
 </head>
 <?php
 include 'connect.php';
@@ -23,7 +22,7 @@ session_start();
     <div id="header-up">
 
         <div id="header-logo">
-            <h1>LOGO STRANICE</h1>
+            <a href="index.php"><img src="img/logo.png"></a>
         </div><!--header-logo-->
 
 
@@ -128,10 +127,9 @@ session_start();
             while($row2 = mysql_fetch_array($sql)){
                 $idpost=$row2["idpost"];
 
-                echo '<span>Komentirani teksta:</span></br></br>';
-                echo '<span><a href="newsDetails.php?id='.$idpost.'">'.$row2["title"].'</span></a></br></br>';
-                echo '<span>Vaš komentar:</span></br></br>';
-                echo '<span>'.$row2["content"].'</span></br>';
+                echo '<span class="posttitle"><a href="newsDetails.php?id='.$idpost.'">'.$row2["title"].'</span></a></br>';
+
+                echo '<span class="usercomment">'.$row2["content"].'</span></br>';
                 echo '<span>'.$row2["date_time"].'</span></br></br>';
             }}
             else{
@@ -217,7 +215,7 @@ session_start();
     <div id="footer-up">
 
         <div id="footer-logo">
-            <h1>LOGO</h1>
+            <a href="index.php"><img src="img/logo.png"></a>
         </div><!--footer-logo-->
 
         <div id="icons">
