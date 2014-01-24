@@ -1,16 +1,4 @@
-<html xmlns="http://www.w3.org/1999/html">
-<head>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
-    <link href="style/HomeStyle.css" rel="stylesheet" type="text/css" />
-    <link href="style/postList.css" rel="stylesheet" type="text/css" />
-    <meta charset="utf-8">
 
-    <link href="style/login-popup.css" rel="stylesheet" type="text/css" />    <!--css style from a login-popup form-->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script> <!--script from a login-popup form-->
-
-</head>
-<body>
 <?php
 
 require("connect.php");
@@ -42,9 +30,8 @@ else
     if($registerquery )
     {
 
-        echo "<script type='text/javascript'>alert('Uspješno ste se registrirali');</script>";
-        echo "<script type='text/javascript'>window.location.href='loginPopup.php'</script>";
-
+        echo "<script type='text/javascript'>alert('Uspješno ste se registrirali! Molimo prijavite se!');</script>";
+        echo "<script type='text/javascript'>window.location.href='index.php'</script>";
 
     }
     else
@@ -54,9 +41,5 @@ else
 }
 
 ?>
-
-
-</body>
-</html>
 
 
