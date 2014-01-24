@@ -108,7 +108,7 @@ session_start();
         <?php
 
         $nameErr = $emailErr = $lastnameErr = $usernameErr = $telephonErr= $passwordErr = $rpasswordErr =$genderErr= "";
-        $name = $email = $lastname = $username = $telephon = $password = $rpassword = $gender="";
+        $name = $email = $lastname = $username = $telephon = $password = $rpassword = $gender=$address=$birthday="";
 
 
         if (isset($_POST['submit']))
@@ -207,7 +207,8 @@ session_start();
             else{
                 $gender=test_input($_POST["gender"]);
             }
-
+            $address=test_input($_POST["address"]);
+            $birthday=test_input($_POST["bday"]);
 
 
         }
@@ -245,9 +246,9 @@ session_start();
                     <tr> <td>Lozinka: *</td>         <td><input type="password" name="password" value="<?php echo "$password"; ?>" ></td> <td> <span class="error"> <?php echo $passwordErr;?> </span> </td> </tr>
                     <tr> <td>Potrvda lozinke: *</td>  <td><input type="password" name="rpass" value="<?php echo "$rpassword"; ?>"></td>  <td> <span class="error"> <?php echo $rpasswordErr;?></span> </td></tr>
                     <tr> <td>E-mail: *</td>           <td><input type="text" name="email" value="<?php echo "$email"; ?>"></td> <td> <span class="error"> <?php echo $emailErr;?> </span> </td> </tr>
-                    <tr> <td>Spol: *</td>             <td><input type="radio" name="gender" value="M" >Muško   <input type="radio" name="gender" value="Z">Žensko</td> <td> <span class="error"> <?php echo $genderErr;?> </span> </td>  </tr>
-                    <tr> <td>Datum rođenja:</td>    <td><input type="date" name="bday" ></td> </tr>
-                    <tr> <td>Adresa:</td>           <td><input type="text" name="address" value="" ></td> <td></td> </tr>
+                    <tr> <td>Spol: *</td>             <td><input type="radio" name="gender" <?php if (isset($gender) && $gender=="M") echo "checked";?> value="M" >Muško   <input type="radio" name="gender" <?php if (isset($gender) && $gender=="Z") echo "checked";?> value="Z">Žensko</td> <td> <span class="error"> <?php echo $genderErr;?> </span> </td>  </tr>
+                    <tr> <td>Datum rođenja:</td>    <td><input type="date" name="bday" value="<?php echo $birthday;?>"></td> </tr>
+                    <tr> <td>Adresa:</td>           <td><input type="text" name="address" value="<?php echo $address;?>" ></td> <td></td> </tr>
                     <tr> <td>Telefon: *</td>          <td><input type="tel" name="telephone" value="<?php echo "$telephon"; ?>" placeholder="+38763123456"></td> <td > <span class="error">  <?php echo $telephonErr;?> </span></td> </tr>
                 </table>
 
