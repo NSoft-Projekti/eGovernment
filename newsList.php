@@ -1,9 +1,9 @@
  <html>
 <head>
-    <meta name="description" content="Design Android applications" />
-    <meta name="keywords" content="android, design, technics" />
-    <meta name="author" content="Jelena" />
-    <title>eGovernment :: Home</title>
+    <meta name="description" content="eGovernment" />
+    <meta name="keywords" content="design, egovernment" />
+    <meta name="author" content="Tim4" />
+    <title>eGovernment :: Vijesti</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
     <link href="style/postList.css" rel="stylesheet" type="text/css">
@@ -32,18 +32,29 @@ session_start();
             <div id="reg-prijava">
 
                 <?php
-                if(!isset ($_SESSION['SESS_MEMBER_ID'])){
 
+                //checks if user is logged in
+                if(isset ($_SESSION['SESS_MEMBER_ID'])){
+                    $sesija=$_SESSION['SESS_MEMBER_ID'];
+                    $result=mysql_query("SELECT * FROM user WHERE user.iduser='$sesija' ");
+                    $row=mysql_fetch_assoc($result);
+                    $gender=$row["gender"];
 
-                    include_once("loginPopup.php");
-                    echo'<a title="registracija" href="registration.php">Registracija</a>';
-                }
-                else{
+                    //checking gender and displaying matching picture
+                    if($gender=='M'){
+                        echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                        echo '<img class="logo" src="img/men.png">';
+                        echo '</br>';
+                        echo'<a title="odjava" href="logout.php">Odjava</a>';
+                    }
 
-                    echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
-                    echo '<img class="logo" src="img/login-icon.png">';
-                    echo '</br>';
-                    echo'<a title="odjava" href="logout.php">Odjava</a>';
+                    //if it's not male gender, it displays female image
+                    else {
+                        echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                        echo '<img class="logo" src="img/girl.png">';
+                        echo '</br>';
+                        echo'<a title="odjava" href="logout.php">Odjava</a>';
+                    }
                 }
                 ?>
 
@@ -65,7 +76,7 @@ session_start();
                     if(isset ($_SESSION['SESS_MEMBER_ID'])){
                         echo'<li><a href="suggestionList.php">Prijedlozi</a> </li>';
                         echo '<li><a href="decisionList.php">Odluke</a> </li>';
-                        echo '<li><a href="#footer">Korisnici</a> </li>';
+                        echo '<li><a href="userList.php">Korisnici</a> </li>';
                     }
 
                     ?>
@@ -76,7 +87,7 @@ session_start();
 
             <div id="search">
                 <div id="search-down">
-                    <a href="#"><div id="img-search">
+                    <a href="search.php"><div id="img-search">
                     </div></a><!--img-search-->
 
                     <input type="text" name="search" >
@@ -138,13 +149,19 @@ session_start();
             $result = mysql_query($sql, $conn) or trigger_error("SQL", E_USER_ERROR);
 
             // while there are rows to be fetched...
+            echo '<p class="news_container"><a href="addNews.php?id='.$idpost.'" class="buton"><button type="submit" name="submit">Dodaj</p></button>';
             while ($row = mysql_fetch_assoc($result)) {
             $idpost=$row['idpost'];
+
             echo '<h2 id="title"><a href="newsDetails.php?id='.$idpost.'">'.$row["title"].'</a></h2>';
             echo '<p class="meta"><span class="date">'.$row["date_time"].'</span></p>';
-            echo '<p><span class="posted">postavio/la <a href="#">'.$row["username"].'</a></span></p>';
+            echo '<p><span class="posted">postavio/la <a class="user_link" href="#">'.$row["username"].'</a></span></p>';
             echo ' <div class="entry"><p>'.$row["summary"].'</p></div>';
+
+            echo ' <button type="button">Izmjeni</button>';
+            echo ' <button type="button">Ukloni</button>';
             echo '<p class="links"><a href="newsDetails.php?id='.$idpost.'" class="right">Pročitaj više</a></p></br>';
+
             } // end while
 
             /******  build the pagination links ******/
