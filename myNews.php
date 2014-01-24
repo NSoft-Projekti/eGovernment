@@ -1,10 +1,10 @@
 
 <html>
 <head>
-    <meta name="description" content="Design Android applications" />
-    <meta name="keywords" content="android, design, technics" />
-    <meta name="author" content="Jelena" />
-    <title>eGovernment :: Home</title>
+    <meta name="description" content="eGovernment" />
+    <meta name="keywords" content="design, egovernment" />
+    <meta name="author" content="Tim4" />
+    <title>eGovernment :: Moje vijesti</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
@@ -23,19 +23,35 @@ session_start();
     <div id="header-up">
 
         <div id="header-logo">
-            <h1>LOGO STRANICE</h1>
+            <a href="index.php"><img src="img/logo.png"></a>
         </div><!--header-logo-->
 
 
         <div id="reg-prijava">
 
             <?php
+            if(isset ($_SESSION['SESS_MEMBER_ID'])){
+                $sesija=$_SESSION['SESS_MEMBER_ID'];
+                $result=mysql_query("SELECT * FROM user WHERE user.iduser='$sesija' ");
+                $row=mysql_fetch_assoc($result);
+                $gender=$row["gender"];
 
+                //checking gender and displaying matching picture
+                if($gender=='M'){
+                    echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                    echo '<img class="logo" src="img/men.png">';
+                    echo '</br>';
+                    echo'<a title="odjava" href="logout.php">Odjava</a>';
+                }
 
-            echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
-            // echo '<img class="logo" src="img/login-icon.png">';
-            //echo '</br>';
-            echo'<a title="odjava" href="logout.php">Odjava</a>';
+                //if it's not male gender, it displays female image
+                else {
+                    echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                    echo '<img class="logo" src="img/girl.png">';
+                    echo '</br>';
+                    echo'<a title="odjava" href="logout.php">Odjava</a>';
+                }
+            }
 
             ?>
 
@@ -51,10 +67,10 @@ session_start();
         <div id="horizontal-menu">
             <ul>
                 <li><a href="index.php">Home</a> </li>
-                <li><a href="newsList.php">Vijesti</a> </li>
+                <li><a href="newsList.php" class="currentTab">Vijesti</a> </li>
                 <li><a href="suggestionList.php">Prijedlozi</a> </li>
                 <li><a href="decisionList.php">Odluke</a> </li>
-                <li><a href="#footer">Korisnici</a> </li>
+                <li><a href="userList.php">Korisnici</a> </li>
 
             </ul>
 
@@ -62,7 +78,7 @@ session_start();
 
         <div id="search">
             <div id="search-down">
-                <a href="#"><div id="img-search">
+                <a href="search.php"><div id="img-search">
                     </div></a><!--img-search-->
 
                 <input type="text" name="search" >
@@ -126,9 +142,10 @@ session_start();
             // while there are rows to be fetched...
             while ($row = mysql_fetch_assoc($result)) {
                 $idpost=$row['idpost'];
+                $iduser=$row['iduser'];
                 echo '<h2 id="title"><a href="newsDetails.php?id='.$idpost.'">'.$row["title"].'</a></h2>';
                 echo '<p class="meta"><span class="date">'.$row["date_time"].'</span></p>';
-                echo '<p><span class="posted">postavio/la <a href="#">'.$_SESSION["SESS_FIRST_NAME"].'</a></span></p>';
+                echo '<p><span class="posted">postavio/la <a class="user_link" href="profileView.php?id='.$iduser.'">'.$_SESSION["SESS_FIRST_NAME"].'</a></span></p>';
                 echo ' <div class="entry"><p>'.$row["summary"].'</p></div>';
                 echo '<p class="links"><a href="newsDetails.php?id='.$idpost.'" class="right">Pročitaj više</a></p></br>';
             } // end while
@@ -212,7 +229,7 @@ session_start();
     <div id="footer-up">
 
         <div id="footer-logo">
-            <h1>LOGO</h1>
+            <a href="index.php"><img src="img/logo.png"></a>
         </div><!--footer-logo-->
 
         <div id="icons">
