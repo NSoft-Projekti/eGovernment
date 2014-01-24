@@ -96,11 +96,13 @@ body {
     width: 630px;
     height: 40px;
     padding: 0;
+    position: absolute;
 }
 
 #horizontal-menu ul li {
     float: left;
     padding: 10 10 10 0;
+    position: relative;
 }
 
 #horizontal-menu ul a {
@@ -146,7 +148,7 @@ body {
 
 #container {
     width: 902px;
-    height: 870px;
+    height: 851px;
     padding: 30px 20px;
     background: white;
     margin: 0 auto;
@@ -218,16 +220,47 @@ h1{
 img{
    border: none;
  }
-
-.hide {
+#aCategory{
+    position: absolute;
+    margin-left: -20px;
+    z-index: 200000;
+    width: 620%;
+    height: 19px;
+    margin-top: -5px;
+}
+#ulCategory{
+    padding:0 20px;
+    height: 40px;
+    line-height:40px;
+    float: left;
+    position:relative;
+    z-index: 2000;
+}
+#aSubcategory1{
+    position: absolute;
+    margin-left: 90px;
+    z-index: 1000;
+    width: 2000%;
+    height: 19px;
+    margin-top: -15px;
+}
+#ulSubcategory1{
+    padding:0 20px;
+    height: 50px;
+    line-height:40px;
+    float: left;
+    position:absolute;
+    z-index: 1000;
+}
+.hide{
     display: none;
 }
-.show {
-    display: inline-block !important;
-    position: fixed;
+.show{
+    display: block;
 }
-
-
+.showSubmenu{
+    display: block;
+}
 #column-right{
     float: right;
     width: 251px;
