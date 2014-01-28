@@ -91,16 +91,16 @@ include('connect.php');
                 $query = mysql_query($sqlCommand) or die(mysql_error());
                 $count = mysql_num_rows($query);
                 if($count > 1){
-                    $search_output .= "<hr />$count results for <strong>$searchquery</strong><hr />$sqlCommand<hr />";
+                    $search_output .= "<hr />$count results for <strong>$searchquery</strong><hr /><hr />";
                     while($row = mysql_fetch_array($query)){
 
                         $idpost = $row["idpost"];
                         $title = $row["title"];
-                        $search_output .= "$idpost - <a href='newsDetails.php?id=$idpost'>$title</a><br />";
+                        $search_output .= "<a href='newsDetails.php?id=$idpost'>$title</a><br />";
 
                     } // close while
                 } else {
-                    $search_output = "<hr />0 results for <strong> $searchquery</strong><hr />$sqlCommand";
+                    $search_output = "<hr />0 results for <strong> $searchquery</strong><hr />";
                 }
             }
 
@@ -110,12 +110,6 @@ include('connect.php');
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                 Search For:
                 <input name="searchquery" type="text" size="44" maxlength="88">
-                Within:
-                <select name="filter1">
-                    <option value="title">Naslov</option>
-                    <option value="content">Sadrzaj</option>
-
-                </select>
                 <input name="myBtn" type="submit">
                 <br />
             </form>
