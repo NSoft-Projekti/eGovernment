@@ -26,8 +26,16 @@ if(mysql_num_rows($checkusername) == 1)
 }
 else
 {
-    $registerquery = mysql_query("call create_user('".$name."','".$lastname."','".$username."','".$address."', '".$password."', '".$email."','".$gender."','".$newDate_of_birth."','".$telephone."')");
-    if($registerquery )
+    $registerquery = mysql_query( "insert into user (name,lastname,username,address,password,email,gender,date_of_birth,telephone,path)
+        VALUES ('".$name."','".$lastname."','".$username."','".$address."', '".$password."', '".$email."','".$gender."','".$newDate_of_birth."','".$telephone."',NULL)");
+
+    if($registerquery){
+
+        $iduser=mysql_insert_id();
+        $query2=mysql_query("INSERT INTO user_group (iduser,idgroup)
+            VALUES ('".$iduser."',3)");
+    }
+    if($query2)
     {
 
         echo "<script type='text/javascript'>alert('Uspješno ste se registrirali! Molimo prijavite se!');</script>";
