@@ -50,7 +50,7 @@ if($errflag) {
 }
 
 //Create query
-$qry="SELECT * FROM user WHERE username='$username' AND password='$password'";
+$qry="SELECT username, password, iduser FROM user WHERE username='$username' AND password='$password'";
 $result=mysql_query($qry);
 
 //Check whether the query was successful or not

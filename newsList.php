@@ -36,7 +36,7 @@ session_start();
                 //checks if user is logged in
                 if(isset ($_SESSION['SESS_MEMBER_ID'])){
                     $iduser=$_SESSION['SESS_MEMBER_ID'];
-                    $result=mysql_query("SELECT * FROM user WHERE user.iduser='$iduser' ");
+                    $result=mysql_query("SELECT gender, iduser FROM user WHERE user.iduser='$iduser' ");
                     $row=mysql_fetch_assoc($result);
                     $gender=$row["gender"];
 
@@ -55,6 +55,11 @@ session_start();
                         echo '</br>';
                         echo'<a title="odjava" href="logout.php">Odjava</a>';
                     }
+                }
+                //includes login popup form
+                else {
+                    include_once("loginPopup.php");
+                    echo'<a title="registracija" href="registration.php">Registracija</a>';
                 }
                 ?>
 
@@ -107,6 +112,22 @@ session_start();
     <div id="container">
         <div class="post">
 
+            <div class="right-title">
+                <h2>Vijesti
+                    <?php
+                    if(isset ($_SESSION['SESS_MEMBER_ID'])){
+                        $iduserLog = $_SESSION['SESS_MEMBER_ID'];
+                        $query1 = mysql_query("SELECT iduser, idgroup FROM user where iduser like $iduserLog");
+                        while($rowLog = mysql_fetch_array($query1)){
+                            if($rowLog['idgroup'] == '1'){
+                                echo ' <a href="addNews.php"><input type="submit" name="button" value="Dodaj" class="button_vijest"></a>';
+                            }
+                        }
+                    }
+                    ?>
+                </h2>
+            </div>
+
             <?php
 
             // find out how many rows are in the table
@@ -152,27 +173,24 @@ session_start();
             // while there are rows to be fetched...
 
             while ($row = mysql_fetch_assoc($result)) {
-            $idpost=$row['idpost'];
-
-            echo '<h2 id="title"><a href="newsDetails.php?id='.$idpost.'">'.$row["title"].'</a></h2>';
-            echo '<p class="meta"><span class="date">'.$row["date_time"].'</span></p>';
-            echo '<p><span class="posted">postavio/la <a class="user_link" href="#">'.$row["username"].'</a></span></p>';
-            echo ' <div class="entry"><p>'.$row["summary"].'</p></div>';
+                $idpost=$row['idpost'];
+                $iduser = $row['iduser'];
+                echo '<h2 id="title"><a href="newsDetails.php?id='.$idpost.'">'.$row["title"].'</a></h2>';
+                echo '<p class="meta"><span class="date">'.$row["date_time"].'</span></p>';
+                echo '<p><span class="posted">postavio/la <a class="user_link" href="profileView.php?id='.$iduser.' ">'.$row["username"].'</a></span></p>';
+                echo ' <div class="entry"><p>'.$row["summary"].'</p></div>';
                 echo '<p class="links"><a href="newsDetails.php?id='.$idpost.'" class="right">Pročitaj više</a></p></br>';
                 if(isset ($_SESSION['SESS_MEMBER_ID'])){
-            $usergroup=mysql_query("SELECT * FROM user where iduser = $iduser");
-            $group_row=mysql_fetch_assoc($usergroup);
-            $admin = $group_row["idgroup"];
-                $sql2 = mysql_query("SELECT * FROM user WHERE iduser = $iduser");
-                $row2 = mysql_fetch_array($sql2);
-            if($row2["idgroup"]== '1'){
-            echo ' <a href="addNews.php" ><button type="button">Dodaj</p></button>';
-            echo ' <button type="button">Izmjeni</button>';
-            echo ' <button type="button">Ukloni</button>';
-            }
+                    $iduserLog = $_SESSION['SESS_MEMBER_ID'];
+                    $query1 = mysql_query("SELECT iduser, idgroup FROM user where iduser like $iduserLog");
+                    while($rowLog = mysql_fetch_array($query1)){
+                        if($rowLog['idgroup'] == '1'){
+                            echo ' <input type="submit" name="button" value="Izmijeni" class="button_vijest" style="float:none">';
+                        }
+                    }
                 }
             } // end while
-
+echo '<br>';
             /******  build the pagination links ******/
             // range of num links to show
             $range = 3;

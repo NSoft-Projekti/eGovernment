@@ -42,7 +42,7 @@ session_start();
 
             if(isset ($_SESSION['SESS_MEMBER_ID'])){
                 $sesija=$_SESSION['SESS_MEMBER_ID'];
-                $result=mysql_query("SELECT * FROM user WHERE user.iduser='$sesija' ");
+                $result=mysql_query("SELECT gender, iduser FROM user WHERE user.iduser='$sesija' ");
                 $row=mysql_fetch_assoc($result);
                 $gender=$row["gender"];
 
@@ -110,7 +110,7 @@ session_start();
 
 
 
-    $result=mysql_query( "SELECT * FROM user WHERE iduser=$iduser ");
+    $result=mysql_query( "SELECT name, lastname, username, email, gender FROM user WHERE iduser=$iduser ");
     $row=mysql_fetch_array($result);
 
     $firstname=$row['name'];

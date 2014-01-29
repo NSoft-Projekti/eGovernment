@@ -49,7 +49,7 @@ session_start();
                     <li><a href="newsList.php" >Vijesti</a> </li>
                     <li><a href="suggestionList.php">Prijedlozi</a> </li>
                     <li><a href="decisionList.php" class="currentTab">Odluke</a> </li>
-                    <li><a href="#footer">Korisnici</a> </li>
+                    <li><a href="userList.php">Korisnici</a> </li>
 
                 </ul>
 
@@ -92,15 +92,15 @@ session_start();
 
         </div>
         <div class="existingComments_container">
+            <h2>Komentari</h2>
             <?php
             $sql = mysql_query("SELECT content, username, date_time FROM comment inner join user on comment.iduser = user.iduser
             WHERE comment.idpost=$idpost");
-            if(mysql_num_rows($sql) > 0)
-                echo("Komentari povuceni iz baze.");
             while($row2 = mysql_fetch_array($sql)){
-                echo '<span>'.$row2["content"].'<span></br>';
-                echo '<span>'.$row2["username"].'</span></br>';
-                echo '<span>'.$row2["date_time"].'</span></br></br>';
+                $iduser = $row2['iduser'];
+                echo '<p><span class="posted"><a class="user_link" href="profileView.php?id='.$iduser.'">'.$row2["username"].' </a></span>'.$row2["content"].'</p>';
+                echo '<span class="date">'.date("d.\tm.\tY. \tH:\ti", strtotime($row2["date_time"])).'</span>';
+                echo '<hr>';
             }
 
             ?>
@@ -126,7 +126,7 @@ session_start();
 
                     <form action="addcomment.php?id=<?php echo $idpost ?>" method="post"><br />
 
-                        <textarea name="comment_text" id="comment_text" cols="50" rows="7">Napisite komentar!</textarea>
+                        <textarea name="comment_text" id="comment_text" cols="50" rows="7" placeholder="Unesite komentar"></textarea>
 
                         <input type="submit" value="Submit" />
 

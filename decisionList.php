@@ -33,7 +33,7 @@ session_start();
                 //checks if user is logged in
                 if(isset ($_SESSION['SESS_MEMBER_ID'])){
                     $sesija=$_SESSION['SESS_MEMBER_ID'];
-                    $result=mysql_query("SELECT * FROM user WHERE user.iduser='$sesija' ");
+                    $result=mysql_query("SELECT iduser, gender FROM user WHERE user.iduser='$sesija' ");
                     $row=mysql_fetch_assoc($result);
                     $gender=$row["gender"];
 

@@ -80,7 +80,7 @@ session_start();
 
     <div id="column-left">
         <div class="user_post">
-
+            <div class="right-title"><h2>Moji komentari</h2></div><br>
             <?php
             $iduser=$_GET['id'];
             // find out how many rows are in the table

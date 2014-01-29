@@ -110,3 +110,16 @@ input[type=submit] {
     color: rgb(82,139,197);
 }
 
+.right-title{
+    border-bottom: 1px solid #cfcfcf;
+    /*padding-top: 20px;*/
+    /*padding-right: 20px;*/
+    /*padding-bottom: 20px;*/
+    /*padding-left: 0px;*/
+    padding:0px;
+    color: #414141;
+}
+
+.right-title h2{
+    margin-top: 0px;
+}
