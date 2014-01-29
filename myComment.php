@@ -53,7 +53,7 @@ session_start();
                 <li><a href="newsList.php">Vijesti</a> </li>
                 <li><a href="suggestionList.php">Prijedlozi</a> </li>
                 <li><a href="decisionList.php">Odluke</a> </li>
-                <li><a href="#footer">Korisnici</a> </li>
+                <li><a href="userList.php">Korisnici</a> </li>
 
             </ul>
 
@@ -82,7 +82,7 @@ session_start();
         <div class="user_post">
 
             <?php
-            $iduser=$_SESSION["SESS_MEMBER_ID"];
+            $iduser=$_GET['id'];
             // find out how many rows are in the table
             $sql = "SELECT comment.content , comment.date_time, post.content
              FROM comment inner join post on comment.idpost = post.idpost WHERE comment.iduser=$iduser";
@@ -196,10 +196,11 @@ session_start();
     </div> <!--column-left-->
 
     <div id="column-right">
+
         <ul>
-            <li> <a href="myNews.php">Moje vijesti</a> </li>
-            <li> <a href="mySuggestion.php">Moji prijedlozi</a> </li>
-            <li> <a href="myComment.php">Moji komentari</a> </li>
+            <li> <a href="myNews.php?id=<?php echo $iduser;?>">Moje vijesti</a> </li>
+            <li> <a href="mySuggestion.php?id=<?php echo $iduser;?>">Moji prijedlozi</a> </li>
+            <li> <a href="myComment.php?id=<?php echo $iduser;?>">Moji komentari</a> </li>
 
         </ul>
 

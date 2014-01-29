@@ -145,7 +145,7 @@ session_start();
     <?php
 
     // find out how many rows are in the table
-    $sql = "SELECT name FROM user inner join user_group on user.iduser=user_group.iduser WHERE user_group.idgroup='3'";
+    $sql = "SELECT name FROM user";
     $result = mysql_query($sql);
     $r = mysql_num_rows($result);
 
@@ -179,7 +179,7 @@ session_start();
     $offset = ($currentpage - 1) * $rowsperpage;
 
     // get the info from the db
-    $sql = "SELECT * FROM user inner join user_group on user.iduser=user_group.iduser WHERE user_group.idgroup='3' ORDER BY name LIMIT $offset, $rowsperpage";
+    $sql = "SELECT * FROM user  ORDER BY name LIMIT $offset, $rowsperpage";
     $result = mysql_query($sql, $conn) or trigger_error("SQL", E_USER_ERROR);
 
     // while there are rows to be fetched...

@@ -17,15 +17,16 @@
 
     width: 300px;
     float: left;
+}
 
+#cleft-data table{
+    margin-bottom: 20px;
 }
 
 #cleft-data table tr td{
     height: 40px;
     width: 135px;
     padding-bottom: 10px;
-
-
 }
 
 #cleft-data table tr td input{
