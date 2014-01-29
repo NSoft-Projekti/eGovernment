@@ -35,6 +35,7 @@
         });
     });
 </script>
+<a class="login-window" href="#login-box">Prijava</a>
 <div class="login-popup" id="login-box">
     <div id="btn" style="float:right">
         <a class="close" href="#"><img alt="Close" title="Close Window" class="btn_close" src="img/close_pop.png"></a>
@@ -61,4 +62,4 @@
         </fieldset>
     </form>
 </div>
-<a class="login-window" href="#login-box">Prijava</a>
+

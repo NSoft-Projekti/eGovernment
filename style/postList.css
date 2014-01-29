@@ -35,7 +35,7 @@ a:visited
 
 a:hover
 {
-    text-decoration: underline; color: #414141;
+    text-decoration: underline; color:  #528BC5;;
 }
 .logo{
     float: right;
@@ -99,5 +99,5 @@ hr{
     font-style: italic;
 }
 .user_post a:hover {
-    color: rgb(82,139,197);
+    color:  #528BC5;;
 }
