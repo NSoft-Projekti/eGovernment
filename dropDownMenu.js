@@ -1,27 +1,23 @@
 /**
  * Created by AJDA on 1/16/14.*/
 
- // calling element (html tag) by id
+// calling element (html tag) by id
 var element = document.getElementById("category")
 // function "show" is called when mouse gets over element with requested id
+//var mouseoverSubcategory = true;
 element.onmouseover=show;
 // function "hide" is called when mouse gets away of the element with requested id
-element.onmouseout=hide;
-
-function show(e)
-{
-    // adding css class "show" to elements that need to show up
-    document.getElementById("ulCategory").className="show";
-    document.getElementById("ulSubcategory").className("show");
-    document.getElementById("liCategory").className="show";
-    document.getElementById("liSubcategory").className("show");
+/*if(mouseoverSubcategory==false){
+ element.onmouseout=hide;
+ }*/
+function show(e){
+    document.getElementById("ulCategoryIzgradnja").className="show";
+    document.getElementById("aCategoryIzgradnja").onmouseover=showSubcategories;
 }
-function hide(e)
-{
-    // adding css class "hide" to elements that need to be hidden
-    document.getElementById("ulCategory").className="hide";
-    document.getElementById("ulSubcategory").className="hide";
-    document.getElementById("liCategory").className="hide";
-    document.getElementById("liSubcategory").className="hide";
+function showSubcategories(e){
+    document.getElementById("ulSubcategoryIzgradnja").className="showSubmenu";
+    document.getElementById("ulSubcategoryIzgradnja").onmouseout=document.getElementById("ulSubcategoryIzgradnja").className="hide";
 }
+function hideSubcategories(e){
 
+}
