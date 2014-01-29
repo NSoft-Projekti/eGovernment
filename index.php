@@ -107,7 +107,7 @@ session_start();
                         echo '</ul>
                         </li>';
                         echo '<li><a href="decisionList.php">Odluke</a> </li>';
-                        echo '<li><a href="#footer">Korisnici</a> </li>';
+                        echo '<li><a href="userList.php">Korisnici</a> </li>';
                     }
 
                     ?>
