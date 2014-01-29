@@ -61,7 +61,7 @@ session_start();
 
             <div id="search">
                 <div id="search-down">
-                    <a href="#"><div id="img-search">
+                    <a href="search.php"><div id="img-search">
                     </div></a><!--img-search-->
 
                     <input type="text" name="search" >
@@ -81,8 +81,6 @@ session_start();
 
         $iduser=$_SESSION['SESS_MEMBER_ID'];
 
-
-
         $result=mysql_query( "SELECT * FROM user WHERE iduser=$iduser ");
         $row=mysql_fetch_array($result);
 
@@ -94,22 +92,54 @@ session_start();
         $address=$row['address'];
         $telephone=$row['telephone'];
         $gender=$row['gender'];
-       // $convert_date=date("d.m.Y",strtotime($bday));
-
+        $convert_date=date("d.m.Y",strtotime($bday));
 
         ?>
 
     <div id="column-left">
+
         <div id="cleft-picture">
-<?php
-            if($gender=='M'){
-            echo "<img src='img/male.png'>";
-            }
-            else{
-            echo"<img src='img/female.png'>";
+
+            <form action="" method="post" enctype="multipart/form-data">
+                <input type="file" name="image" accept="image/*">
+                <input type="submit" name="upload" value="Upload"><br>
+
+
+            </form>
+
+            <?php
+
+            if(isset($_POST['upload'])){
+
+                $image_name=$_FILES['image']['name'];
+                $image_type=$_FILES['image']['type'];
+                $image_size=$_FILES['image']['size'];
+                $image_tmp_name=$_FILES['image']['tmp_name'];
+                $path="upload_img/";
+
+                $path=$path . $_FILES['image']['name'];
+
+                if($image_name==''){
+
+                    echo "Please select an Image";
+                    exit();
+                }
+                else{
+                    move_uploaded_file($image_tmp_name,$path);
+
+                   mysql_query("update user set path='$path' where iduser='$iduser'");
+
+                   }
+                echo "<script type='text/javascript'>window.location.href='profile.php'</script>";
+
 
             }
-?>
+
+
+            ?>
+
+           <img src="<?php echo $row['path']; ?>">
+
 
         </div> <!--cleft-picture-->
 
@@ -118,13 +148,13 @@ session_start();
             <form action="" method="get">
 
            <table>
-               <tr> <td>Ime:</td>       <td> <input  type="text" name="usr_name"  value=" <?php echo $firstname;?>">  </td> </tr>
-               <tr> <td>Prezime:</td>   <td> <input type="text" name="usr_lname" value=" <?php echo $lastname;?>">      </td> </tr>
+               <tr> <td>Ime:</td>       <td> <input  type="text" name="usr_name"  value=" <?php echo $firstname;?>">  </td>   </tr>
+               <tr> <td>Prezime:</td>   <td> <input type="text" name="usr_lname" value=" <?php echo $lastname;?>">    </td>  </tr>
                <tr> <td>Username:</td>   <td> <input type="text" name="usr_usern" value=" <?php echo $username;?>">  </td> </tr>
-               <tr> <td>E-mail:</td>     <td> <input type="text" name="usr_email" value=" <?php echo $email;?>">  </td> </tr>
-               <tr> <td>Datum rođenja:</td> <td> <input type="text" name="usr_bday" value=" <?php echo $bday;?>">    </td> </tr>
+               <tr> <td>E-mail:</td>     <td> <input type="text" name="usr_email" value=" <?php echo $email;?>">  </td>  </tr>
+               <tr> <td>Datum rođenja:</td> <td> <input type="text" name="usr_bday" value=" <?php echo  $convert_date;?>">    </td> </tr>
                <tr> <td>Adresa:</td>     <td> <input type="text" name="usr_add" value=" <?php echo $address;?>">   </td> </tr>
-               <tr> <td>Telefon:</td>    <td> <input type="tel" name="usr_tel" value=" <?php echo $telephone;?>">   </td> </tr>
+               <tr> <td>Telefon:</td>    <td> <input type="tel" name="usr_tel" value=" <?php echo $telephone;?>">   </td></tr>
 
             </table>
 
@@ -152,34 +182,27 @@ if(isset($_GET['submit']))
     $usr_bday=test_input( $_GET['usr_bday']);
     $usr_add=test_input( $_GET['usr_add']);
     $usr_tel=test_input($_GET['usr_tel']);
-   // $convert_bday=date("d.m.Y",strtotime($usr_bday));
+    $convert_bday=date("Y.m.d",strtotime($usr_bday));
 
-
-
-
-    $query2 = "UPDATE user SET name='$usr_name',lastname='$usr_lname',username='$usr_usern',email='$usr_email',date_of_birth='$usr_bday',address='$usr_add',telephone='$usr_tel'
+            $query2 = "UPDATE user SET name='$usr_name',lastname='$usr_lname',username='$usr_usern',email='$usr_email',date_of_birth='$convert_bday',address='$usr_add',telephone='$usr_tel'
     WHERE iduser='$iduser'";
 
+            $result2 = mysql_query ( $query2 ) or die ( "Query Failed : " . mysql_error () );
 
-    $result2 = mysql_query ( $query2 ) or die ( "Query Failed : " . mysql_error () );
+            if($query2){
+                echo "<script type='text/javascript'>alert('Uspješna promjena');</script>";
 
-    if($query2){
-        echo "<script type='text/javascript'>alert('Uspješna promjena');</script>";
+            }
+            else{
+                echo "<script type='text/javascript'>alert('Greska');</script>";
 
-    }
-    else{
-        echo "<script type='text/javascript'>alert('Greska');</script>";
+            }
 
-    }
-
-    echo "<script type='text/javascript'>window.location.href='profile.php'</script>";
-
+            echo "<script type='text/javascript'>window.location.href='profile.php'</script>";
 
 }
 
 ?>
-
-
 
 
         </div> <!--cleft-data-->

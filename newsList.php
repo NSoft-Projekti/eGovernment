@@ -149,14 +149,19 @@ session_start();
             $result = mysql_query($sql, $conn) or trigger_error("SQL", E_USER_ERROR);
 
             // while there are rows to be fetched...
+            echo '<p class="news_container"><a href="addNews.php?id='.$idpost.'" class="buton"><button type="submit" name="submit">Dodaj</p></button>';
             while ($row = mysql_fetch_assoc($result)) {
             $idpost=$row['idpost'];
-            $iduser=$row['iduser'];
+
             echo '<h2 id="title"><a href="newsDetails.php?id='.$idpost.'">'.$row["title"].'</a></h2>';
             echo '<p class="meta"><span class="date">'.$row["date_time"].'</span></p>';
-            echo '<p><span class="posted">postavio/la <a class="user_link" href="profileView.php?id='.$iduser.'">'.$row["username"].'</a></span></p>';
+            echo '<p><span class="posted">postavio/la <a class="user_link" href="#">'.$row["username"].'</a></span></p>';
             echo ' <div class="entry"><p>'.$row["summary"].'</p></div>';
+
+            echo ' <button type="button">Izmjeni</button>';
+            echo ' <button type="button">Ukloni</button>';
             echo '<p class="links"><a href="newsDetails.php?id='.$idpost.'" class="right">Pročitaj više</a></p></br>';
+
             } // end while
 
             /******  build the pagination links ******/

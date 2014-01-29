@@ -78,7 +78,7 @@ session_start();
 
         <div id="search">
             <div id="search-down">
-                <a href="#"><div id="img-search">
+                <a href="search.php"><div id="img-search">
                     </div></a><!--img-search-->
 
                 <input type="text" name="search" >

@@ -1,15 +1,4 @@
-<html xmlns="http://www.w3.org/1999/html">
-<head>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
-    <link href="style/postList.css" rel="stylesheet" type="text/css" />
-    <meta charset="utf-8">
 
-    <link href="style/login-popup.css" rel="stylesheet" type="text/css" />    <!--css style from a login-popup form-->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script> <!--script from a login-popup form-->
-
-</head>
-<body>
 <?php
 
 require("connect.php");
@@ -37,13 +26,20 @@ if(mysql_num_rows($checkusername) == 1)
 }
 else
 {
-    $registerquery = mysql_query("call create_user('".$name."','".$lastname."','".$username."','".$address."', '".$password."', '".$email."','".$gender."','".$newDate_of_birth."','".$telephone."')");
-    if($registerquery )
+    $registerquery = mysql_query( "insert into user (name,lastname,username,address,password,email,gender,date_of_birth,telephone,path)
+        VALUES ('".$name."','".$lastname."','".$username."','".$address."', '".$password."', '".$email."','".$gender."','".$newDate_of_birth."','".$telephone."',NULL)");
+
+    if($registerquery){
+
+        $iduser=mysql_insert_id();
+        $query2=mysql_query("INSERT INTO user_group (iduser,idgroup)
+            VALUES ('".$iduser."',3)");
+    }
+    if($query2)
     {
 
-        echo "<script type='text/javascript'>alert('Uspješno ste se registrirali');</script>";
-        echo "<script type='text/javascript'>window.location.href='loginPopup.php'</script>";
-
+        echo "<script type='text/javascript'>alert('Uspješno ste se registrirali! Molimo prijavite se!');</script>";
+        echo "<script type='text/javascript'>window.location.href='index.php'</script>";
 
     }
     else
@@ -53,9 +49,5 @@ else
 }
 
 ?>
-
-
-</body>
-</html>
 
 

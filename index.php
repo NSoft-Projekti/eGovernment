@@ -6,6 +6,7 @@
     <title>eGovernment :: Home</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
+    <link href="style/HomeStyle.css" rel="stylesheet" type="text/css" />
     <link href="style/postList.css" rel="stylesheet" type="text/css" />
     <link href="style/userList.css" rel="stylesheet" type="text/css" />
 
@@ -106,7 +107,7 @@ session_start();
                         echo '</ul>
                         </li>';
                         echo '<li><a href="decisionList.php">Odluke</a> </li>';
-                        echo '<li><a href="userList.php">Korisnici</a> </li>';
+                        echo '<li><a href="#footer">Korisnici</a> </li>';
                     }
 
                     ?>
@@ -118,7 +119,7 @@ session_start();
 
             <div id="search">
                 <div id="search-down">
-                    <a href="search.php"><div id="img-search">
+                    <a href="#"><div id="img-search">
                         </div></a><!--img-search-->
 
                     <input type="text" name="search" >
@@ -181,11 +182,10 @@ session_start();
 
             // while there are rows to be fetched...
             while ($row = mysql_fetch_assoc($result)) {
-                $iduser=$row['iduser'];
                 $idpost=$row['idpost'];
                 echo '<h2 id="title"><a href="newsDetails.php?id='.$idpost.'">'.$row["title"].'</a></h2>';
                 echo '<p class="meta"><span class="date">'.$row["date_time"].'</span></p>';
-                echo '<p><span class="posted">postavio/la <a class="user_link" href="profileView.php?id='.$iduser.'">'.$row["username"].'</a></span></p>';
+                echo '<p><span class="posted">postavio/la <a class="user_link" href="#">'.$row["username"].'</a></span></p>';
                 echo ' <div class="entry"><p>'.$row["summary"].'</p></div>';
                 echo '<p class="links"><a href="newsDetails.php?id='.$idpost.'" class="right">Pročitaj više</a></p></br>';
             } // end while
@@ -248,12 +248,6 @@ session_start();
 
             <div class="post-right">
 
-                <!--checks if user is logged in-->
-                <?php
-                if(isset ($_SESSION['SESS_MEMBER_ID'])){
-                ?>
-
-                <!--if the session exists (the user is logged in) display the suggestions-->
                 <div class="right-title"><h2>Prijedlozi</h2></div>
 
                 <?php
@@ -301,10 +295,9 @@ session_start();
                 // while there are rows to be fetched...
                 while ($row = mysql_fetch_assoc($result)) {
                     $idpost=$row['idpost'];
-                    $iduser=$row['iduser'];
                     echo '<h3 id="title"><a href="suggestionDetails.php?id='.$idpost.'">'.$row["title"].'</a></h3>';
-                    echo '<p><span class="date">'.$row["date_time"].'</span></p>';
-                    echo '<p><span class="posted">postavio/la <a class="user_link" href="profileView.php?id='.$iduser.'">'.$row["username"].'</a></span></p><br>';
+                    echo '<p><span>'.$row["date_time"].'</span></p>';
+                    echo '<p><span class="posted">postavio/la <a class="user_link" href="#">'.$row["username"].'</a></span></p><br>';
 //                  echo ' <div class="entry"><p>'.$row["content"].'</p></div>';
 //                    echo '<p class="links"><a href="suggestionDetails.php?id='.$idpost.'" class="right">Pročitaj više</a></p></br>';
                     echo '<form name="addVote" action="addVoteStore.php?id=<?php echo $idpost ?>" method="post">';
@@ -362,7 +355,7 @@ session_start();
                     // show < link to go back to 1 page
                     echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$prevpage'><</a> ";
                 } // end if
-                }
+
                 ?>
 
             </div> <!--class post-->

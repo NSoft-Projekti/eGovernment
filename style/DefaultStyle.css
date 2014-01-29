@@ -96,11 +96,13 @@ body {
     width: 630px;
     height: 40px;
     padding: 0;
+    position: absolute;
 }
 
 #horizontal-menu ul li {
     float: left;
     padding: 10 10 10 0;
+    position: relative;
 }
 
 #horizontal-menu ul a {
@@ -146,7 +148,7 @@ body {
 
 #container {
     width: 902px;
-    height: 870px;
+    height: 851px;
     padding: 30px 20px;
     background: white;
     margin: 0 auto;
@@ -218,16 +220,57 @@ h1{
 img{
    border: none;
  }
-
-.hide {
+#aCategoryIzgradnja{
+    position: absolute;
+    margin-left: -20px;
+    z-index: 200000;
+    width: 65px;
+    height: 19px;
+    margin-top: -5px;
+    float: left;
+}
+#ulCategoryIzgradnja {
+    padding:0 40px;
+    line-height:48px;
+    float: left;
+    position: absolute;
+    z-index: 200000000;
+    width: 100px;
+    margin-left: 100px;
+    height: 600px !important;
+}
+#aSubcategoryIzgradnja{
+    position: absolute;
+    margin-left: 90px;
+    z-index: 100000;
+    width: 200px;
+    height: 19px;
+    margin-top: -15px;
+    padding: 200px;
+}
+#ulSubcategoryIzgradnja{
+    padding:0 20px;
+    line-height:40px;
+    float: left;
+    position:absolute;
+    z-index: 1000;
+    height: 600px !important;
+}
+#divSub{
+    width: 300px;
+    height: 300px;
+}
+.hide{
     display: none;
 }
-.show {
-    display: inline-block !important;
-    position: fixed;
+.show{
+    display: block !important;
+    float: left;
 }
-
-
+.showSubmenu{
+    display: block !important;
+    float: left;
+}
 #column-right{
     float: right;
     width: 251px;
