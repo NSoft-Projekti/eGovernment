@@ -144,7 +144,7 @@ session_start();
                     <tr> <td>Ime:</td>       <td> <?php echo $firstname;?> </td> </tr>
                     <tr> <td>Prezime:</td>   <td> <?php echo $lastname;?> </td> </tr>
                     <tr> <td>Username:</td>   <td> <?php echo $username;?> </td> </tr>
-                    <tr> <td>E-mail:</td>     <td> <?php echo $email;?>"  </td> </tr>
+                    <tr> <td>E-mail:</td>     <td> <?php echo $email;?>  </td> </tr>
 
                 </table>
 
@@ -156,12 +156,12 @@ session_start();
     </div> <!--column-left-->
 
     <div id="column-right">
-<!--        <ul>-->
-<!--            <li> <a href="myNews.php">Moje vijesti</a> </li>-->
-<!--            <li> <a href="mySuggestion.php">Moji prijedlozi</a> </li>-->
-<!--            <li> <a href="myComment.php">Moji komentari</a> </li>-->
-<!---->
-<!--        </ul>-->
+        <ul>
+            <li> <a href="myNews.php?id=<?php echo $iduser;?>">Korisničke vijesti</a> </li>
+         <li> <a href="mySuggestion.php?id=<?php echo $iduser;?>">Korisnikčke prijedlozi</a> </li>
+          <li> <a href="myComment.php?id=<?php echo $iduser;?>">Korisničke komentari</a> </li>
+
+     </ul>
 
 
     </div>

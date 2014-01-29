@@ -223,9 +223,9 @@ if(isset($_GET['submit']))
 
         <div id="column-right">
             <ul>
-                <li> <a href="myNews.php">Moje vijesti</a> </li>
-                <li> <a href="mySuggestion.php">Moji prijedlozi</a> </li>
-                <li> <a href="myComment.php">Moji komentari</a> </li>
+                <li> <a href="myNews.php?id=<?php echo $iduser;?>">Moje vijesti</a> </li>
+                <li> <a href="mySuggestion.php?id=<?php echo $iduser;?>">Moji prijedlozi</a> </li>
+                <li> <a href="myComment.php?id=<?php echo $iduser;?>">Moji komentari</a> </li>
 
             </ul>
 

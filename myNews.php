@@ -99,7 +99,7 @@ session_start();
         <div class="user_post">
 
             <?php
-            $iduser=$_SESSION["SESS_MEMBER_ID"];
+            $iduser=$_GET['id'];
             // find out how many rows are in the table
             $sql = "SELECT * FROM post WHERE POST.idpost_type='1'AND iduser=$iduser";
             $result = mysql_query($sql);
@@ -211,9 +211,9 @@ session_start();
 
     <div id="column-right">
         <ul>
-            <li> <a href="myNews.php">Moje vijesti</a> </li>
-            <li> <a href="mySuggestion.php">Moji prijedlozi</a> </li>
-            <li> <a href="myComment.php">Moji komentari</a> </li>
+            <li> <a href="myNews.php?id=<?php echo $iduser;?>">Moje vijesti</a> </li>
+            <li> <a href="mySuggestion.php?id=<?php echo $iduser;?>">Moji prijedlozi</a> </li>
+            <li> <a href="myComment.php?id=<?php echo $iduser;?>">Moji komentari</a> </li>
 
         </ul>
 
