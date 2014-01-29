@@ -53,7 +53,7 @@ session_start();
                     <li><a href="newsList.php">Vijesti</a> </li>
                     <li><a href="suggestionList.php">Prijedlozi</a> </li>
                     <li><a href="decisionList.php">Odluke</a> </li>
-                    <li><a href="#footer">Korisnici</a> </li>
+                    <li><a href="userList.php">Korisnici</a> </li>
 
                 </ul>
 
@@ -92,7 +92,6 @@ session_start();
         $address=$row['address'];
         $telephone=$row['telephone'];
         $gender=$row['gender'];
-        $image_path=$row['path'];
         $convert_date=date("d.m.Y",strtotime($bday));
 
         ?>
@@ -102,7 +101,8 @@ session_start();
         <div id="cleft-picture">
 
             <form action="" method="post" enctype="multipart/form-data">
-                <input type="file" name="image"> <input type="submit" name="upload" value="Upload"><br>
+                <input type="file" name="image" accept="image/*">
+                <input type="submit" name="upload" value="Upload"><br>
 
 
             </form>
@@ -110,6 +110,7 @@ session_start();
             <?php
 
             if(isset($_POST['upload'])){
+
                 $image_name=$_FILES['image']['name'];
                 $image_type=$_FILES['image']['type'];
                 $image_size=$_FILES['image']['size'];
@@ -118,7 +119,6 @@ session_start();
 
                 $path=$path . $_FILES['image']['name'];
 
-
                 if($image_name==''){
 
                     echo "Please select an Image";
@@ -126,18 +126,19 @@ session_start();
                 }
                 else{
                     move_uploaded_file($image_tmp_name,$path);
-                    echo "<script type='javascript'>alert('Uspjeh')</script>";
-                   // echo"<img src='upload_img/$image_name'>";
 
-                    mysql_query("UPDATE user SET path='$path' WHERE iduser='$iduser'");
-                    //echo "<img src='".$row['path']."' />";
+                   mysql_query("update user set path='$path' where iduser='$iduser'");
 
-                }
+                   }
+                echo "<script type='text/javascript'>window.location.href='profile.php'</script>";
+
 
             }
 
+
             ?>
-            <img src="<?php echo"'".$row['path']."'"; ?>">
+
+           <img src="<?php echo $row['path']; ?>">
 
 
         </div> <!--cleft-picture-->

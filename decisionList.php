@@ -1,9 +1,9 @@
 <html>
 <head>
-    <meta name="description" content="Design Android applications" />
-    <meta name="keywords" content="android, design, technics" />
-    <meta name="author" content="Jelena" />
-    <title>eGovernment :: Home</title>
+    <meta name="description" content="eGovernment" />
+    <meta name="keywords" content="design, egovernment" />
+    <meta name="author" content="Tim4" />
+    <title>eGovernment :: Odluke</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
     <link href="style/postList.css" rel="stylesheet" type="text/css" />
@@ -30,10 +30,30 @@ session_start();
             <div id="reg-prijava">
 
                 <?php
-                echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
-                echo '<img class="logo" src="img/login-icon.png">';
-                echo '</br>';
-                echo'<a title="odjava" href="logout.php">Odjava</a>';
+                //checks if user is logged in
+                if(isset ($_SESSION['SESS_MEMBER_ID'])){
+                    $sesija=$_SESSION['SESS_MEMBER_ID'];
+                    $result=mysql_query("SELECT * FROM user WHERE user.iduser='$sesija' ");
+                    $row=mysql_fetch_assoc($result);
+                    $gender=$row["gender"];
+
+                    //checking gender and displaying matching picture
+                    if($gender=='M'){
+                        echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                        echo '<img class="logo" src="img/men.png">';
+                        echo '</br>';
+                        echo'<a title="odjava" href="logout.php">Odjava</a>';
+                    }
+
+                    //if it's not male gender, it displays female image
+                    else {
+                        echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                        echo '<img class="logo" src="img/girl.png">';
+                        echo '</br>';
+                        echo'<a title="odjava" href="logout.php">Odjava</a>';
+                    }
+                }
+
                 ?>
 
             </div><!--reg-prijava-->
@@ -50,7 +70,7 @@ session_start();
                     <li><a href="newsList.php">Vijesti</a> </li>
                     <li><a href="suggestionList.php">Prijedlozi</a> </li>
                     <li><a href="decisionList.php" class="currentTab">Odluke</a> </li>
-                    <li><a href="#footer">Korisnici</a> </li>
+                    <li><a href="userList.php">Korisnici</a> </li>
 
                 </ul>
 

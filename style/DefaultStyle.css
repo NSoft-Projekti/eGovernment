@@ -38,7 +38,7 @@ body {
 }
 
 #reg-prijava {
-    width: 180px;
+    width: 170px;
     height: 15px;
     margin-top: 30px;
     float: right;
@@ -58,7 +58,7 @@ body {
 }
 
 #reg-prijava a:hover {
-    color: rgb(82,139,197);
+    color: #528BC5;
 }
 
 
@@ -220,46 +220,56 @@ h1{
 img{
    border: none;
  }
-#aCategory{
+#aCategoryIzgradnja{
     position: absolute;
     margin-left: -20px;
     z-index: 200000;
-    width: 620%;
+    width: 65px;
     height: 19px;
     margin-top: -5px;
-}
-#ulCategory{
-    padding:0 20px;
-    height: 40px;
-    line-height:40px;
     float: left;
-    position:relative;
-    z-index: 2000;
 }
-#aSubcategory1{
+#ulCategoryIzgradnja {
+    padding:0 40px;
+    line-height:48px;
+    float: left;
+    position: absolute;
+    z-index: 200000000;
+    width: 100px;
+    margin-left: 100px;
+    height: 600px !important;
+}
+#aSubcategoryIzgradnja{
     position: absolute;
     margin-left: 90px;
-    z-index: 1000;
-    width: 2000%;
+    z-index: 100000;
+    width: 200px;
     height: 19px;
     margin-top: -15px;
+    padding: 200px;
 }
-#ulSubcategory1{
+#ulSubcategoryIzgradnja{
     padding:0 20px;
-    height: 50px;
     line-height:40px;
     float: left;
     position:absolute;
     z-index: 1000;
+    height: 600px !important;
+}
+#divSub{
+    width: 300px;
+    height: 300px;
 }
 .hide{
     display: none;
 }
 .show{
-    display: block;
+    display: block !important;
+    float: left;
 }
 .showSubmenu{
-    display: block;
+    display: block !important;
+    float: left;
 }
 #column-right{
     float: right;
