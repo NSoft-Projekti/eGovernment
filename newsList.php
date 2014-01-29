@@ -149,7 +149,7 @@ session_start();
             $result = mysql_query($sql, $conn) or trigger_error("SQL", E_USER_ERROR);
 
             // while there are rows to be fetched...
-            echo '<p class="news_container"><a href="addNews.php" ><button type="submit" class="buton" name="submit">Dodaj</p></button>';
+
             while ($row = mysql_fetch_assoc($result)) {
             $idpost=$row['idpost'];
 
@@ -157,17 +157,19 @@ session_start();
             echo '<p class="meta"><span class="date">'.$row["date_time"].'</span></p>';
             echo '<p><span class="posted">postavio/la <a class="user_link" href="#">'.$row["username"].'</a></span></p>';
             echo ' <div class="entry"><p>'.$row["summary"].'</p></div>';
-            $usergroup=mysql_query("SELECT * FROM user_group WHERE idgroup='1'");
-
-              while($usergroup_row=mysql_fetch_array($usergroup)){
-                $admin=$user_group_array['iduser'];
-
-                if($admin=$iduser){
+                echo '<p class="links"><a href="newsDetails.php?id='.$idpost.'" class="right">Pročitaj više</a></p></br>';
+                if(isset ($_SESSION['SESS_MEMBER_ID'])){
+            $usergroup=mysql_query("SELECT * FROM user where iduser = $iduser");
+            $group_row=mysql_fetch_assoc($usergroup);
+            $admin = $group_row["idgroup"];
+                $sql2 = mysql_query("SELECT * FROM user WHERE iduser = $iduser");
+                $row2 = mysql_fetch_array($sql2);
+            if($row2["idgroup"]== '1'){
+            echo ' <a href="addNews.php" ><button type="button">Dodaj</p></button>';
             echo ' <button type="button">Izmjeni</button>';
             echo ' <button type="button">Ukloni</button>';
-            echo '<p class="links"><a href="newsDetails.php?id='.$idpost.'" class="right">Pročitaj više</a></p></br>';
+            }
                 }
-              }
             } // end while
 
             /******  build the pagination links ******/
