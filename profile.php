@@ -115,9 +115,21 @@ session_start();
                 $image_type=$_FILES['image']['type'];
                 $image_size=$_FILES['image']['size'];
                 $image_tmp_name=$_FILES['image']['tmp_name'];
-                $path="upload_img/";
+                $path="img/";
 
                 $path=$path . $_FILES['image']['name'];
+
+                $allowedExts = array("gif", "jpeg", "jpg", "png");
+                $temp = explode(".", $_FILES["image"]["name"]);
+                $extension = end($temp);
+                if ((($_FILES["image"]["type"] == "image/gif")
+                        || ($_FILES["image"]["type"] == "image/jpeg")
+                        || ($_FILES["image"]["type"] == "image/jpg")
+                        || ($_FILES["image"]["type"] == "image/pjpeg")
+                        || ($_FILES["image"]["type"] == "image/x-png")
+                        || ($_FILES["image"]["type"] == "image/png"))
+                    && ($_FILES["image"]["size"] < 20000)
+                    && in_array($extension, $allowedExts)){
 
                 if($image_name==''){
 
@@ -132,7 +144,7 @@ session_start();
                    }
                 echo "<script type='text/javascript'>window.location.href='profile.php'</script>";
 
-
+                }
             }
 
 
