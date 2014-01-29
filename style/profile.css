@@ -7,10 +7,10 @@
 }
 
 #cleft-picture{
-    width: 299px;
+    width: 550px;
     float: left;
-    height:300px;
-    margin-bottom:50px;
+    height:470px;
+    margin-bottom:10px;
 
 }
 #cleft-data{
@@ -46,8 +46,8 @@ input[type=submit] {
     width:135px;
     height:35px;
     font-weight:bold;
-    margin-left:50px;
-    margin-top:50px;
+
+
 }
 
 #column-right{
