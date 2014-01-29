@@ -6,7 +6,6 @@
     <title>eGovernment :: Home</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
-    <link href="style/HomeStyle.css" rel="stylesheet" type="text/css" />
     <link href="style/postList.css" rel="stylesheet" type="text/css" />
     <link href="style/userList.css" rel="stylesheet" type="text/css" />
 
@@ -81,37 +80,126 @@ session_start();
                     <?php
 
                     if(isset ($_SESSION['SESS_MEMBER_ID'])){
-                        echo'<li><a href="suggestionList.php" id="category" >Prijedlozi</a>
-                        <ul id="ulCategory" class="hide">';
+                    echo'<li><a href="suggestionList.php" id="category" >Prijedlozi</a>
+                        <ul id="ulCategoryIzgradnja" class="hide">';
 
-                        $sqlCat = "SELECT idcategory, name FROM category WHERE idcategory != '1'";
-                        $resultCat=mysql_query($sqlCat, $conn);
-                        while($rowCat = mysql_fetch_assoc($resultCat))
+                    $sqlCat = "SELECT idcategory, name FROM category WHERE idcategory != '1'";
+                    $resultCat=mysql_query($sqlCat, $conn);
+                    $num_fields = mysql_num_fields($resultCat);
+                    $x=1;
+
+                    while($rowCat = mysql_fetch_assoc($resultCat)){
+                        for($i=0; $i<$num_fields; $i++)
                         {
-                            echo '<li>';
-                            echo '<a href="suggestionList.php?id='.$rowCat['idcategory'].'"  id="liCategory" class="hide">'.$rowCat["name"].'</a>';
-                            echo '<ul id="ulSubcategory" class="hide">';
-                            $idCat = $rowCat['idcategory'];
-                            $sqlSub = "SELECT idsubcategory, name FROM subcategory WHERE name != 'Vijest' AND subcategory.idcategory = $idCat";
-                            $resultSub=mysql_query($sqlSub, $conn);
-                            while($rowSub = mysql_fetch_assoc($resultSub))
+                            $name=mysql_field_name($resultCat, $i);
+                            $object[$x][$name] = $rowCat[$name];
+                        }$x++;
+                    }
+                    $j=1;
+                    $ii=count($object);         //quick access function
+                    for($j=1;$j<=$ii;$j++){
+                        echo '<li id="liCategoryIzgradnja">';
+                        echo '<a href="suggestionList.php?id='.$object[$j]['idcategory'].'"  id="aCategoryIzgradnja" class="show">'.$object[$j]["name"].'</a>';
+                        $idCat = $object[$j]['idcategory'];
+                        $sqlSub = "SELECT idsubcategory, name, idcategory FROM subcategory WHERE name != 'Vijest' AND subcategory.idcategory = 2";
+                        $resultSub=mysql_query($sqlSub, $conn);
+                        $num_fields_Sub = mysql_num_fields($resultSub);
+                        $y=1;
+                        while($rowSub = mysql_fetch_assoc($resultSub)){
+                            for($n=0; $n<$num_fields_Sub; $n++)
                             {
-                                echo '<li >';
-                                echo '<a href="suggestionList.php?id='.$rowSub['idsubcategory'].'" id="liSubcategory" class="hide">'.$rowSub["name"].'</a>>';
-                                echo '</li>';
-                            }
-                            echo '</ul>';
-                            echo '</li>';
+                                $nameSub = mysql_field_name($resultSub, $n);
+                                $objectSub[$y][$nameSub] = $rowSub[$nameSub];
+                            }$y++;
                         }
+                        $m=1;
+                        $mm=count($objectSub);
 
+<<<<<<< HEAD
                         echo '</ul>
                         </li>';
                         echo '<li><a href="decisionList.php">Odluke</a> </li>';
                         echo '<li><a href="userList.php">Korisnici</a> </li>';
                     }
+=======
+                        echo '<ul id="ulSubcategoryIzgradnja" class="hide">';
+>>>>>>> origin/master
 
-                    ?>
+                        echo '<li id="liSubcategoryIzgradnja">';
+                        echo '<div id="divSub">';
+                        for($m=1;$m<=$mm;$m++)
+                        {
 
+                            echo '<a href="suggestionList.php?id='.$objectSub[$m]['idsubcategory'].'" id="aSubcategoryIzgradnja">'.$objectSub[$m]["name"].'</a></br>';
+
+                        }
+                        echo '</div>';
+                        echo '</li></br>';
+
+                        echo '</ul>';
+
+                        echo '</li></br>';
+                        /* echo '<li id="liCategoryIzleti class="hide">';
+                         $sqlSub = "SELECT idsubcategory, name, idcategory FROM subcategory WHERE name != 'Vijest' AND subcategory.idcategory = 3";
+                         $resultSub=mysql_query($sqlSub, $conn);
+                         $num_fields_Sub = mysql_num_fields($resultSub);
+                         $y=1;
+                         while($rowSub = mysql_fetch_assoc($resultSub)){
+                             for($n=0; $n<$num_fields_Sub; $n++)
+                             {
+                                 $nameSub = mysql_field_name($resultSub, $n);
+                                 $objectSub[$y][$nameSub] = $rowSub[$nameSub];
+                             }$y++;
+                         }
+                         $m=1;
+                         $mm=count($objectSub);
+                         echo '<ul id="ulSubcategory class="hide">';
+                         for($m=1;$m<=$mm;$m++)
+                         {
+                             $sub = $objectSub[$m]['idcategory'];
+                             $cat = $object[$j]['idcategory'];
+                             if($sub== $cat){
+                                 echo '<li id="liSubcategory">';
+                                 echo '<a href="suggestionList.php?id='.$objectSub[$m]['idsubcategory'].'" id="aSubcategory" class="hide">'.$objectSub[$m]["name"].'</a>';
+                                 echo '</li>';
+                             }
+                         }
+                         echo '</ul>';
+                         echo '</li></br>';
+                         echo '<li id="liCategoryEkologija class="hide">';
+                         $sqlSub = "SELECT idsubcategory, name, idcategory FROM subcategory WHERE name != 'Vijest' AND subcategory.idcategory = 4";
+                         $resultSub=mysql_query($sqlSub, $conn);
+                         $num_fields_Sub = mysql_num_fields($resultSub);
+                         $y=1;
+                         while($rowSub = mysql_fetch_assoc($resultSub)){
+                             for($n=0; $n<$num_fields_Sub; $n++)
+                             {
+                                 $nameSub = mysql_field_name($resultSub, $n);
+                                 $objectSub[$y][$nameSub] = $rowSub[$nameSub];
+                             }$y++;
+                         }
+                         $m=1;
+                         $mm=count($objectSub);
+                         echo '<ul id="ulSubcategory">';
+                         for($m=1;$m<=$mm;$m++)
+                         {
+                             $sub = $objectSub[$m]['idcategory'];
+                             $cat = $object[$j]['idcategory'];
+                             if($sub== $cat){
+                                 echo '<li id="liSubcategory">';
+                                 echo '<a href="suggestionList.php?id='.$objectSub[$m]['idsubcategory'].'" id="aSubcategory" class="hide">'.$objectSub[$m]["name"].'</a>';
+                                 echo '</li>';
+                             }
+                         }
+                         echo '</ul>';
+                         echo '</li></br>';*/
+                    }
+                    echo '</ul></li>';
+                    echo '<li><a href="decisionList.php">Odluke</a> </li>';
+                    echo '<li><a href="#footer">Korisnici</a> </li>';
+                }
+
+                ?>
 
                 </ul>
 
@@ -119,7 +207,7 @@ session_start();
 
             <div id="search">
                 <div id="search-down">
-                    <a href="#"><div id="img-search">
+                    <a href="search.php"><div id="img-search">
                         </div></a><!--img-search-->
 
                     <input type="text" name="search" >
@@ -248,6 +336,13 @@ session_start();
 
             <div class="post-right">
 
+
+                <!--checks if user is logged in-->
+                <?php
+                    if(isset ($_SESSION['SESS_MEMBER_ID'])){
+                    ?>
+
+                <!--if the session exists (the user is logged in) display the suggestions-->
                 <div class="right-title"><h2>Prijedlozi</h2></div>
 
                 <?php
@@ -355,6 +450,7 @@ session_start();
                     // show < link to go back to 1 page
                     echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$prevpage'><</a> ";
                 } // end if
+                }
 
                 ?>
 
