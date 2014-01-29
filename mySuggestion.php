@@ -1,4 +1,3 @@
-
 <html>
 <head>
     <meta name="description" content="eGovernment" />
@@ -70,7 +69,7 @@ session_start();
                 <li><a href="newsList.php">Vijesti</a> </li>
                 <li><a href="suggestionList.php" class="currentTab">Prijedlozi</a> </li>
                 <li><a href="decisionList.php">Odluke</a> </li>
-                <li><a href="#footer">Korisnici</a> </li>
+                <li><a href="userList.php">Korisnici</a> </li>
 
             </ul>
 
