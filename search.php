@@ -1,4 +1,3 @@
-//
 <html>
 <head>
     <meta name="description" content="Design Android applications" />
@@ -56,10 +55,10 @@ include('connect.php');
 
             </div><!--horizontal-menu-->
 
-
+<?php $string=$_GET['id']?>
             <div id="search">
                 <div id="search-down">
-                    <a href="#"><div id="img-search">
+                   <a href="search.php?id=<?php $string ?>"><div id="img-search">
                         </div></a><!--img-search-->
 
                     <input type="text" name="search" >
