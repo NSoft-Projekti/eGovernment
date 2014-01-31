@@ -40,7 +40,7 @@ session_start();
             //checks if user is logged in
             if(isset ($_SESSION['SESS_MEMBER_ID'])){
                 $sesija=$_SESSION['SESS_MEMBER_ID'];
-                $result=mysql_query("SELECT * FROM user WHERE user.iduser='$sesija' ");
+                $result=mysql_query("SELECT iduser, gender FROM user WHERE user.iduser='$sesija' ");
                 $row=mysql_fetch_assoc($result);
                 $gender=$row["gender"];
 
@@ -346,7 +346,7 @@ session_start();
         $r = mysql_num_rows($result);
 
         // number of rows to show per page
-        $rowsperpage = 3;
+        $rowsperpage = 5;
         // find out total pages
         $totalpages = ceil($r / $rowsperpage);
 
@@ -386,8 +386,6 @@ session_start();
             echo '<h3 id="title"><a href="suggestionDetails.php?id='.$idpost.'">'.$row["title"].'</a></h3>';
             echo '<p><span>'.$row["date_time"].'</span></p>';
             echo '<p><span class="posted">postavio/la <a class="user_link" href="profileView.php?id='.$iduser.' ">'.$row["username"].'</a></span></p><br>';
-//                  echo ' <div class="entry"><p>'.$row["content"].'</p></div>';
-//                    echo '<p class="links"><a href="suggestionDetails.php?id='.$idpost.'" class="right">Pročitaj više</a></p></br>';
             echo '<form name="addVote" action="addVoteStore.php?id=<?php echo $idpost ?>" method="post">';
             echo '<button id="voteButton" name="submit" value="submit">Glasaj</button> </br>';
             echo '</form>';
