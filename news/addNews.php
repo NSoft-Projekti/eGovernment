@@ -4,8 +4,8 @@
     <meta name="author" content="Ajda" />
     <title>eGovernment :: Home</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
-    <link href="style/addNews.css" rel="stylesheet" type="text/css" />
+    <link href="../style/DefaultStyle.css" rel="stylesheet" type="text/css" />
+    <link href="../style/addNews.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
 </head>
 
@@ -20,13 +20,13 @@ session_start();
         <div id="header-up">
 
             <div id="header-logo">
-                <a href="index.php"><img src="img/logo.png"></a>
+                <a href="../index.php"><img src="../img/logo.png"></a>
             </div><!--header-logo-->
 
 
             <div id="reg-prijava">
 
-                <a title="prijava" href="profile.php"><?php echo $_SESSION["SESS_FIRST_NAME"] ?> <img class="logo" src="img/login-icon.png"></a>
+                <a title="prijava" href="../profiles/profile.php"><?php echo $_SESSION["SESS_FIRST_NAME"] ?> <img class="logo" src="img/login-icon.png"></a>
 
 
 
@@ -41,11 +41,11 @@ session_start();
 
             <div id="horizontal-menu">
                 <ul>
-                    <li><a href="index.php">Home</a> </li>
+                    <li><a href="../index.php">Home</a> </li>
                     <li><a href="newsList.php" class="currentTab">Vijesti</a> </li>
-                    <li><a href="suggestionList.php">Prijedlozi</a> </li>
-                    <li><a href="decisionList.php">Odluke</a> </li>
-                    <li><a href="#footer">Korisnici</a> </li>
+                    <li><a href="../suggestions/suggestionList.php">Prijedlozi</a> </li>
+                    <li><a href="../decisions/decisionList.php">Odluke</a> </li>
+                    <li><a href="../profiles/userList.php">Korisnici</a> </li>
 
                 </ul>
 
@@ -53,7 +53,7 @@ session_start();
 
             <div id="search">
                 <div id="search-down">
-                    <a href="search.php"><div id="img-search">
+                    <a href="../search.php"><div id="img-search">
                         </div></a><!--img-search-->
 
                     <input type="text" name="search" >
@@ -105,16 +105,16 @@ session_start();
         <div id="footer-up">
 
             <div id="footer-logo">
-                <a href="index.php"><img src="img/logo.png"></a>
+                <a href="../index.php"><img src="../img/logo.png"></a>
             </div><!--footer-logo-->
 
             <div id="icons">
 
-                <a href="http://www.flickr.com/" target="_blank" > <img title="Flick" src="img/icon-fl.png"></a>
-                <a href="https://twitter.com/" target="_blank">  <img src="img/icon-tw.png"></a>
-                <a href="https://www.facebook.com/" target="_blank"> <img src="img/icon-fb.png"></a>
-                <a href="http://www.google.ba" target="_blank"> <img src="img/icon-gp.png"></a>
-                <a href="http://dribbble.com/" target="_blank"> <img src="img/icon-db.png"></a>
+                <a href="http://www.flickr.com/" target="_blank" > <img title="Flick" src="../img/icon-fl.png"></a>
+                <a href="https://twitter.com/" target="_blank">  <img src="../img/icon-tw.png"></a>
+                <a href="https://www.facebook.com/" target="_blank"> <img src="../img/icon-fb.png"></a>
+                <a href="http://www.google.ba" target="_blank"> <img src="../img/icon-gp.png"></a>
+                <a href="http://dribbble.com/" target="_blank"> <img src="../img/icon-db.png"></a>
             </div><!--icons-->
 
         </div><!--footer-up-->

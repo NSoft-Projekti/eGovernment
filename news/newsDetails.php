@@ -5,14 +5,14 @@
     <meta name="author" content="Tim4" />
     <title>eGovernment :: Vijesti</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
-    <link href="style/postList.css" rel="stylesheet" type="text/css" />
-    <link href="style/login-popup.css" rel="stylesheet" type="text/css" />    <!--css style from a login-popup form-->
+    <link href="../style/DefaultStyle.css" rel="stylesheet" type="text/css" />
+    <link href="../style/postList.css" rel="stylesheet" type="text/css" />
+    <link href="../style/login-popup.css" rel="stylesheet" type="text/css" />    <!--css style from a login-popup form-->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script> <!--script from a login-popup form-->
     <meta charset="utf-8">
 </head>
 <?php
- include('connect.php');
+ include('../connect.php');
 session_start();
 ?>
 
@@ -24,7 +24,7 @@ session_start();
         <div id="header-up">
 
             <div id="header-logo">
-                <a href="home.php"><img src="img/logo.png"></a>
+                <a href="home.php"><img src="../img/logo.png"></a>
             </div><!--header-logo-->
 
 
@@ -41,25 +41,25 @@ session_start();
 
                     //checking gender and displaying matching picture
                     if($gender=='M'){
-                        echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
-                        echo '<img class="logo" src="img/men.png">';
+                        echo '<a title="prijava" href="../profiles/profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                        echo '<img class="logo" src="../img/men.png">';
                         echo '</br>';
-                        echo'<a title="odjava" href="logout.php">Odjava</a>';
+                        echo '<a title="odjava" href="../logout.php">Odjava</a>';
                     }
 
                     //if it's not male gender, it displays female image
                     else {
-                        echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
-                        echo '<img class="logo" src="img/girl.png">';
+                        echo '<a title="prijava" href="../profiles/profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                        echo '<img class="logo" src="../img/girl.png">';
                         echo '</br>';
-                        echo'<a title="odjava" href="logout.php">Odjava</a>';
+                        echo '<a title="odjava" href="../logout.php">Odjava</a>';
                     }
                 }
 
                 //includes login popup form
                 else {
                     include_once("loginPopup.php");
-                    echo'<a title="registracija" href="registration.php">Registracija</a>';
+                    echo '<a title="registracija" href="../registration/registration.php">Registracija</a>';
                 }
                 ?>
             </div><!--reg-prijava-->
@@ -71,15 +71,15 @@ session_start();
 
             <div id="horizontal-menu">
                 <ul>
-                    <li><a href="index.php">Home</a> </li>
+                    <li><a href="../index.php">Home</a> </li>
                     <li><a href="newsList.php" class="currentTab">Vijesti</a> </li>
                     <?php
 
 
                     if(isset ($_SESSION['SESS_MEMBER_ID'])){
-                    echo'<li><a href="suggestionList.php">Prijedlozi</a> </li>';
-                    echo '<li><a href="decisionList.php">Odluke</a> </li>';
-                    echo '<li><a href="userList.php">Korisnici</a> </li>';
+                    echo '<li><a href="../suggestions/suggestionList.php">Prijedlozi</a> </li>';
+                    echo '<li><a href="../decisions/decisionList.php">Odluke</a> </li>';
+                    echo '<li><a href="../profiles/userList.php">Korisnici</a> </li>';
                     }
 
                     ?>
@@ -92,7 +92,7 @@ session_start();
 
             <div id="search">
                 <div id="search-down">
-                    <a href="search.php"><div id="img-search">
+                    <a href="../search.php"><div id="img-search">
                     </div></a><!--img-search-->
 
                     <input type="text" name="search" >
@@ -133,7 +133,7 @@ session_start();
             WHERE comment.idpost=$idpost");
             while($row2 = mysql_fetch_array($sql)){
                 $iduser = $row2['iduser'];
-                echo '<p><span class="posted"><a class="user_link" href="profileView.php?id='.$iduser.'">'.$row2["username"].' </a></span>'.$row2["content"].'</p>';
+                echo '<p><span class="posted"><a class="user_link" href="../profiles/profileView.php?id='.$iduser.'">'.$row2["username"].' </a></span>'.$row2["content"].'</p>';
                 echo '<span class="date">'.date("d.\tm.\tY. \tH:\ti", strtotime($row2["date_time"])).'</span>';
                 echo '<hr>';
             }
@@ -157,7 +157,7 @@ session_start();
 
             <div  id="comment">
 
-               <form action="addcomment.php?id=<?php echo $idpost ?>" method="post"><br />
+               <form action="../comments/addcomment.php?id=<?php echo $idpost ?>" method="post"><br />
 
                <textarea name="comment_text" id="comment_text" cols="30" rows="7" placeholder="Unesite komentar"></textarea>
 
@@ -182,16 +182,16 @@ session_start();
         <div id="footer-up">
 
             <div id="footer-logo">
-                <a href="home.php"><img src="img/logo.png"></a>
+                <a href="home.php"><img src="../img/logo.png"></a>
             </div><!--footer-logo-->
 
             <div id="icons">
 
-                <a href="http://www.flickr.com/" target="_blank" > <img title="Flick" src="img/icon-fl.png"></a>
-                <a href="https://twitter.com/" target="_blank">  <img src="img/icon-tw.png"></a>
-                <a href="https://www.facebook.com/" target="_blank"> <img src="img/icon-fb.png"></a>
-                <a href="http://www.google.ba" target="_blank"> <img src="img/icon-gp.png"></a>
-                <a href="http://dribbble.com/" target="_blank"> <img src="img/icon-db.png"></a>
+                <a href="http://www.flickr.com/" target="_blank" > <img title="Flick" src="../img/icon-fl.png"></a>
+                <a href="https://twitter.com/" target="_blank">  <img src="../img/icon-tw.png"></a>
+                <a href="https://www.facebook.com/" target="_blank"> <img src="../img/icon-fb.png"></a>
+                <a href="http://www.google.ba" target="_blank"> <img src="../img/icon-gp.png"></a>
+                <a href="http://dribbble.com/" target="_blank"> <img src="../img/icon-db.png"></a>
             </div><!--icons-->
 
         </div><!--footer-up-->
