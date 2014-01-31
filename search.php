@@ -95,7 +95,7 @@ include('connect.php');
 
                         $idpost = $row["idpost"];
                         $title = $row["title"];
-                        $search_output .= "<a href='news/newsDetails.php?id=$idpost'>$title</a><br />";
+                        $search_output .= "<a href='newsDetails.php?id=$idpost'>$title</a><br />";
 
                     } // close while
                 } else {
