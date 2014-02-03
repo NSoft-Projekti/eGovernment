@@ -5,13 +5,15 @@
     <title>eGovernment :: Home</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
-    <link href="style/postList.css" rel="stylesheet" type="text/css">
     <link href="style/addNews.css" rel="stylesheet" type="text/css" />
+    <link href="style/postList.css" rel="stylesheet" type="text/css">
     <meta charset="utf-8">
 </head>
 
 <?php
+include "connect.php";
 session_start();
+$idpost = $_GET['id'];
 ?>
 <body>
 <div id="wrapper" >
@@ -59,8 +61,6 @@ session_start();
                 }
                 ?>
 
-
-
             </div><!--reg-prijava-->
 
 
@@ -101,30 +101,41 @@ session_start();
     <div id="container">
 
         <div class="news_container">
-        <div id="title">
-            <form name="addNews" action="addNewsStore.php" method="post">
-        <label >Unesite naslov vijesti: </label><br>
-        <input type="text" name="title" id="inputTitle"/>
-        </div>
-        <div id="content">
-            <label>Unesite sadržaj vijesti: </label>
-            <textarea name="content" id="inputContent"></textarea>
-        </div>
-        <div id="summary">
-                <label>Unesite kratki opis vijesti: </label>
-                <textarea name="summary" id="inputSummary"></textarea>
-            </div>
-            <div id="attachment">
-                <label>Attachment</label>
-                <input type="file" name="file" id="file">
-            </div>
-            <hr>
-        <input type="submit" name="button" value="Spasi" class="button" />
+            <div id="title">
+                <form name="editNews" action="editNewsStore.php" method="post">
+                    <?php
+                    $sql = mysql_query("SELECT * FROM post WHERE post.idpost = $idpost");
+                    while($row = mysql_fetch_assoc($sql))
+                    {
+                        $title = $row['title'];
+                        $content = $row['content'];
+                        $summary = $row['summary'];
+
+                    echo '<label >Unesite naslov vijesti: </label><br>';
+                    echo '<input type="text" name="title" id="inputTitle" value="'.$title.'"/>';
+            echo '</div>';
+            echo '<div id="content">';
+                echo '<label>Unesite sadržaj vijesti: </label>';
+                echo '<textarea name="content" id="inputContent">'.$content.'</textarea>';
+            echo '</div>';
+            echo '<div id="summary">';
+                echo '<label>Unesite kratki opis vijesti: </label>';
+                echo '<textarea name="summary" id="inputSummary">'.$summary.'</textarea>';
+            echo '</div>';
+            echo '<div id="attachment">';
+                echo '<label>Attachment</label>';
+                echo '<input type="file" name="file" id="file">';
+            echo '</div>';
+            echo '<hr>';
+                        echo '<input type="hidden" name="idpost" value="'.$idpost.'">';
+            echo '<input type="submit" name="button" value="Spasi" class="button" />';
+            }
+            ?>
             </form>
 
 
 
-</div><!--news_container-->
+        </div><!--news_container-->
 
 
 
