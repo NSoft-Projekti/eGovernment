@@ -50,7 +50,7 @@ session_start();
                 echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'<img class="logo" src="img/login-icon.png"></a>';
                // echo '<img class="logo" src="img/login-icon.png">';
                 //echo '</br>';
-                echo'<a title="odjava" href="logout.php">Odjava</a>';
+                echo '<a title="odjava" href="logout.php">Odjava</a>';
             }
             ?>
 
@@ -69,9 +69,9 @@ session_start();
                 <?php
 
                 if(isset ($_SESSION['SESS_MEMBER_ID'])){
-                    echo'<li><a href="suggestionList.php">Prijedlozi</a> </li>';
+                    echo '<li><a href="suggestionList.php">Prijedlozi</a> </li>';
                     echo '<li><a href="decisionList.php">Odluke</a> </li>';
-                    echo '<li><a href="#footer">Korisnici</a> </li>';
+                    echo '<li><a href="userList.php">Korisnici</a> </li>';
                 }
 
                 ?>
@@ -217,7 +217,7 @@ session_start();
 
         if(isset($_POST['submit'])){
             if($nameErr=="" && $lastnameErr=="" && $usernameErr=="" && $passwordErr=="" &&  $rpasswordErr=="" && $emailErr=="" &&  $telephonErr=="" && $genderErr=="")
-            include ('register_proces.php');
+            include('register_proces.php');
 
         }
 

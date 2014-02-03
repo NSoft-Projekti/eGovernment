@@ -32,7 +32,7 @@ session_start();
             <?php
             if(isset ($_SESSION['SESS_MEMBER_ID'])){
                 $sesija=$_SESSION['SESS_MEMBER_ID'];
-                $result=mysql_query("SELECT gender, iduser FROM user WHERE user.iduser='$sesija' ");
+                $result=mysql_query("SELECT * FROM user WHERE user.iduser='$sesija' ");
                 $row=mysql_fetch_assoc($result);
                 $gender=$row["gender"];
 
@@ -97,7 +97,7 @@ session_start();
 
     <div id="column-left">
         <div class="user_post">
-            <div class="right-title"><h2>Moje vijesti</h2></div>
+
             <?php
             $iduser=$_GET['id'];
             // find out how many rows are in the table

@@ -23,7 +23,7 @@
 </head>
 
 <?php
-include('connect.php');
+include('../connect.php');
 session_start();
 ?>
 
@@ -54,7 +54,7 @@ session_start();
                     echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
                     echo '<img class="logo" src="img/men.png">';
                     echo '</br>';
-                    echo'<a title="odjava" href="logout.php">Odjava</a>';
+                    echo '<a title="odjava" href="logout.php">Odjava</a>';
                 }
 
                 //if it's not male gender, it displays female image
@@ -62,14 +62,14 @@ session_start();
                     echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
                     echo '<img class="logo" src="img/girl.png">';
                     echo '</br>';
-                    echo'<a title="odjava" href="logout.php">Odjava</a>';
+                    echo '<a title="odjava" href="logout.php">Odjava</a>';
                 }
             }
 
             //includes login popup form
             else {
                 include_once("loginPopup.php");
-                echo'<a title="registracija" href="registration.php">Registracija</a>';
+                echo '<a title="registracija" href="registration.php">Registracija</a>';
             }
             ?>
 
@@ -85,7 +85,7 @@ session_start();
                 <?php
 
                 if(isset ($_SESSION['SESS_MEMBER_ID'])){
-                    echo'<li><a href="suggestionList.php" id="category" >Prijedlozi</a>
+                    echo '<li><a href="suggestionList.php" id="category" >Prijedlozi</a>
                         <ul id="ulCategory" class="hide">';
 
                     $sqlCat = "SELECT idcategory, name FROM category WHERE idcategory != '1'";
@@ -282,7 +282,7 @@ session_start();
 </div><!--wrapper-->
 
 
-<script src="dropDownMenu.js" type="text/javascript"></script>
+<script src="javascript/dropDownMenu.js" type="text/javascript"></script>
 </body>
 
 </html>
