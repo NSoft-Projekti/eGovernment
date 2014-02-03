@@ -13,6 +13,7 @@
 <?php
 include('connect.php');
 session_start();
+$idsubcategory = $_GET['id'];
 ?>
 
 <body>
@@ -135,7 +136,7 @@ session_start();
 
             // get the info from the db
             $sql = "SELECT * FROM post inner join user on post.iduser = user.iduser
-             WHERE POST.idpost_type='3' ORDER BY date_time DESC LIMIT $offset, $rowsperpage";
+             WHERE POST.idpost_type='3' AND post.idsubcategory = $idsubcategory ORDER BY date_time DESC LIMIT $offset, $rowsperpage";
             $result = mysql_query($sql, $conn) or trigger_error("SQL", E_USER_ERROR);
 
             // while there are rows to be fetched...
@@ -157,7 +158,7 @@ session_start();
                 }
                 echo '<form name="addVote" action="addVoteStore.php?id='.$idpost.'" method="post">';
                 if($a == true){
-                echo '<button id="voteButton" name="submit" value="submit" disabled>Glasaj</button> </br>';
+                echo '<button id="voteButton" name="submit" value="submit"  disabled>Glasaj</button> </br>';
                 }
                 else
                     echo '<button id="voteButton" name="submit" value="submit">Glasaj</button> </br>';

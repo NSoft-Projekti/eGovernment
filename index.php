@@ -85,51 +85,23 @@ session_start();
 
                     $sqlCat = "SELECT idcategory, name FROM category WHERE idcategory != '1'";
                     $resultCat=mysql_query($sqlCat, $conn);
-                    $num_fields = mysql_num_fields($resultCat);
-                    $x=1;
-
                     while($rowCat = mysql_fetch_assoc($resultCat)){
-                        for($i=0; $i<$num_fields; $i++)
-                        {
-                            $name=mysql_field_name($resultCat, $i);
-                            $object[$x][$name] = $rowCat[$name];
-                        }$x++;
-                    }
-                    $j=1;
-                    $ii=count($object);         //quick access function
-                    for($j=1;$j<=$ii;$j++){
-                        echo '<li id="liCategoryIzgradnja">';
-                        echo '<a href="suggestionList.php?id='.$object[$j]['idcategory'].'"  id="aCategoryIzgradnja" class="show">'.$object[$j]["name"].'</a>';
-                        $idCat = $object[$j]['idcategory'];
-                        $sqlSub = "SELECT idsubcategory, name, idcategory FROM subcategory WHERE name != 'Vijest' AND subcategory.idcategory = 2";
-                        $resultSub=mysql_query($sqlSub, $conn);
-                        $num_fields_Sub = mysql_num_fields($resultSub);
-                        $y=1;
-                        while($rowSub = mysql_fetch_assoc($resultSub)){
-                            for($n=0; $n<$num_fields_Sub; $n++)
-                            {
-                                $nameSub = mysql_field_name($resultSub, $n);
-                                $objectSub[$y][$nameSub] = $rowSub[$nameSub];
-                            }$y++;
-                        }
-                        $m=1;
-                        $mm=count($objectSub);
 
+                        echo '<li id="liCategoryIzgradnja">';
+                        echo '<a href="suggestionList.php?id='.$rowCat['idcategory'].'"  id="aCategoryIzgradnja" class="show">'.$rowCat["name"].'</a>';
+                        $sqlSub = "SELECT idsubcategory, name, idcategory FROM subcategory WHERE name != 'Vijest'";
+                        $resultSub=mysql_query($sqlSub, $conn);
                         echo '<ul id="ulSubcategoryIzgradnja" class="hide">';
+                        while($rowSub = mysql_fetch_assoc($resultSub)){
 
                         echo '<li id="liSubcategoryIzgradnja">';
-                        echo '<div id="divSub">';
-                        for($m=1;$m<=$mm;$m++)
-                        {
-
-                            echo '<a href="suggestionList.php?id='.$objectSub[$m]['idsubcategory'].'" id="aSubcategoryIzgradnja">'.$objectSub[$m]["name"].'</a></br>';
-
-                        }
-                        echo '</div>';
+                            echo '<a href="suggestionList.php?id='.$rowSub['idsubcategory'].'" id="aSubcategoryIzgradnja">'.$rowSub["name"].'</a>';
                         echo '</li></br>';
-
+                        }
+                        echo '<li id="liSubcategoryIzgradnja">';
+                        echo '<a href="addSuggestion.php" id="aSubcategoryIzgradnja">Dodaj temu</a>';
+                        echo '</li></br>';
                         echo '</ul>';
-
                         echo '</li></br>';
                         /* echo '<li id="liCategoryIzleti class="hide">';
                          $sqlSub = "SELECT idsubcategory, name, idcategory FROM subcategory WHERE name != 'Vijest' AND subcategory.idcategory = 3";
@@ -269,6 +241,21 @@ session_start();
         echo '<p><span class="posted">postavio/la <a class="user_link" href="#">'.$row["username"].'</a></span></p>';
         echo ' <div class="entry"><p>'.$row["summary"].'</p></div>';
         echo '<p class="links"><a href="newsDetails.php?id='.$idpost.'" class="right">Pročitaj više</a></p></br>';
+        $sql2 = mysql_query("SELECT * FROM vote WHERE idpost = $idpost");
+        $a = false;
+        while($row2 = mysql_fetch_assoc($sql2))
+        {
+            if($row2['iduser'] == $_SESSION['SESS_MEMBER_ID']){
+                $a = true;
+            }
+        }
+        echo '<form name="addVote" action="addVoteStore.php?id='.$idpost.'" method="post">';
+        if($a == true){
+            echo '<button id="voteButton" name="submit" value="submit" disabled>Glasaj</button> </br>';
+        }
+        else
+            echo '<button id="voteButton" name="submit" value="submit">Glasaj</button> </br>';
+        echo '</form>';
     } // end while
 
     /******  build the pagination links ******/

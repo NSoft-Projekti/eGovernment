@@ -240,7 +240,7 @@ img{
     height: 600px !important;
 }
 #aSubcategoryIzgradnja{
-    position: absolute;
+    position: relative;
     margin-left: 90px;
     z-index: 100000;
     width: 200px;
