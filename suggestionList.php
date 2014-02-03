@@ -147,8 +147,20 @@ session_start();
                 echo '<p><span class="posted">postavio/la <a class="user_link" href="profileView.php?id='.$iduser.'">'.$row["username"].'</a></span></p>';
                 echo ' <div class="entry"><p>'.$row["content"].'</p></div>';
                 echo '<p class="links"><a href="suggestionDetails.php?id='.$idpost.'" class="right">Pročitaj više</a></p></br>';
-                echo '<form name="addVote" action="addVoteStore.php?id=<?php echo $idpost ?>" method="post">';
-                echo '<button id="voteButton" name="submit" value="submit">Glasaj</button> </br>';
+                $sql2 = mysql_query("SELECT * FROM vote WHERE idpost = $idpost");
+                $a = false;
+                while($row2 = mysql_fetch_assoc($sql2))
+                {
+                    if($row2['iduser'] == $_SESSION['SESS_MEMBER_ID']){
+                        $a = true;
+                    }
+                }
+                echo '<form name="addVote" action="addVoteStore.php?id='.$idpost.'" method="post">';
+                if($a == true){
+                echo '<button id="voteButton" name="submit" value="submit" disabled>Glasaj</button> </br>';
+                }
+                else
+                    echo '<button id="voteButton" name="submit" value="submit">Glasaj</button> </br>';
                 echo '</form>';
             } // end while
 
