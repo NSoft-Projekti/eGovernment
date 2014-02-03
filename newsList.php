@@ -185,7 +185,7 @@ session_start();
                     $query1 = mysql_query("SELECT iduser, idgroup FROM user where iduser like $iduserLog");
                     while($rowLog = mysql_fetch_array($query1)){
                         if($rowLog['idgroup'] == '1'){
-                            echo ' <input type="submit" name="button" value="Izmijeni" class="button_vijest" style="float:none">';
+                            echo '<a href="editNews.php?id='.$idpost.'"<input type="submit" name="button" value="Izmijeni" class="button_vijest" style="float:none">Izmijeni<a/>';
                         }
                     }
                 }
