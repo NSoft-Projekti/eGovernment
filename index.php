@@ -9,13 +9,17 @@
     <link href="style/postList.css" rel="stylesheet" type="text/css" />
     <link href="style/userList.css" rel="stylesheet" type="text/css" />
 
+
     <meta charset="utf-8">
 
     <link href="style/login-popup.css" rel="stylesheet" type="text/css" />    <!--css style from a login-popup form-->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script> <!--script from a login-popup form-->
 
 
+
 </head>
+
+
 
 <?php
 include('connect.php');
@@ -466,7 +470,8 @@ session_start();
     </div><!--footer-up-->
 
     <div id="footer-down">
-        <p class="text">All design and content Copyright &copy; 2013<span id="year"></span>. All rights reserved.</p>
+        <p class="text">All design and content Copyright &copy; <span><?php echo date('Y');?></span>. All rights reserved.</p>
+
     </div><!--footer-down-->
 
 
@@ -477,6 +482,7 @@ session_start();
 </div><!--wrapper-->
 
 <script src="dropDownMenu.js" type="text/javascript"></script>
+
 </body>
 
 </html>
