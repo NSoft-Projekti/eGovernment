@@ -219,9 +219,9 @@ session_start();
 
     <div id="column-right">
         <ul>
-            <li> <a href="userNews.php?=<?php echo $iduser;?>">Moje vijesti</a> </li>
-            <li> <a href="userSuggestion.php?=<?php echo $iduser;?>">Moji prijedlozi</a> </li>
-            <li> <a href="userComment.php?=<?php echo $iduser;?>">Moji komentari</a> </li>
+            <li> <a href="userNews.php?=<?php echo $iduser;?>">Korisničke vijesti</a> </li>
+            <li> <a href="userSuggestion.php?=<?php echo $iduser;?>">Korisnički prijedlozi</a> </li>
+            <li> <a href="userComment.php?=<?php echo $iduser;?>">Korisnički komentari</a> </li>
 
         </ul>
 
