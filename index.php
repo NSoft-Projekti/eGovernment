@@ -236,9 +236,10 @@ session_start();
     // while there are rows to be fetched...
     while ($row = mysql_fetch_assoc($result)) {
         $idpost=$row['idpost'];
+        $iduserNews=$row['iduser'];
         echo '<h2 id="title"><a href="newsDetails.php?id='.$idpost.'">'.$row["title"].'</a></h2>';
         echo '<p class="meta"><span class="date">'.$row["date_time"].'</span></p>';
-        echo '<p><span class="posted">postavio/la <a class="user_link" href="#">'.$row["username"].'</a></span></p>';
+        echo '<p><span class="posted">postavio/la <a class="user_link" href="profileView.php?id='.$iduserNews.'">'.$row["username"].'</a></span></p>';
         echo ' <div class="entry"><p>'.$row["summary"].'</p></div>';
         echo '<p class="links"><a href="newsDetails.php?id='.$idpost.'" class="right">Pročitaj više</a></p></br>';
         $sql2 = mysql_query("SELECT * FROM vote WHERE idpost = $idpost");
@@ -368,9 +369,10 @@ session_start();
         // while there are rows to be fetched...
         while ($row = mysql_fetch_assoc($result)) {
             $idpost=$row['idpost'];
-            echo '<h3 id="title"><a href="suggestionDetails.php?id='.$idpost.'">'.$row["title"].'</a></h3>';
+            $iduser=$row['iduser'];
+            echo '<h3 id="title"><a href="suggestionDetails.php?id='.$idpost.'">'.$row["content"].'</a></h3>';
             echo '<p><span>'.$row["date_time"].'</span></p>';
-            echo '<p><span class="posted">postavio/la <a class="user_link" href="#">'.$row["username"].'</a></span></p><br>';
+            echo '<p><span class="posted">postavio/la <a class="user_link" href="profileView.php?id='.$iduser.'">'.$row["username"].'</a></span></p><br>';
 //                  echo ' <div class="entry"><p>'.$row["content"].'</p></div>';
 //                    echo '<p class="links"><a href="suggestionDetails.php?id='.$idpost.'" class="right">Pročitaj više</a></p></br>';
             echo '<form name="addVote" action="addVoteStore.php?id=<?php echo $idpost ?>" method="post">';
