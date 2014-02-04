@@ -66,9 +66,24 @@ button:focus {outline:none;}
     padding: 5px;
 }
 
+#subcategoryDropdownList {
+    border-radius: 3px;
+    color: rgb(113,113,113);
+    width: 360px;
+    height: 40px;
+    border: 1px solid;
+    font-size: 17px;
+    padding: 5px;
+}
+
 #categoryDropdownList:focus {
     outline: none;
 }
+
+#subcategoryDropdownList:focus {
+    outline: none;
+}
+
 
 #contentSummary {
     border-radius: 3px;

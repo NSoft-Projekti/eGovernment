@@ -127,8 +127,8 @@ session_start();
 
             <?php
 
-            if(isset($_POST['upload'])){
 
+            if(isset($_POST['upload'])){
                 $image_name=$_FILES['image']['name'];
                 $image_type=$_FILES['image']['type'];
                 $image_size=$_FILES['image']['size'];
@@ -140,6 +140,8 @@ session_start();
                 $allowedExts = array("gif", "jpeg", "jpg", "png");
                 $temp = explode(".", $_FILES["image"]["name"]);
                 $extension = end($temp);
+
+
                 if ((($_FILES["image"]["type"] == "image/gif")
                         || ($_FILES["image"]["type"] == "image/jpeg")
                         || ($_FILES["image"]["type"] == "image/jpg")
@@ -163,6 +165,7 @@ session_start();
                     echo "<script type='text/javascript'>window.location.href='profile.php'</script>";
 
                 }
+
             }
 
 
