@@ -7,6 +7,7 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
     <link href="style/addSuggestion.css" rel="stylesheet" type="text/css" />
+    <link href="style/postList.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
 </head>
 <?php
@@ -29,8 +30,32 @@ session_start();
 
             <div id="reg-prijava">
 
-                <a title="prijava" href="profile.php">Korisnik</a>
-                <img class="logo" src="img/login-icon.png">
+                <?php
+
+                //checks if user is logged in
+                if(isset ($_SESSION['SESS_MEMBER_ID'])){
+                    $sesija=$_SESSION['SESS_MEMBER_ID'];
+                    $result=mysql_query("SELECT gender, iduser FROM user WHERE user.iduser='$sesija' ");
+                    $row=mysql_fetch_assoc($result);
+                    $gender=$row["gender"];
+
+                    //checking gender and displaying matching picture
+                    if($gender=='M'){
+                        echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                        echo '<img class="logo" src="img/men.png">';
+                        echo '</br>';
+                        echo '<a title="odjava" href="logout.php">Odjava</a>';
+                    }
+
+                    //if it's not male gender, it displays female image
+                    else {
+                        echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                        echo '<img class="logo" src="img/girl.png">';
+                        echo '</br>';
+                        echo '<a title="odjava" href="logout.php">Odjava</a>';
+                    }
+                }
+                ?>
 
 
             </div><!--reg-prijava-->
@@ -72,13 +97,32 @@ session_start();
 
     <div id="container">
 
-        <?php
-        $idsubcategory = mysql_real_escape_string( $_GET['id']);//** gets idpost using URL */
-        ?>
+<!--        --><?php
+//        $idsubcategory = mysql_real_escape_string( $_GET['id']);//** gets idpost using URL */
+//        ?>
 
-        <form name="addSuggestion" action="addSuggestionStore.php?id=<?php echo $idsubcategory ?>" method="post">
+        <form name="addSuggestion" action="addSuggestionStore.php" method="post">
 
-        <label class="title">Unesite sadržaj prijedloga: </label> </br></br>
+
+
+            <br/><br/>
+            <label class="title" >Podkategorija: </label> </br></br>
+            <?php
+
+            $sql = "SELECT * FROM subcategory";
+            $result = mysql_query($sql);
+
+            echo "<select id='subcategoryDropdownList' name='subcategoryDropdownList'>";
+            echo "<option value='0'></option>";
+            while ($row = mysql_fetch_array($result)) {
+                echo "<option value='" . $row['idsubcategory'] . "'>" . $row['name'] . "</option>";
+            }
+            echo "</select>";
+
+            ?>
+            <br/><br/>
+            <label class="title">Unesite sadržaj prijedloga: </label> </br></br>
+
         <textarea name="contentPrijedlog" id="contentPrijedlog"></textarea>
 
         </br> </br>
