@@ -106,7 +106,7 @@ session_start();
 <div id="container">
     <?php
 
-    $iduser=$_GET ['id'];
+    $iduser=$_GET['id'];
 
 
 
@@ -149,9 +149,9 @@ session_start();
 
     <div id="column-right">
         <ul>
-            <li> <a href="myNews.php?id=<?php echo $iduser;?>">Korisničke vijesti</a> </li>
-         <li> <a href="mySuggestion.php?id=<?php echo $iduser;?>">Korisnikčke prijedlozi</a> </li>
-          <li> <a href="myComment.php?id=<?php echo $iduser;?>">Korisničke komentari</a> </li>
+            <li> <a href="userNews.php?id=<?php echo $iduser;?>">Korisničke vijesti</a> </li>
+         <li> <a href="userSuggestion.php?id=<?php echo $iduser;?>">Korisnički prijedlozi</a> </li>
+          <li> <a href="userComment.php?id=<?php echo $iduser;?>">Korisnički komentari</a> </li>
 
      </ul>
 

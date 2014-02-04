@@ -103,7 +103,10 @@ session_start();
                             echo '</li></br>';
                         }
                         echo '<li id="liSubcategoryIzgradnja">';
-                        echo '<a href="addSuggestion.php" id="aSubcategoryIzgradnja">Dodaj temu</a>';
+                        echo '<a href="addSuggestion.php" id="aSubcategoryIzgradnja">Dodaj prijedlog</a>';
+                        echo '</li></br>';
+                        echo '<li id="liSubcategoryIzgradnja">';
+                        echo '<a href="addSubcategory.php" id="aSubcategoryIzgradnja">Dodaj temu</a>';
                         echo '</li></br>';
                         echo '</ul>';
                         echo '</li></br>';

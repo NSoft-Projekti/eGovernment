@@ -8,6 +8,7 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
+    <link href="style/postList.css" rel="stylesheet" type="text/css" />
     <link href="style/profile.css" rel="stylesheet" type="text/css" />
 </head>
 <?php
@@ -29,12 +30,28 @@ session_start();
         <div id="reg-prijava">
 
             <?php
+            if(isset ($_SESSION['SESS_MEMBER_ID'])){
+                $sesija=$_SESSION['SESS_MEMBER_ID'];
+                $result=mysql_query("SELECT * FROM user WHERE user.iduser='$sesija' ");
+                $row=mysql_fetch_assoc($result);
+                $gender=$row["gender"];
 
+                //checking gender and displaying matching picture
+                if($gender=='M'){
+                    echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                    echo '<img class="logo" src="img/men.png">';
+                    echo '</br>';
+                    echo'<a title="odjava" href="logout.php">Odjava</a>';
+                }
 
-            echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
-            // echo '<img class="logo" src="img/login-icon.png">';
-            //echo '</br>';
-            echo '<a title="odjava" href="logout.php">Odjava</a>';
+                //if it's not male gender, it displays female image
+                else {
+                    echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                    echo '<img class="logo" src="img/girl.png">';
+                    echo '</br>';
+                    echo'<a title="odjava" href="logout.php">Odjava</a>';
+                }
+            }
 
             ?>
 
