@@ -1,11 +1,8 @@
 #column-left{
     float: left;
-    width: 540px;
+    width: 560px;
     height: 811px;
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 20px;
-    padding-left: 20px;
+    padding:20px;
 
 }
 
@@ -14,14 +11,12 @@
     float: left;
     height:470px;
     margin-bottom:10px;
-    padding-top: 20px;
 
 }
 #cleft-data{
 
     width: 300px;
     float: left;
-
 }
 
 #cleft-data table{
@@ -32,8 +27,6 @@
     height: 40px;
     width: 135px;
     padding-bottom: 10px;
-
-
 }
 
 #cleft-data table tr td input{
@@ -54,8 +47,6 @@ input[type=submit] {
     width:135px;
     height:35px;
     font-weight:bold;
-
-
 }
 
 #column-right{
@@ -72,10 +63,11 @@ input[type=submit] {
     margin:0;
     padding:0;
 }
+
 #column-right ul li{
     margin-bottom:15px;
-
 }
+
 #column-right ul li a{
     padding: 0;
     display: block;
@@ -86,8 +78,8 @@ input[type=submit] {
     color: #717171;
     margin:0;
     font-weight: bold;
-
 }
+
 #column-right ul li a:hover{
     color: #389CEA;
 
@@ -115,4 +107,18 @@ input[type=submit] {
 
 .posttitle a:hover {
     color: rgb(82,139,197);
+}
+
+.right-title{
+    border-bottom: 1px solid #cfcfcf;
+    /*padding-top: 20px;*/
+    /*padding-right: 20px;*/
+    /*padding-bottom: 20px;*/
+    /*padding-left: 0px;*/
+    padding:0px;
+    color: #414141;
+}
+
+.right-title h2{
+    margin-top: 0px;
 }
