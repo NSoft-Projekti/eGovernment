@@ -45,7 +45,7 @@ session_start();
             //checks if user is logged in
             if(isset ($_SESSION['SESS_MEMBER_ID'])){
                 $sesija=$_SESSION['SESS_MEMBER_ID'];
-                $result=mysql_query("SELECT * FROM user WHERE user.iduser='$sesija' ");
+                $result=mysql_query("SELECT gender, iduser FROM user WHERE iduser='$sesija' ");
                 $row=mysql_fetch_assoc($result);
                 $gender=$row["gender"];
 
@@ -54,7 +54,7 @@ session_start();
                     echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
                     echo '<img class="logo" src="img/men.png">';
                     echo '</br>';
-                    echo '<a title="odjava" href="logout.php">Odjava</a>';
+                    echo'<a title="odjava" href="logout.php">Odjava</a>';
                 }
 
                 //if it's not male gender, it displays female image
@@ -62,14 +62,14 @@ session_start();
                     echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
                     echo '<img class="logo" src="img/girl.png">';
                     echo '</br>';
-                    echo '<a title="odjava" href="logout.php">Odjava</a>';
+                    echo'<a title="odjava" href="logout.php">Odjava</a>';
                 }
             }
 
             //includes login popup form
             else {
                 include_once("loginPopup.php");
-                echo '<a title="registracija" href="registration.php">Registracija</a>';
+                echo'<a title="registracija" href="registration.php">Registracija</a>';
             }
             ?>
 
@@ -85,7 +85,7 @@ session_start();
                 <?php
 
                 if(isset ($_SESSION['SESS_MEMBER_ID'])){
-                    echo '<li><a href="suggestionList.php" id="category" >Prijedlozi</a>
+                    echo'<li><a href="suggestionList.php" id="category" >Prijedlozi</a>
                         <ul id="ulCategory" class="hide">';
 
                     $sqlCat = "SELECT idcategory, name FROM category WHERE idcategory != '1'";
@@ -150,7 +150,7 @@ session_start();
     $r = mysql_num_rows($result);
 
     // number of rows to show per page
-    $rowsperpage = 17;
+    $rowsperpage = 15;
     // find out total pages
     $totalpages = ceil($r / $rowsperpage);
 
@@ -179,7 +179,7 @@ session_start();
     $offset = ($currentpage - 1) * $rowsperpage;
 
     // get the info from the db
-    $sql = "SELECT * FROM user  ORDER BY name LIMIT $offset, $rowsperpage";
+    $sql = "SELECT * FROM user ORDER BY name LIMIT $offset, $rowsperpage";
     $result = mysql_query($sql, $conn) or trigger_error("SQL", E_USER_ERROR);
 
     // while there are rows to be fetched...
@@ -233,15 +233,6 @@ session_start();
     } // end if
     /****** end build pagination links ******/
     /******  build the pagination links ******/
-    // if not on page 1, don't show back links
-    if ($currentpage > 1) {
-        // show << link to go back to page 1
-        echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=1'><<</a> ";
-        // get previous page num
-        $prevpage = $currentpage - 1;
-        // show < link to go back to 1 page
-        echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$prevpage'><</a> ";
-    } // end if
     ?>
 
 </div>
@@ -282,7 +273,7 @@ session_start();
 </div><!--wrapper-->
 
 
-<script src="javascript/dropDownMenu.js" type="text/javascript"></script>
+<script src="dropDownMenu.js" type="text/javascript"></script>
 </body>
 
 </html>
