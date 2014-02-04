@@ -16,7 +16,7 @@ function show(e){
 }
 function showSubcategories(e){
     document.getElementById("ulSubcategoryIzgradnja").className="showSubmenu";
-    document.getElementById("ulSubcategoryIzgradnja").onmouseout=document.getElementById("ulSubcategoryIzgradnja").className="hide";
+    //document.getElementById("ulSubcategoryIzgradnja").onmouseout=document.getElementById("ulSubcategoryIzgradnja").className="hide";
 }
 function hideSubcategories(e){
 

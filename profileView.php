@@ -109,7 +109,6 @@ session_start();
     $iduser=$_GET ['id'];
 
 
-
     $result=mysql_query( "SELECT name, lastname, username, email, gender FROM user WHERE iduser=$iduser ");
     $row=mysql_fetch_array($result);
 
@@ -124,31 +123,51 @@ session_start();
 
     <div id="column-left">
         <div id="cleft-picture">
-            <?php
-            if($gender=='M'){
-                echo "<img src='img/male.png'>";
-            }
-            else{
-                echo"<img src='img/female.png'>";
 
-            }
-            ?>
+            <img src="<?php echo $row['path']; ?>">
+
 
         </div> <!--cleft-picture-->
 
         <div id="cleft-data">
 
-            <form action="" method="get">
+            <form action="" method="post">
 
                 <table>
                     <tr> <td>Ime:</td>       <td> <?php echo $firstname;?> </td> </tr>
                     <tr> <td>Prezime:</td>   <td> <?php echo $lastname;?> </td> </tr>
                     <tr> <td>Username:</td>   <td> <?php echo $username;?> </td> </tr>
-                    <tr> <td>E-mail:</td>     <td> <?php echo $email;?>  </td> </tr>
+                    <tr> <td>E-mail:</td>     <td> <?php echo $email;?>"  </td> </tr>
 
                 </table>
+                <?php
+                if(isset ($_SESSION['SESS_MEMBER_ID'])){
+                    $iduserLog = $_SESSION['SESS_MEMBER_ID'];
+                    $query1 = mysql_query("SELECT iduser, idgroup FROM user where iduser like $iduserLog");
+                    while($rowLog = mysql_fetch_array($query1)){
+                        if($rowLog['idgroup'] == '1'){
+                            $query=mysql_query("select iduser,idgroup from user where iduser=$iduser");
+                            while($row1=mysql_fetch_array($query)){
+                                if($row1['idgroup']!='1'){
+                                    echo '<input type="submit" name="admin" value="Dodaj za Admina" class="button_vijest"></a>';
+                                }
+                            }
+                        }
+                    }
+                }
+
+                ?>
 
             </form>
+            <?php
+            if (isset($_POST['admin'])){
+
+                $update=mysql_query("update tim4.user set idgroup= '1' where iduser='$iduser'");
+                echo "<script type='text/javascript'>alert('Uspješno ste dodali novog admina');</script>";
+                echo "<script type='text/javascript'>window.location.href='profileView.php?id=$iduser'</script>";
+            }
+
+            ?>
 
 
         </div> <!--cleft-data-->
@@ -157,11 +176,11 @@ session_start();
 
     <div id="column-right">
         <ul>
-            <li> <a href="myNews.php?id=<?php echo $iduser;?>">Korisničke vijesti</a> </li>
-         <li> <a href="mySuggestion.php?id=<?php echo $iduser;?>">Korisnikčke prijedlozi</a> </li>
-          <li> <a href="myComment.php?id=<?php echo $iduser;?>">Korisničke komentari</a> </li>
+            <li> <a href="userNews.php?id=<?php echo $iduser;?>">Korisničke vijesti</a> </li>
+            <li> <a href="userSuggestion.php?id=<?php echo $iduser;?>">Korisnički prijedlozi</a> </li>
+            <li> <a href="userComment.php?id=<?php echo $iduser;?>">Korisnički komentari</a> </li>
 
-     </ul>
+        </ul>
 
 
     </div>

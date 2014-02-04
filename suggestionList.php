@@ -13,6 +13,7 @@
 <?php
 include('connect.php');
 session_start();
+$idsubcategory = $_GET['id'];
 ?>
 
 <body>
@@ -42,7 +43,7 @@ session_start();
                         echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
                         echo '<img class="logo" src="img/men.png">';
                         echo '</br>';
-                        echo'<a title="odjava" href="logout.php">Odjava</a>';
+                        echo '<a title="odjava" href="logout.php">Odjava</a>';
                     }
 
                     //if it's not male gender, it displays female image
@@ -50,7 +51,7 @@ session_start();
                         echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
                         echo '<img class="logo" src="img/girl.png">';
                         echo '</br>';
-                        echo'<a title="odjava" href="logout.php">Odjava</a>';
+                        echo '<a title="odjava" href="logout.php">Odjava</a>';
                     }
                 }
                 ?>
@@ -135,7 +136,7 @@ session_start();
 
             // get the info from the db
             $sql = "SELECT * FROM post inner join user on post.iduser = user.iduser
-             WHERE POST.idpost_type='3' ORDER BY date_time DESC LIMIT $offset, $rowsperpage";
+             WHERE POST.idpost_type='3' AND post.idsubcategory = $idsubcategory ORDER BY date_time DESC LIMIT $offset, $rowsperpage";
             $result = mysql_query($sql, $conn) or trigger_error("SQL", E_USER_ERROR);
 
             // while there are rows to be fetched...
@@ -147,8 +148,20 @@ session_start();
                 echo '<p><span class="posted">postavio/la <a class="user_link" href="profileView.php?id='.$iduser.'">'.$row["username"].'</a></span></p>';
                 echo ' <div class="entry"><p>'.$row["content"].'</p></div>';
                 echo '<p class="links"><a href="suggestionDetails.php?id='.$idpost.'" class="right">Pročitaj više</a></p></br>';
-                echo '<form name="addVote" action="addVoteStore.php?id=<?php echo $idpost ?>" method="post">';
-                echo '<button id="voteButton" name="submit" value="submit">Glasaj</button> </br>';
+                $sql2 = mysql_query("SELECT * FROM vote WHERE idpost = $idpost");
+                $a = false;
+                while($row2 = mysql_fetch_assoc($sql2))
+                {
+                    if($row2['iduser'] == $_SESSION['SESS_MEMBER_ID']){
+                        $a = true;
+                    }
+                }
+                echo '<form name="addVote" action="addVoteStore.php?id='.$idpost.'" method="post">';
+                if($a == true){
+                echo '<button id="voteButton" name="submit" value="submit"  disabled>Glasaj</button> </br>';
+                }
+                else
+                    echo '<button id="voteButton" name="submit" value="submit">Glasaj</button> </br>';
                 echo '</form>';
             } // end while
 

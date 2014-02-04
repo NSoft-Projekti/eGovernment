@@ -24,7 +24,7 @@ session_start();
         <div id="header-up">
 
             <div id="header-logo">
-                <a href="home.php"><img src="img/logo.png"></a>
+                <a href="index.php"><img src="img/logo.png"></a>
             </div><!--header-logo-->
 
 
@@ -35,7 +35,7 @@ session_start();
                 //checks if user is logged in
                 if(isset ($_SESSION['SESS_MEMBER_ID'])){
                     $sesija=$_SESSION['SESS_MEMBER_ID'];
-                    $result=mysql_query("SELECT gender, iduser FROM user WHERE user.iduser='$sesija' ");
+                    $result=mysql_query("SELECT * FROM user WHERE user.iduser='$sesija' ");
                     $row=mysql_fetch_assoc($result);
                     $gender=$row["gender"];
 
@@ -122,19 +122,19 @@ session_start();
                 echo '<h2 id="title">'.$row["title"].'</h2>';
                 echo '<p class="meta"><span class="date">'.$row["date_time"].'</span></p>';
                 echo ' <div class="entry"><p>'.$row["content"].'</p></div>';
-
             }
             ?>
         </div>
         <div class="existingComments_container">
-        <h2>Komentari</h2>
+        <h2>Komentari</h2></br>
             <?php
-            $sql = mysql_query("SELECT content, username, date_time, user.iduser FROM comment inner join user on comment.iduser = user.iduser
+            $sql = mysql_query("SELECT content, username, date_time FROM comment inner join user on comment.iduser = user.iduser
             WHERE comment.idpost=$idpost");
             while($row2 = mysql_fetch_array($sql)){
-                $iduser = $row2['iduser'];
-                echo '<p><span class="posted"><a class="user_link" href="profileView.php?id='.$iduser.'">'.$row2["username"].' </a></span>'.$row2["content"].'</p>';
-                echo '<span class="date">'.date("d.\tm.\tY. \tH:\ti", strtotime($row2["date_time"])).'</span>';
+                echo '<span>'.$row2["content"].'<span></br>';
+//                echo '<span id="username">'.$row2["username"].'</span></br>';
+                echo '<p><span class="posted">postavio/la <a class="user_link" href="#">'.$row2["username"].'</a></span></p>';
+                echo '<span class="date">'.date("d.\tm.\tY. \tH:\ti", strtotime($row2["date_time"])).'</span></br></br>';
                 echo '<hr>';
             }
 
@@ -145,7 +145,8 @@ session_start();
             $result = mysql_query("select title,content,date_time from post where post.idpost = $idpost");
             $_SESSION['SESS_IDPOST']=$idpost;
             if($result == FALSE) {
-                die(mysql_error());            }
+                die(mysql_error());
+            }
             ?>
         </div><!--existingComments_container-->
 
@@ -182,7 +183,7 @@ session_start();
         <div id="footer-up">
 
             <div id="footer-logo">
-                <a href="home.php"><img src="img/logo.png"></a>
+                <a href="index.php"><img src="img/logo.png"></a>
             </div><!--footer-logo-->
 
             <div id="icons">
