@@ -12,6 +12,7 @@
 
 <?php
 session_start();
+include 'connect.php';
 ?>
 <body>
 <div id="wrapper" >

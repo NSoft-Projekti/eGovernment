@@ -13,7 +13,7 @@
 <?php
 include('connect.php');
 session_start();
-$idsubcategory = $_GET['id'];
+//$idsubcategory = $_GET['id'];
 ?>
 
 <body>
@@ -136,7 +136,7 @@ $idsubcategory = $_GET['id'];
 
             // get the info from the db
             $sql = "SELECT * FROM post inner join user on post.iduser = user.iduser
-             WHERE POST.idpost_type='3' AND post.idsubcategory = $idsubcategory ORDER BY date_time DESC LIMIT $offset, $rowsperpage";
+             WHERE POST.idpost_type='3' ORDER BY date_time DESC LIMIT $offset, $rowsperpage";
             $result = mysql_query($sql, $conn) or trigger_error("SQL", E_USER_ERROR);
 
             // while there are rows to be fetched...
