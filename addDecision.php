@@ -6,6 +6,7 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
     <link href="style/addNews.css" rel="stylesheet" type="text/css" />
+
     <meta charset="utf-8">
 </head>
 
@@ -142,7 +143,7 @@ session_start();
         </div><!--footer-up-->
 
         <div id="footer-down">
-            <p class="text">All design and content Copyright &copy; 2013.<span id="year"></span>. All rights reserved.</p>
+            <p class="text">All design and content Copyright &copy; <span><?php echo date('Y');?></span>. All rights reserved.</p>
         </div><!--footer-down-->
 
 
@@ -154,4 +155,5 @@ session_start();
 
 
 </body>
+
 </html>
