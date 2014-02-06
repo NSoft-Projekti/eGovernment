@@ -103,10 +103,7 @@ session_start();
                             echo '</li></br>';
                         }
                         echo '<li id="liSubcategoryIzgradnja">';
-                        echo '<a href="addSuggestion.php" id="aSubcategoryIzgradnja">Dodaj prijedlog</a>';
-                        echo '</li></br>';
-                        echo '<li id="liSubcategoryIzgradnja">';
-                        echo '<a href="addSubcategory.php" id="aSubcategoryIzgradnja">Dodaj temu</a>';
+                        echo '<a href="addSuggestion.php" id="aSubcategoryIzgradnja">Dodaj temu</a>';
                         echo '</li></br>';
                         echo '</ul>';
                         echo '</li></br>';
@@ -243,10 +240,9 @@ session_start();
     // while there are rows to be fetched...
     while ($row = mysql_fetch_assoc($result)) {
         $idpost=$row['idpost'];
-        $iduserNews=$row['iduser'];
         echo '<h2 id="title"><a href="newsDetails.php?id='.$idpost.'">'.$row["title"].'</a></h2>';
         echo '<p class="meta"><span class="date">'.$row["date_time"].'</span></p>';
-        echo '<p><span class="posted">postavio/la <a class="user_link" href="profileView.php?id='.$iduserNews.'">'.$row["username"].'</a></span></p>';
+        echo '<p><span class="posted">postavio/la <a class="user_link" href="#">'.$row["username"].'</a></span></p>';
         echo ' <div class="entry"><p>'.$row["summary"].'</p></div>';
         echo '<p class="links"><a href="newsDetails.php?id='.$idpost.'" class="right">Pročitaj više</a></p></br>';
         $sql2 = mysql_query("SELECT * FROM vote WHERE idpost = $idpost");
@@ -375,10 +371,9 @@ session_start();
             // while there are rows to be fetched...
             while ($row = mysql_fetch_assoc($result)) {
                 $idpost=$row['idpost'];
-                $iduser=$row['iduser'];
                 echo '<h3 id="title"><a href="suggestionDetails.php?id='.$idpost.'">'.$row["content"].'</a></h3>';
                 echo '<p><span>'.$row["date_time"].'</span></p>';
-                echo '<p><span class="posted">postavio/la <a class="user_link" href="profileView.php?id='.$iduser.'">'.$row["username"].'</a></span></p><br>';
+                echo '<p><span class="posted">postavio/la <a class="user_link" href="#">'.$row["username"].'</a></span></p><br>';
 //                  echo ' <div class="entry"><p>'.$row["content"].'</p></div>';
 //                    echo '<p class="links"><a href="suggestionDetails.php?id='.$idpost.'" class="right">Pročitaj više</a></p></br>';
                 $sql2 = mysql_query("SELECT * FROM vote WHERE idpost = $idpost");
@@ -400,17 +395,16 @@ session_start();
 
             /******  build the pagination links ******/
             // range of num links to show
-            echo"<div id='pagination'>";
             $range = 3;
 
             // if not on page 1, don't show back links
             if ($currentpage > 1) {
                 // show << link to go back to page 1
-                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=1' id='ff-prev'></a> ";
+                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=1'><img src='img/ff-p-button.png'></a> ";
                 // get previous page num
                 $prevpage = $currentpage - 1;
                 // show < link to go back to 1 page
-                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$prevpage'  id='previous'></a> ";
+                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$prevpage'><img src='img/prev-button.png'></a> ";
             } // end if
 
             // loop to show links to range of pages around current page
@@ -420,7 +414,7 @@ session_start();
                     // if we're on current page...
                     if ($x == $currentpage) {
                         // 'highlight' it but don't make a link
-                        echo "<a href='#' class='blue'>$x</a> ";
+                        echo " [<b>$x</b>] ";
                         // if not current page...
                     } else {
                         // make it a link
@@ -434,9 +428,9 @@ session_start();
                 // get next page
                 $nextpage = $currentpage + 1;
                 // echo forward link for next page
-                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$nextpage' id='next'></a> ";
+                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$nextpage'><img src='img/next-btn.png'></a> ";
                 // echo forward link for lastpage
-                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$totalpages' id='ff-next' ></a> ";
+                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$totalpages'><img src='img/ff-n-btn.png'></a> ";
             } // end if
             /****** end build pagination links ******/
             /******  build the pagination links ******/
@@ -451,7 +445,7 @@ session_start();
                   echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$prevpage'><img src='img/prev-button.png'></a> ";
               } // end if
                 */
-            echo "</div><!--pagination-->";
+
         }
         ?>
 
