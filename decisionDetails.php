@@ -29,10 +29,29 @@ session_start();
             <div id="reg-prijava">
                 <?php
 
-                echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
-                echo '<img class="logo" src="img/login-icon.png">';
-                echo '</br>';
-                echo '<a title="odjava" href="logout.php">Odjava</a>';
+                //checks if user is logged in
+                if(isset ($_SESSION['SESS_MEMBER_ID'])){
+                    $sesija=$_SESSION['SESS_MEMBER_ID'];
+                    $result=mysql_query("SELECT gender, iduser FROM user WHERE user.iduser='$sesija' ");
+                    $row=mysql_fetch_assoc($result);
+                    $gender=$row["gender"];
+
+                    //checking gender and displaying matching picture
+                    if($gender=='M'){
+                        echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                        echo '<img class="logo" src="img/men.png">';
+                        echo '</br>';
+                        echo '<a title="odjava" href="logout.php">Odjava</a>';
+                    }
+
+                    //if it's not male gender, it displays female image
+                    else {
+                        echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                        echo '<img class="logo" src="img/girl.png">';
+                        echo '</br>';
+                        echo '<a title="odjava" href="logout.php">Odjava</a>';
+                    }
+                }
                 ?>
 
             </div><!--reg-prijava-->
@@ -94,10 +113,11 @@ session_start();
         <div class="existingComments_container">
             <h2>Komentari</h2>
             <?php
-            $sql = mysql_query("SELECT content, username, date_time FROM comment inner join user on comment.iduser = user.iduser
+
+            $sql = mysql_query("SELECT  content, username, date_time,comment.iduser FROM comment inner join user on comment.iduser = user.iduser
             WHERE comment.idpost=$idpost");
             while($row2 = mysql_fetch_array($sql)){
-                $iduser = $row2['iduser'];
+                $iduser=$row2['iduser'];
                 echo '<p><span class="posted"><a class="user_link" href="profileView.php?id='.$iduser.'">'.$row2["username"].' </a></span>'.$row2["content"].'</p>';
                 echo '<span class="date">'.date("d.\tm.\tY. \tH:\ti", strtotime($row2["date_time"])).'</span>';
                 echo '<hr>';
