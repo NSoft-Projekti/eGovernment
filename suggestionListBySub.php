@@ -96,7 +96,15 @@ $idsubcategory = $_GET['id'];
 
 <div id="container">
     <div class="post">
-        <div class="right-title"><h2>Prijedlozi</h2></div>
+        <?php
+        $sql2 = mysql_query("SELECT name FROM subcategory WHERE idsubcategory=$idsubcategory");
+        $row2=mysql_fetch_array($sql2);
+        ?>
+        <div class="right-title">
+            <label>Prijedlozi za kategoriju</label>
+            <h2> <?php echo $row2['name'] ?></h2>
+        </div>
+
         <?php
 
         // find out how many rows are in the table
