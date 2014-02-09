@@ -13,7 +13,11 @@
 <?php
 include('connect.php');
 session_start();
-//$idsubcategory = $_GET['id'];
+if(!isset ($_SESSION['SESS_MEMBER_ID']))
+{
+    header("location: index.php");
+}
+
 ?>
 
 <body>

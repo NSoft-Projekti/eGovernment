@@ -13,7 +13,10 @@
 <?php
 include "connect.php";
 session_start();
-include 'connect.php';
+if(!isset ($_SESSION['SESS_MEMBER_ID']))
+{
+    header("location: index.php");
+}
 ?>
 <body>
 <div id="wrapper" >
