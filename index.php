@@ -99,7 +99,7 @@ session_start();
                         while($rowSub = mysql_fetch_assoc($resultSub)){
 
                             echo '<li id="liSubcategoryIzgradnja">';
-                            echo '<a href="suggestionList.php?id='.$rowSub['idsubcategory'].'" id="aSubcategoryIzgradnja">'.$rowSub["name"].'</a>';
+                            echo '<a href="suggestionListBySub.php?id='.$rowSub['idsubcategory'].'" id="aSubcategoryIzgradnja">'.$rowSub["name"].'</a>';
                             echo '</li></br>';
                         }
                         echo '<li id="liSubcategoryIzgradnja">';

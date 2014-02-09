@@ -190,7 +190,7 @@ session_start();
                     }
                 }
             } // end while
-echo '<br>';
+echo '<br><br>';
             /******  build the pagination links ******/
             // range of num links to show
             echo"<div id='pagination'>";

@@ -143,7 +143,7 @@ $idsubcategory = $_GET['id'];
         $offset = ($currentpage - 1) * $rowsperpage;
 
         // get the info from the db
-        $sql = "SELECT *, subcategory.name FROM post inner join user on post.iduser = user.iduser
+        $sql = "SELECT *, subcategory.name, subcategory.endDate as endDate, subcategory.startDate FROM post inner join user on post.iduser = user.iduser
                                        inner join subcategory on post.idsubcategory = subcategory.idsubcategory
              WHERE POST.idpost_type='3' and post.idsubcategory = $idsubcategory ORDER BY date_time DESC LIMIT $offset, $rowsperpage";
         $result = mysql_query($sql, $conn) or trigger_error("SQL", E_USER_ERROR);
@@ -159,8 +159,25 @@ $idsubcategory = $_GET['id'];
             echo ' <div class="entry"><p>'.$row["content"].'</p></div>';
             echo '<p class="links"><a href="suggestionDetails.php?id='.$idpost.'" class="right">Pročitaj više</a></p></br></br></br>';
         } // end while
-        echo '<input type="submit" name="racunaj" value="Donesi odluku" class="button_vijest" float="right"></br></br></br></br>';
-        /******  build the pagination links ******/
+        // get the info from the db
+        $sql2 = "SELECT *, subcategory.name, subcategory.endDate as endDate, subcategory.startDate FROM post inner join user on post.iduser = user.iduser
+                                       inner join subcategory on post.idsubcategory = subcategory.idsubcategory
+             WHERE POST.idpost_type='3' and post.idsubcategory = $idsubcategory ORDER BY date_time DESC LIMIT $offset, $rowsperpage";
+        $result2 = mysql_query($sql2, $conn) or trigger_error("SQL", E_USER_ERROR);
+        $currentDate = date("Y-m-d");
+        $row2 = mysql_fetch_array($result2);
+        $endDate = $row2["endDate"];
+
+       if($endDate > $currentDate){
+                echo '<input type="submit" name="racunaj" value="Donesi odluku" class="button_vijest_false" float="right" disabled></br></br></br></br>';
+            }
+        else{
+            echo 'Datum isteka teme: <strong>'.date("d.m.Y.", strtotime($row2["endDate"])). '</strong>';
+            echo '<input type="submit" name="racunaj" value="Donesi odluku" class="button_vijest" float="right"></br></br></br></br>';
+            }
+
+
+       /******  build the pagination links ******/
         // range of num links to show
         echo"<div id='pagination'>";
         $range = 3;
