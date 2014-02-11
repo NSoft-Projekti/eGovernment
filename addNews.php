@@ -11,9 +11,9 @@
 </head>
 
 <?php
-include "connect.php";
-session_start();
 include 'connect.php';
+session_start();
+
 ?>
 <body>
 <div id="wrapper" >

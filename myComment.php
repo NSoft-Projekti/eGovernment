@@ -160,11 +160,11 @@ session_start();
             // if not on page 1, don't show back links
             if ($currentpage > 1) {
                 // show << link to go back to page 1
-                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=1'><<</a> ";
+                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=1'></a> ";
                 // get previous page num
                 $prevpage = $currentpage - 1;
                 // show < link to go back to 1 page
-                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$prevpage'><</a> ";
+                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$prevpage'></a> ";
             } // end if
 
             // loop to show links to range of pages around current page
