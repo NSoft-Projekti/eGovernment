@@ -190,19 +190,20 @@ session_start();
                     }
                 }
             } // end while
-echo '<br>';
+echo '<br><br>';
             /******  build the pagination links ******/
             // range of num links to show
+            echo"<div id='pagination'>";
             $range = 3;
 
             // if not on page 1, don't show back links
             if ($currentpage > 1) {
                 // show << link to go back to page 1
-                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=1'><<</a> ";
+                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=1' id='ff-prev'></a> ";
                 // get previous page num
                 $prevpage = $currentpage - 1;
                 // show < link to go back to 1 page
-                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$prevpage'><</a> ";
+                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$prevpage'  id='previous'></a> ";
             } // end if
 
             // loop to show links to range of pages around current page
@@ -212,7 +213,7 @@ echo '<br>';
                     // if we're on current page...
                     if ($x == $currentpage) {
                         // 'highlight' it but don't make a link
-                        echo " [<b>$x</b>] ";
+                        echo "<a href='#' class='blue'>$x</a> ";
                         // if not current page...
                     } else {
                         // make it a link
@@ -226,24 +227,30 @@ echo '<br>';
                 // get next page
                 $nextpage = $currentpage + 1;
                 // echo forward link for next page
-                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$nextpage'>></a> ";
+                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$nextpage' id='next'></a> ";
                 // echo forward link for lastpage
-                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$totalpages'>>></a> ";
+                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$totalpages' id='ff-next' ></a> ";
             } // end if
             /****** end build pagination links ******/
             /******  build the pagination links ******/
             // if not on page 1, don't show back links
-            if ($currentpage > 1) {
-                // show << link to go back to page 1
-                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=1'><<</a> ";
-                // get previous page num
-                $prevpage = $currentpage - 1;
-                // show < link to go back to 1 page
-                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$prevpage'><</a> ";
-            } // end if
+            /*
+                if ($currentpage > 1) {
+                    // show << link to go back to page 1
+                   echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=1'><img src='img/ff-p-button.png'></a> ";
+                    // get previous page num
+                    $prevpage = $currentpage - 1;
+                    // show < link to go back to 1 page
+                   echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$prevpage'><img src='img/prev-button.png'></a> ";
+                } // end if
+            */
+            echo "</div><!--pagination-->";
             ?>
 
         </div>
+        <?php
+
+        ?>
 
 
 

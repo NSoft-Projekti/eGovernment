@@ -1,3 +1,12 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Darija
+ * Date: 15.12.13.
+ * Time: 15:12
+ */
+?>
+
 <?php ?>
 <script type="text/javascript">
 
@@ -8,7 +17,7 @@
             var loginBox = $(this).attr('href');
 
             //Fade in the Popup and add close button
-            $(loginBox).fadeIn(300);
+            $(loginBox).fadeIn(1000);
 
             //Set the center alignment padding + border
             var popMargTop = ($(loginBox).height() + 24) / 2;
@@ -21,14 +30,14 @@
 
             // Add the mask to body
             $('body').append('<div id="mask"></div>');
-            $('#mask').fadeIn(300);
+            $('#mask').fadeIn(700);
 
             return false;
         });
 
         // When clicking on the button close or the mask layer the popup closed
         $('a.close, #mask').live('click', function() {
-            $('#mask , .login-popup').fadeOut(300 , function() {
+            $('#mask , .login-popup').fadeOut(1000 , function() {
                 $('#mask').remove();
             });
             return false;
@@ -54,10 +63,6 @@
             </label>
 
             <button type="submit" class="submit button">Sign in</button>
-
-            <!--                    <p>-->
-            <!--                        <a href="#" class="forgot">Forgot your password?</a>-->
-            <!--                    </p>-->
 
         </fieldset>
     </form>

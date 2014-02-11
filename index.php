@@ -93,17 +93,20 @@ session_start();
 
                         echo '<li id="liCategoryIzgradnja">';
                         echo '<a href="suggestionList.php?id='.$rowCat['idcategory'].'"  id="aCategoryIzgradnja" class="show">'.$rowCat["name"].'</a>';
-                        $sqlSub = "SELECT idsubcategory, name, idcategory FROM subcategory WHERE name != 'Vijest'";
+                        $sqlSub = "SELECT idsubcategory, name, idcategory FROM subcategory WHERE name != 'Vijest' and idcategory = 2";
                         $resultSub=mysql_query($sqlSub, $conn);
                         echo '<ul id="ulSubcategoryIzgradnja" class="hide">';
                         while($rowSub = mysql_fetch_assoc($resultSub)){
 
                             echo '<li id="liSubcategoryIzgradnja">';
-                            echo '<a href="suggestionList.php?id='.$rowSub['idsubcategory'].'" id="aSubcategoryIzgradnja">'.$rowSub["name"].'</a>';
+                            echo '<a href="suggestionListBySub.php?id='.$rowSub['idsubcategory'].'" id="aSubcategoryIzgradnja">'.$rowSub["name"].'</a>';
                             echo '</li></br>';
                         }
                         echo '<li id="liSubcategoryIzgradnja">';
-                        echo '<a href="addSuggestion.php" id="aSubcategoryIzgradnja">Dodaj temu</a>';
+                        echo '<a href="addSuggestion.php" id="aSubcategoryIzgradnja">Dodaj prijedlog</a>';
+                        echo '</li></br>';
+                        echo '<li id="liSubcategoryIzgradnja">';
+                        echo '<a href="addSubcategory.php" id="aSubcategoryIzgradnja">Dodaj temu</a>';
                         echo '</li></br>';
                         echo '</ul>';
                         echo '</li></br>';
