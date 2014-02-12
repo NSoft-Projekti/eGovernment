@@ -145,13 +145,12 @@ $idsubcategory = $_GET['id'];
 
         // the offset of the list, based on current page
         $offset = ($currentpage - 1) * $rowsperpage;
-
+        $decision = false;
         // get the info from the db
-        $sql = "SELECT *, subcategory.name, subcategory.endDate as endDate, subcategory.startDate FROM post inner join user on post.iduser = user.iduser
+        $sql = "SELECT *, subcategory.name, subcategory.endDate as endDate, subcategory.decision as decision, subcategory.startDate FROM post inner join user on post.iduser = user.iduser
                                        inner join subcategory on post.idsubcategory = subcategory.idsubcategory
              WHERE POST.idpost_type='3' and post.idsubcategory = $idsubcategory ORDER BY date_time DESC LIMIT $offset, $rowsperpage";
         $result = mysql_query($sql, $conn) or trigger_error("SQL", E_USER_ERROR);
-
         // while there are rows to be fetched...
         while ($row = mysql_fetch_assoc($result)) {
             $idpost=$row['idpost'];
@@ -162,9 +161,40 @@ $idsubcategory = $_GET['id'];
 
             echo ' <div class="entry"><p>'.$row["content"].'</p></div>';
             echo '<p class="links"><a href="suggestionDetails.php?id='.$idpost.'" class="right">Pročitaj više</a></p></br></br></br>';
-        } // end while
+
+            $sql2 = mysql_query("SELECT *, subcategory.decision as decision FROM vote inner join post on vote.idpost = post.idpost inner join subcategory on post.idsubcategory = subcategory.idsubcategory WHERE vote.idpost = $idpost");
+            $a = false;
+
+            while($row2 = mysql_fetch_assoc($sql2))
+            {
+                if($row2['iduser'] == $_SESSION['SESS_MEMBER_ID']){
+                    $a = true;
+                }
+                if($row2['decision']==1)
+                {
+                    $decision = true;
+                }
+            }
+            $sql3 = "SELECT *, subcategory.name, subcategory.endDate as endDate, subcategory.decision as decision, subcategory.startDate FROM post inner join user on post.iduser = user.iduser
+                                       inner join subcategory on post.idsubcategory = subcategory.idsubcategory
+             WHERE POST.idpost_type='3' and post.idsubcategory = $idsubcategory ORDER BY date_time DESC LIMIT $offset, $rowsperpage";
+            $result3 = mysql_query($sql3, $conn) or trigger_error("SQL", E_USER_ERROR);
+            $currentDate2 = date("Y-m-d");
+            $row3 = mysql_fetch_array($result3);
+            $endDate2 = $row3["endDate"];
+            if($decision==false and $endDate2 > $currentDate2){
+            echo '<form name="addVote" action="addVoteStore.php?id='.$idpost.'" method="post">';
+            if($a == true){
+                echo '<label>Tema zaključana.</label>';
+                echo '<button id="voteButtonFalse" name="submit" value="submit"  disabled>Glasaj</button> </br>';
+            }
+            else
+                echo '<button id="voteButton" name="submit" value="submit">Glasaj</button> </br>';
+            echo '</form>';
+            }
+        }// end while
         // get the info from the db
-        $sql2 = "SELECT *, subcategory.name, subcategory.endDate as endDate, subcategory.startDate FROM post inner join user on post.iduser = user.iduser
+        $sql2 = "SELECT *, subcategory.name, subcategory.endDate as endDate, subcategory.decision as decision, subcategory.startDate FROM post inner join user on post.iduser = user.iduser
                                        inner join subcategory on post.idsubcategory = subcategory.idsubcategory
              WHERE POST.idpost_type='3' and post.idsubcategory = $idsubcategory ORDER BY date_time DESC LIMIT $offset, $rowsperpage";
         $result2 = mysql_query($sql2, $conn) or trigger_error("SQL", E_USER_ERROR);
@@ -173,12 +203,24 @@ $idsubcategory = $_GET['id'];
         $endDate = $row2["endDate"];
 
        if($endDate > $currentDate){
+
                 echo '<input type="submit" name="racunaj" value="Donesi odluku" class="button_vijest_false" float="right" disabled></br></br></br></br>';
             }
-        else{
+       else if($decision==false){
+           echo '<form name="formOdluka" method="post" action="addDecision.php?id='.$idsubcategory.'">';
             echo 'Datum isteka teme: <strong>'.date("d.m.Y.", strtotime($row2["endDate"])). '</strong>';
-            echo '<input type="submit" name="racunaj" value="Donesi odluku" class="button_vijest" float="right"></br></br></br></br>';
+            echo '<input type="submit" name="racunaj2" value="Donesi odluku" class="button_vijest" float="right"></br></br></br></br>';
+           echo '</form>';
             }
+
+        if($decision==true)
+        {
+            echo 'Datum isteka teme: <strong>'.date("d.m.Y.", strtotime($row2["endDate"])). '</br>Tema zaključana.</strong>';
+            echo '<form name="formPogledaj" method="post" action="decisionDetails.php?id='.$idsubcategory.'">';
+            echo '<input type="submit" name="pogledajOdluku" value="Pogledaj odluku" class="button_vijest" float="right"></br></br></br></br>';
+            echo '</form>';
+        }
+
 
 
        /******  build the pagination links ******/

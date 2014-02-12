@@ -93,7 +93,7 @@ session_start();
 
                         echo '<li id="liCategoryIzgradnja">';
                         echo '<a href="suggestionList.php?id='.$rowCat['idcategory'].'"  id="aCategoryIzgradnja" class="show">'.$rowCat["name"].'</a>';
-                        $sqlSub = "SELECT idsubcategory, name, idcategory FROM subcategory WHERE name != 'Vijest' and idcategory = 2";
+                        $sqlSub = "SELECT idsubcategory, name, idcategory, startDate FROM subcategory WHERE name != 'Vijest' and idcategory = 2 ORDER BY startDate DESC";
                         $resultSub=mysql_query($sqlSub, $conn);
                         echo '<ul id="ulSubcategoryIzgradnja" class="hide">';
                         while($rowSub = mysql_fetch_assoc($resultSub)){

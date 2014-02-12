@@ -154,7 +154,7 @@ if(!isset ($_SESSION['SESS_MEMBER_ID']))
 
                 echo ' <div class="entry"><p>'.$row["content"].'</p></div>';
                 echo '<p class="links"><a href="suggestionDetails.php?id='.$idpost.'" class="right">Pročitaj više</a></p></br>';
-                $sql2 = mysql_query("SELECT * FROM vote WHERE idpost = $idpost");
+                $sql2 = mysql_query("SELECT *, subcategory.decision as decision FROM vote inner join post on vote.idpost = post.idpost inner join subcategory on post.idsubcategory = subcategory.idsubcategory WHERE vote.idpost = $idpost");
                 $a = false;
                 while($row2 = mysql_fetch_assoc($sql2))
                 {
@@ -163,7 +163,8 @@ if(!isset ($_SESSION['SESS_MEMBER_ID']))
                     }
                 }
                 echo '<form name="addVote" action="addVoteStore.php?id='.$idpost.'" method="post">';
-                if($a == true){
+                if($a == true or $row2['decision']==1){
+                echo '<label>Tema zaključana.</label>';
                 echo '<button id="voteButtonFalse" name="submit" value="submit"  disabled>Glasaj</button> </br>';
                 }
                 else

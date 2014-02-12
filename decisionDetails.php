@@ -16,6 +16,7 @@ if(!isset ($_SESSION['SESS_MEMBER_ID']))
 {
     header("location: index.php");
 }
+$idsubcategory = $_GET['id'];
 ?>
 
 <body>
@@ -98,15 +99,15 @@ if(!isset ($_SESSION['SESS_MEMBER_ID']))
     <div id="container">
         <div class="news_container">
             <?php
-            $idpost = $_GET['id'];
-            $result = mysql_query("select title,content,date_time from post where post.idpost = $idpost");
-
+            $result = mysql_query("select post.title,post.content,post.date_time, post.idsubcategory, post.idpost from post inner join subcategory on post.idsubcategory = subcategory.idsubcategory where post.idsubcategory = $idsubcategory and post.idpost_type = 2");
+            $idpost = 0;
             if($result == FALSE) {
                 die(mysql_error());
             }
 
             while($row = mysql_fetch_array($result))
             {
+                $idpost = $row['idpost'];
                 echo '<h2 id="title">'.$row["title"].'</h2>';
                 echo '<p class="meta"><span class="date">'.$row["date_time"].'</span></p>';
                 echo ' <div class="entry"><p>'.$row["content"].'</p></div>';
@@ -118,8 +119,8 @@ if(!isset ($_SESSION['SESS_MEMBER_ID']))
             <h2>Komentari</h2>
             <?php
 
-            $sql = mysql_query("SELECT  content, username, date_time,comment.iduser FROM comment inner join user on comment.iduser = user.iduser
-            WHERE comment.idpost=$idpost");
+            $sql = mysql_query("SELECT comment.content, user.username, comment.date_time, comment.iduser, comment.idpost FROM comment inner join user on comment.iduser = user.iduser
+            WHERE comment.idpost = $idpost");
             while($row2 = mysql_fetch_array($sql)){
                 $iduser=$row2['iduser'];
                 echo '<p><span class="posted"><a class="user_link" href="profileView.php?id='.$iduser.'">'.$row2["username"].' </a></span>'.$row2["content"].'</p>';

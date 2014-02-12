@@ -18,6 +18,7 @@ if(!isset ($_SESSION['SESS_MEMBER_ID']))
 {
     header("location: index.php");
 }
+$idsubcategory = $_GET['id'];
 ?>
 <body>
 <div id="wrapper" >
@@ -103,10 +104,49 @@ if(!isset ($_SESSION['SESS_MEMBER_ID']))
     </div><!--header--->
 
     <div id="container">
+        <?php
+        if (isset($_POST['racunaj2']))
+        {
+            $sql1= mysql_query("select * from post inner join subcategory on post.idsubcategory=$idsubcategory
+        where post.idpost_type='3' ");
+            $maxidpost=0;
+            $maxvotecount= 0;
+            $countSum = 0;
+            while($row=mysql_fetch_assoc($sql1)){
+                $sql2=mysql_query("select * from post where idsubcategory=$idsubcategory");
 
+                while ($row2=mysql_fetch_assoc($sql2)){
+                    $idpost=$row2['idpost'];
+
+                    $sql3=mysql_query("select count(votevalue) as votecount ,vote.idpost,post.content from vote inner join post on vote.idpost=post.idpost where vote.idpost=$idpost ");
+                    while($row3=mysql_fetch_assoc($sql3)){
+                        $votecount=$row3['votecount'];
+                        if($votecount>$maxvotecount){
+                            $maxvotecount=$votecount;
+                            $maxidpost=$row3['idpost'];
+                        }
+                    }
+                }
+            }
+            echo $countSum;
+            if($maxidpost>0){
+                $sql4=mysql_query("select *, user.username as username, subcategory.name as subName from post inner join user on post.iduser = user.iduser inner join subcategory on post.idsubcategory = subcategory.idsubcategory where idpost=$maxidpost");
+                $row4=mysql_fetch_assoc($sql4);
+                $idpost=$row4['idpost'];
+                echo '<h4>Kategorija: '.$row4['subName'].'</h4>';
+                echo '<h3 style="color: #528BC5">Prijedlog koji je imao najviše glasova:</h3>';
+                echo '<h4>Ukupno glasova: '.$maxvotecount.'</h4>';
+                echo ' <div class="entry"><p>'.$row4["content"].'</p></div>';
+                echo '<p >postavio/la <a href="userProfile.php?id='.$row4['iduser'].'" class="user_link">'.$row4['username'].'</a></p></br>';
+                echo '<p class="links"><a href="suggestionDetails.php?id='.$idpost.'" class="right">Pročitaj više</a></p></br>';
+                }
+            else
+                echo 'Nema nista izglasano!';
+        }
+        ?>
         <div class="news_container">
             <div id="title">
-                <form name="addNews" action="addDecisionStore.php" method="post">
+                <form name="addNews" action="addDecisionStore.php?id=<?php echo $idsubcategory ?>" method="post">
                     <label >Naslov odluke: </label><br>
                     <input type="text" name="title" id="inputTitle"/>
             </div>
@@ -119,32 +159,8 @@ if(!isset ($_SESSION['SESS_MEMBER_ID']))
                 <textarea name="summary" id="inputSummary"></textarea>
             </div>
 
-            <div id="selectsubcategory">
-                <label>Subkategorija</label>
-                <select name="subcategory">
-
-                    <?php
-                    $getAllSubcategory = mysql_query("SELECT idsubcategory,name,endDate FROM subcategory where subcategory.idcategory!='1'and subcategory.decision= false ;");
-                    $curentDate=date("Y-m-d");
-
-
-                    while($viewAllSubcategory=mysql_fetch_assoc($getAllSubcategory)){
-
-                       $endDate=$viewAllSubcategory['endDate'];
-
-                        if(strtotime($curentdate) < strtotime($endDate)){
-                        echo '<option value='.$viewAllSubcategory['idsubcategory'].'>'.$viewAllSubcategory['name']. '</option>';
-                        }
-                        else{
-                        echo '';
-                    }
-                    }
-                    ?>
-                </select>
-
-            </div><!--selectsubcategory-->
             <hr>
-            <input type="submit" name="button" value="submit" class="button" />
+            <input type="submit" name="button" value="Donesi odluku" class="button" />
             </form>
 
 
