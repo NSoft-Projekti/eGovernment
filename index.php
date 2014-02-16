@@ -110,60 +110,7 @@ session_start();
                         echo '</li></br>';
                         echo '</ul>';
                         echo '</li></br>';
-                        /* echo '<li id="liCategoryIzleti class="hide">';
-                         $sqlSub = "SELECT idsubcategory, name, idcategory FROM subcategory WHERE name != 'Vijest' AND subcategory.idcategory = 3";
-                         $resultSub=mysql_query($sqlSub, $conn);
-                         $num_fields_Sub = mysql_num_fields($resultSub);
-                         $y=1;
-                         while($rowSub = mysql_fetch_assoc($resultSub)){
-                             for($n=0; $n<$num_fields_Sub; $n++)
-                             {
-                                 $nameSub = mysql_field_name($resultSub, $n);
-                                 $objectSub[$y][$nameSub] = $rowSub[$nameSub];
-                             }$y++;
-                         }
-                         $m=1;
-                         $mm=count($objectSub);
-                         echo '<ul id="ulSubcategory class="hide">';
-                         for($m=1;$m<=$mm;$m++)
-                         {
-                             $sub = $objectSub[$m]['idcategory'];
-                             $cat = $object[$j]['idcategory'];
-                             if($sub== $cat){
-                                 echo '<li id="liSubcategory">';
-                                 echo '<a href="suggestionList.php?id='.$objectSub[$m]['idsubcategory'].'" id="aSubcategory" class="hide">'.$objectSub[$m]["name"].'</a>';
-                                 echo '</li>';
-                             }
-                         }
-                         echo '</ul>';
-                         echo '</li></br>';
-                         echo '<li id="liCategoryEkologija class="hide">';
-                         $sqlSub = "SELECT idsubcategory, name, idcategory FROM subcategory WHERE name != 'Vijest' AND subcategory.idcategory = 4";
-                         $resultSub=mysql_query($sqlSub, $conn);
-                         $num_fields_Sub = mysql_num_fields($resultSub);
-                         $y=1;
-                         while($rowSub = mysql_fetch_assoc($resultSub)){
-                             for($n=0; $n<$num_fields_Sub; $n++)
-                             {
-                                 $nameSub = mysql_field_name($resultSub, $n);
-                                 $objectSub[$y][$nameSub] = $rowSub[$nameSub];
-                             }$y++;
-                         }
-                         $m=1;
-                         $mm=count($objectSub);
-                         echo '<ul id="ulSubcategory">';
-                         for($m=1;$m<=$mm;$m++)
-                         {
-                             $sub = $objectSub[$m]['idcategory'];
-                             $cat = $object[$j]['idcategory'];
-                             if($sub== $cat){
-                                 echo '<li id="liSubcategory">';
-                                 echo '<a href="suggestionList.php?id='.$objectSub[$m]['idsubcategory'].'" id="aSubcategory" class="hide">'.$objectSub[$m]["name"].'</a>';
-                                 echo '</li>';
-                             }
-                         }
-                         echo '</ul>';
-                         echo '</li></br>';*/
+
                     }
                     echo '</ul></li>';
                     echo '<li><a href="decisionList.php">Odluke</a> </li>';
