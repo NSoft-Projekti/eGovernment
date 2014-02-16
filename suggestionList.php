@@ -72,9 +72,43 @@ if(!isset ($_SESSION['SESS_MEMBER_ID']))
                 <ul>
                     <li><a href="index.php">Home</a> </li>
                     <li><a href="newsList.php">Vijesti</a> </li>
-                    <li><a href="suggestionList.php" class="currentTab">Prijedlozi</a> </li>
-                    <li><a href="decisionList.php">Odluke</a> </li>
-                    <li><a href="userList.php">Korisnici</a> </li>
+                    <?php
+
+                    if(isset ($_SESSION['SESS_MEMBER_ID'])){
+                        echo'<li><a href="suggestionList.php" id="category" >Prijedlozi</a>
+                        <ul id="ulCategoryIzgradnja" class="hide">';
+
+                        $sqlCat = "SELECT idcategory, name FROM category WHERE idcategory != '1'";
+                        $resultCat=mysql_query($sqlCat, $conn);
+                        while($rowCat = mysql_fetch_assoc($resultCat)){
+
+                            echo '<li id="liCategoryIzgradnja">';
+                            echo '<a href="suggestionList.php?id='.$rowCat['idcategory'].'"  id="aCategoryIzgradnja" class="show">'.$rowCat["name"].'</a>';
+                            $sqlSub = "SELECT idsubcategory, name, idcategory, startDate FROM subcategory WHERE name != 'Vijest' and idcategory = 2 ORDER BY startDate DESC";
+                            $resultSub=mysql_query($sqlSub, $conn);
+                            echo '<ul id="ulSubcategoryIzgradnja" class="hide">';
+                            while($rowSub = mysql_fetch_assoc($resultSub)){
+
+                                echo '<li id="liSubcategoryIzgradnja">';
+                                echo '<a href="suggestionListBySub.php?id='.$rowSub['idsubcategory'].'" id="aSubcategoryIzgradnja">'.$rowSub["name"].'</a>';
+                                echo '</li></br>';
+                            }
+                            echo '<li id="liSubcategoryIzgradnja">';
+                            echo '<a href="addSuggestion.php" id="aSubcategoryIzgradnja">Dodaj prijedlog</a>';
+                            echo '</li></br>';
+                            echo '<li id="liSubcategoryIzgradnja">';
+                            echo '<a href="addSubcategory.php" id="aSubcategoryIzgradnja">Dodaj temu</a>';
+                            echo '</li></br>';
+                            echo '</ul>';
+                            echo '</li></br>';
+
+                        }
+                        echo '</ul></li>';
+
+                        echo '<li><a href="decisionList.php">Odluke</a></li>';
+                        echo '<li><a href="userList.php">Korisnici</a> </li>';
+                    }
+                    ?>
 
                 </ul>
 
