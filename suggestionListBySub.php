@@ -44,18 +44,18 @@ $idsubcategory = $_GET['id'];
 
                 //checking gender and displaying matching picture
                 if($gender=='M'){
-                    echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                    echo '<a href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
                     echo '<img class="logo" src="img/men.png">';
                     echo '</br>';
-                    echo '<a title="odjava" href="logout.php">Odjava</a>';
+                    echo '<a href="logout.php">Odjava</a>';
                 }
 
                 //if it's not male gender, it displays female image
                 else {
-                    echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                    echo '<a href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
                     echo '<img class="logo" src="img/girl.png">';
                     echo '</br>';
-                    echo '<a title="odjava" href="logout.php">Odjava</a>';
+                    echo '<a href="logout.php">Odjava</a>';
                 }
             }
             ?>
@@ -68,55 +68,58 @@ $idsubcategory = $_GET['id'];
 
     <div id="header-down">
 
-        <div id="horizontal-menu">
+        <nav>
             <ul>
-                <li><a href="index.php">Home</a> </li>
-                <li><a href="newsList.php">Vijesti</a> </li>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="newsList.php">Vijesti</a></li>
                 <?php
 
                 if(isset ($_SESSION['SESS_MEMBER_ID'])){
-                echo'<li><a href="suggestionList.php" id="category" >Prijedlozi</a>
-                        <ul id="ulCategoryIzgradnja" class="hide">';
+                    echo'<li><a href="suggestionList.php">Prijedlozi</a>';
+                    echo'<ul>';
 
-                $sqlCat = "SELECT idcategory, name FROM category WHERE idcategory != '1'";
-                $resultCat=mysql_query($sqlCat, $conn);
-                while($rowCat = mysql_fetch_assoc($resultCat)){
+                    $sqlCat = "SELECT idcategory, name FROM category WHERE idcategory != '1'";
+                    $resultCat=mysql_query($sqlCat, $conn);
+                    while($rowCat = mysql_fetch_assoc($resultCat)){
+                        echo '<li>';
+                        echo '<a href="suggestionList.php?id='.$rowCat['idcategory'].'">'.$rowCat["name"].'</a>';
+                        echo '<ul>';
 
-                    echo '<li id="liCategoryIzgradnja">';
-                    echo '<a href="suggestionList.php?id='.$rowCat['idcategory'].'"  id="aCategoryIzgradnja" class="show">'.$rowCat["name"].'</a>';
-                    $sqlSub = "SELECT idsubcategory, name, idcategory, startDate FROM subcategory WHERE name != 'Vijest' and idcategory = 2 ORDER BY startDate DESC";
-                    $resultSub=mysql_query($sqlSub, $conn);
-                    echo '<ul id="ulSubcategoryIzgradnja" class="hide">';
-                    while($rowSub = mysql_fetch_assoc($resultSub)){
+                        $idcategory = $rowCat['idcategory'];
+                        $sqlSub = "SELECT idcategory, name FROM subcategory WHERE idcategory = $idcategory";
+                        $resSub=mysql_query($sqlSub, $conn);
+                        while($rowSub =mysql_fetch_assoc ($resSub)){
+                            echo '<li>';
+                            echo '<a href="suggestionList.php?id='.$rowSub['idcategory'].'">'.$rowSub["name"].'</a>';
+                            echo '</li>';
+                        }
+                        echo '<li>';
+                        echo '<a href="addSubcategory.php">+ Nova potkategorija</a>';
+                        echo '</li>';
+                        echo '<li>';
+                        echo '<a href="addSuggestion.php">+ Novi prijedlog</a>';
+                        echo '</li>';
 
-                        echo '<li id="liSubcategoryIzgradnja">';
-                        echo '<a href="suggestionListBySub.php?id='.$rowSub['idsubcategory'].'" id="aSubcategoryIzgradnja">'.$rowSub["name"].'</a>';
-                        echo '</li></br>';
-                    }
-                    echo '<li id="liSubcategoryIzgradnja">';
-                    echo '<a href="addSuggestion.php" id="aSubcategoryIzgradnja">Dodaj prijedlog</a>';
-                    echo '</li></br>';
-                    echo '<li id="liSubcategoryIzgradnja">';
-                    echo '<a href="addSubcategory.php" id="aSubcategoryIzgradnja">Dodaj temu</a>';
-                    echo '</li></br>';
-                    echo '</ul>';
-                    echo '</li></br>';
+                        echo '</ul>';
 
-                }
-                echo '</ul></li>';
+                        echo '</li>';}
+                    ?>
 
-                echo '<li><a href="decisionList.php">Odluke</a></li>';
-                echo '<li><a href="userList.php">Korisnici</a> </li>';
-                }
-            ?>
+                    <?php echo'</ul>';?>
+                    <?php echo'</li>';?>
+
+                    <li><a href="decisionList.php">Odluke</a></li>
+                    <li><a href="userList.php">Korisnici</a></li>
+                <?php }
+                ?>
+
 
             </ul>
-
-        </div><!--horizontal-menu-->
+        </nav><!--horizontal-menu-->
 
         <div id="search">
             <div id="search-down">
-                <a href="search.php"><div id="img-search">
+                <a href="search.php?id=<?php $string ?>"><div id="img-search">
                     </div></a><!--img-search-->
 
                 <input type="text" name="search" >
@@ -217,14 +220,14 @@ $idsubcategory = $_GET['id'];
             $row3 = mysql_fetch_array($result3);
             $endDate2 = $row3["endDate"];
             if($decision==false and $endDate2 > $currentDate2){
-            echo '<form name="addVote" action="addVoteStore.php?id='.$idpost.'" method="post">';
-            if($a == true){
-                echo '<label>Tema zaključana.</label>';
-                echo '<button id="voteButtonFalse" name="submit" value="submit"  disabled>Glasaj</button> </br>';
-            }
-            else
-                echo '<button id="voteButton" name="submit" value="submit">Glasaj</button> </br>';
-            echo '</form>';
+                echo '<form name="addVote" action="addVoteStore.php?id='.$idpost.'" method="post">';
+                if($a == true){
+                    echo '<label>Tema zaključana.</label>';
+                    echo '<button id="voteButtonFalse" name="submit" value="submit"  disabled>Glasaj</button> </br>';
+                }
+                else
+                    echo '<button id="voteButton" name="submit" value="submit">Glasaj</button> </br>';
+                echo '</form>';
             }
         }// end while
         // get the info from the db
@@ -236,16 +239,16 @@ $idsubcategory = $_GET['id'];
         $row2 = mysql_fetch_array($result2);
         $endDate = $row2["endDate"];
 
-       if($endDate > $currentDate){
+        if($endDate > $currentDate){
 
-                echo '<input type="submit" name="racunaj" value="Donesi odluku" class="button_vijest_false" float="right" disabled></br></br></br></br>';
-            }
-       else if($decision==false){
-           echo '<form name="formOdluka" method="post" action="addDecision.php?id='.$idsubcategory.'">';
+            echo '<input type="submit" name="racunaj" value="Donesi odluku" class="button_vijest_false" float="right" disabled></br></br></br></br>';
+        }
+        else if($decision==false){
+            echo '<form name="formOdluka" method="post" action="addDecision.php?id='.$idsubcategory.'">';
             echo 'Datum isteka teme: <strong>'.date("d.m.Y.", strtotime($row2["endDate"])). '</strong>';
             echo '<input type="submit" name="racunaj2" value="Donesi odluku" class="button_vijest" float="right"></br></br></br></br>';
-           echo '</form>';
-            }
+            echo '</form>';
+        }
 
         if($decision==true)
         {
@@ -257,7 +260,7 @@ $idsubcategory = $_GET['id'];
 
 
 
-       /******  build the pagination links ******/
+        /******  build the pagination links ******/
         // range of num links to show
         echo"<div id='pagination'>";
         $range = 3;
@@ -299,17 +302,7 @@ $idsubcategory = $_GET['id'];
         } // end if
         /****** end build pagination links ******/
         /******  build the pagination links ******/
-        // if not on page 1, don't show back links
-        /*
-            if ($currentpage > 1) {
-                // show << link to go back to page 1
-               echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=1'><img src='img/ff-p-button.png'></a> ";
-                // get previous page num
-                $prevpage = $currentpage - 1;
-                // show < link to go back to 1 page
-               echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$prevpage'><img src='img/prev-button.png'></a> ";
-            } // end if
-        */
+        
         echo "</div><!--pagination-->";
         ?>
     </div>
@@ -347,10 +340,7 @@ $idsubcategory = $_GET['id'];
 </div><!---footer-->
 
 
-
 </div><!--wrapper-->
-
-<script src="dropDownMenu.js" type="text/javascript"></script>
 
 
 </body>
