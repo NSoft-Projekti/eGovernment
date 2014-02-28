@@ -45,18 +45,18 @@ if(!isset ($_SESSION['SESS_MEMBER_ID']))
 
                     //checking gender and displaying matching picture
                     if($gender=='M'){
-                        echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                        echo '<a href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
                         echo '<img class="logo" src="img/men.png">';
                         echo '</br>';
-                        echo '<a title="odjava" href="logout.php">Odjava</a>';
+                        echo '<a href="logout.php">Odjava</a>';
                     }
 
                     //if it's not male gender, it displays female image
                     else {
-                        echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                        echo '<a href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
                         echo '<img class="logo" src="img/girl.png">';
                         echo '</br>';
-                        echo '<a title="odjava" href="logout.php">Odjava</a>';
+                        echo '<a href="logout.php">Odjava</a>';
                     }
                 }
                 ?>
@@ -70,21 +70,58 @@ if(!isset ($_SESSION['SESS_MEMBER_ID']))
 
         <div id="header-down">
 
-            <div id="horizontal-menu">
+            <nav>
                 <ul>
                     <li><a href="index.php">Home</a> </li>
-                    <li><a href="newsList.php" >Vijesti</a> </li>
-                    <li><a href="suggestionList.php"class="currentTab">Prijedlozi</a> </li>
-                    <li><a href="decisionList.php">Odluke</a> </li>
-                    <li><a href="userList.php">Korisnici</a> </li>
+                    <li><a href="newsList.php">Vijesti</a> </li>
+                    <?php
+
+                    if(isset ($_SESSION['SESS_MEMBER_ID'])){
+                        echo'<li class="currentTab"><a href="suggestionList.php">Prijedlozi</a>';
+                        echo'<ul>';
+
+                        $sqlCat = "SELECT idcategory, name FROM category WHERE idcategory != '1'";
+                        $resultCat=mysql_query($sqlCat, $conn);
+                        while($rowCat = mysql_fetch_assoc($resultCat)){
+                            echo '<li>';
+                            echo '<a href="suggestionList.php?id='.$rowCat['idcategory'].'">'.$rowCat["name"].'</a>';
+                            echo '<ul>';
+
+                            $idcategory = $rowCat['idcategory'];
+                            $sqlSub = "SELECT idcategory, name FROM subcategory WHERE idcategory = $idcategory";
+                            $resSub=mysql_query($sqlSub, $conn);
+                            while($rowSub =mysql_fetch_assoc ($resSub)){
+                                echo '<li>';
+                                echo '<a href="suggestionList.php?id='.$rowSub['idcategory'].'">'.$rowSub["name"].'</a>';
+                                echo '</li>';
+                            }
+                            echo '<li>';
+                            echo '<a href="addSubcategory.php">+ Nova potkategorija</a>';
+                            echo '</li>';
+                            echo '<li>';
+                            echo '<a href="addSuggestion.php">+ Novi prijedlog</a>';
+                            echo '</li>';
+
+                            echo '</ul>';
+
+                            echo '</li>';}
+                        ?>
+
+                        <?php echo'</ul>';?>
+                        <?php echo'</li>';?>
+
+                        <li><a href="decisionList.php">Odluke</a></li>
+                        <li><a href="userList.php">Korisnici</a></li>
+                    <?php }
+                    ?>
 
                 </ul>
 
-            </div><!--horizontal-menu-->
+            </nav><!--horizontal-menu-->
 
             <div id="search">
                 <div id="search-down">
-                    <a href="search.php"><div id="img-search">
+                    <a href="search.php?id=<?php $string ?>"><div id="img-search">
                         </div></a><!--img-search-->
 
                     <input type="text" name="search" >
@@ -188,7 +225,7 @@ if(!isset ($_SESSION['SESS_MEMBER_ID']))
         </div><!--footer-up-->
 
         <div id="footer-down">
-            <p class="text">All design and content Copyright &copy; <span><?php echo date('Y');?></span>. All rights reserved.</p>
+            <p class="text">All design and content Copyright &copy; 2013.<span id="year"></span>. All rights reserved.</p>
         </div><!--footer-down-->
 
 
