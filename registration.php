@@ -3,7 +3,7 @@
     <meta name="description" content="eGovernment" />
     <meta name="keywords" content="design, egovernment" />
     <meta name="author" content="Tim4" />
-    <title>eGovernment :: Home</title>
+    <title>eGovernment :: Registracija</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="style/login-popup.css" rel="stylesheet" type="text/css" />    <!--css style from a login-popup form-->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script> <!--script from a login-popup form-->
@@ -21,10 +21,12 @@
 
 </head>
 <?php
+include('connect.php');
 session_start();
 ?>
 
 <body onload="document.registration.reset();">
+
 <div id="wrapper" >
 
 <div id="header">
@@ -42,15 +44,10 @@ session_start();
             if(!isset ($_SESSION['SESS_MEMBER_ID'])){
 
 
-                include_once("loginPopup.php");
-                echo'<a title="registracija" href="registration.php">Registracija</a>';
-            }
-            else{
+                require_once('loginPopup.php');
+                echo '<a class="login-window" href="#loginPopup.php">Prijava</a>';
 
-                echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'<img class="logo" src="img/login-icon.png"></a>';
-               // echo '<img class="logo" src="img/login-icon.png">';
-                //echo '</br>';
-                echo '<a title="odjava" href="logout.php">Odjava</a>';
+                echo'<a title="registracija" href="registration.php">Registracija</a>';
             }
             ?>
 
@@ -62,29 +59,20 @@ session_start();
 
     <div id="header-down">
 
-        <div id="horizontal-menu">
+        <nav>
             <ul>
                 <li><a href="index.php">Home</a> </li>
                 <li><a href="newsList.php">Vijesti</a> </li>
-                <?php
-
-                if(isset ($_SESSION['SESS_MEMBER_ID'])){
-                    echo '<li><a href="suggestionList.php">Prijedlozi</a> </li>';
-                    echo '<li><a href="decisionList.php">Odluke</a> </li>';
-                    echo '<li><a href="userList.php">Korisnici</a> </li>';
-                }
-
-                ?>
             </ul>
 
-        </div><!--horizontal-menu-->
+        </nav><!--horizontal-menu-->
 
         <div id="search">
             <div id="search-down">
-                <a href="#"><div id="img-search">
+                <a href="search.php?id=<?php $string ?>"><div id="img-search" title="Pretraga">
                     </div></a><!--img-search-->
 
-                <input type="text" name="search" >
+                <input type="text" name="search">
 
 
             </div>
