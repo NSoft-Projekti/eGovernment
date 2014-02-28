@@ -16,7 +16,6 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
     <link href="style/postList.css" rel="stylesheet" type="text/css" />
-    <link href="style/userList.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
 
 
@@ -32,6 +31,8 @@ if(!isset ($_SESSION['SESS_MEMBER_ID']))
 ?>
 
 <body>
+
+
 <div id="wrapper" >
 
 <div id="header">
@@ -55,25 +56,19 @@ if(!isset ($_SESSION['SESS_MEMBER_ID']))
 
                 //checking gender and displaying matching picture
                 if($gender=='M'){
-                    echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                    echo '<a href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
                     echo '<img class="logo" src="img/men.png">';
                     echo '</br>';
-                    echo'<a title="odjava" href="logout.php">Odjava</a>';
+                    echo'<a href="logout.php">Odjava</a>';
                 }
 
                 //if it's not male gender, it displays female image
                 else {
-                    echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                    echo '<a href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
                     echo '<img class="logo" src="img/girl.png">';
                     echo '</br>';
-                    echo'<a title="odjava" href="logout.php">Odjava</a>';
+                    echo'<a href="logout.php">Odjava</a>';
                 }
-            }
-
-            //includes login popup form
-            else {
-                include_once("loginPopup.php");
-                echo'<a title="registracija" href="registration.php">Registracija</a>';
             }
             ?>
 
@@ -82,52 +77,58 @@ if(!isset ($_SESSION['SESS_MEMBER_ID']))
 
     <div id="header-down">
 
-        <div id="horizontal-menu">
+        <nav>
             <ul>
-                <li><a href="index.php">Home</a> </li>
-                <li><a href="newsList.php">Vijesti</a> </li>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="newsList.php">Vijesti</a></li>
                 <?php
 
                 if(isset ($_SESSION['SESS_MEMBER_ID'])){
-                    echo'<li><a href="suggestionList.php" id="category" >Prijedlozi</a>
-                        <ul id="ulCategory" class="hide">';
+                    echo'<li><a href="suggestionList.php">Prijedlozi</a>';
+                    echo'<ul>';
 
                     $sqlCat = "SELECT idcategory, name FROM category WHERE idcategory != '1'";
                     $resultCat=mysql_query($sqlCat, $conn);
-                    while($rowCat = mysql_fetch_assoc($resultCat))
-                    {
+                    while($rowCat = mysql_fetch_assoc($resultCat)){
                         echo '<li>';
-                        echo '<a href="suggestionList.php?id='.$rowCat['idcategory'].'"  id="liCategory" class="hide">'.$rowCat["name"].'</a>';
-                        echo '<ul id="ulSubcategory" class="hide">';
-                        $idCat = $rowCat['idcategory'];
-                        $sqlSub = "SELECT idsubcategory, name FROM subcategory WHERE name != 'Vijest' AND subcategory.idcategory = $idCat";
-                        $resultSub=mysql_query($sqlSub, $conn);
-                        while($rowSub = mysql_fetch_assoc($resultSub))
-                        {
-                            echo '<li >';
-                            echo '<a href="suggestionList.php?id='.$rowSub['idsubcategory'].'" id="liSubcategory" class="hide">'.$rowSub["name"].'</a>>';
+                        echo '<a href="suggestionList.php?id='.$rowCat['idcategory'].'">'.$rowCat["name"].'</a>';
+                        echo '<ul>';
+
+                        $idcategory = $rowCat['idcategory'];
+                        $sqlSub = "SELECT idcategory, name FROM subcategory WHERE idcategory = $idcategory";
+                        $resSub=mysql_query($sqlSub, $conn);
+                        while($rowSub =mysql_fetch_assoc ($resSub)){
+                            echo '<li>';
+                            echo '<a href="suggestionList.php?id='.$rowSub['idcategory'].'">'.$rowSub["name"].'</a>';
                             echo '</li>';
                         }
-                        echo '</ul>';
+                        echo '<li>';
+                        echo '<a href="addSubcategory.php">+ Nova potkategorija</a>';
                         echo '</li>';
-                    }
+                        echo '<li>';
+                        echo '<a href="addSuggestion.php">+ Novi prijedlog</a>';
+                        echo '</li>';
 
-                    echo '</ul>
-                        </li>';
-                    echo '<li><a href="decisionList.php">Odluke</a> </li>';
-                    echo '<li><a href="userList.php" class="currentTab">Korisnici</a> </li>';
-                }
+                        echo '</ul>';
 
+                        echo '</li>';}
+                    ?>
+
+                    <?php echo'</ul>';?>
+                    <?php echo'</li>';?>
+
+                    <li><a href="decisionList.php">Odluke</a></li>
+                    <li class="currentTab"><a href="userList.php">Korisnici</a></li>
+                <?php }
                 ?>
 
 
             </ul>
-
-        </div><!--horizontal-menu-->
+        </nav><!--horizontal-menu-->
 
         <div id="search">
             <div id="search-down">
-                <a href="search.php"><div id="img-search">
+                <a href="search.php?id=<?php $string ?>"><div id="img-search">
                     </div></a><!--img-search-->
 
                 <input type="text" name="search" >
@@ -239,16 +240,7 @@ if(!isset ($_SESSION['SESS_MEMBER_ID']))
     /****** end build pagination links ******/
     /******  build the pagination links ******/
     // if not on page 1, don't show back links
-    /*
-        if ($currentpage > 1) {
-            // show << link to go back to page 1
-           echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=1'><img src='img/ff-p-button.png'></a> ";
-            // get previous page num
-            $prevpage = $currentpage - 1;
-            // show < link to go back to 1 page
-           echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$prevpage'><img src='img/prev-button.png'></a> ";
-        } // end if
-    */
+
     echo "</div><!--pagination-->";
     ?>
 
@@ -290,7 +282,6 @@ if(!isset ($_SESSION['SESS_MEMBER_ID']))
 </div><!--wrapper-->
 
 
-<script src="dropDownMenu.js" type="text/javascript"></script>
 </body>
 
 </html>
