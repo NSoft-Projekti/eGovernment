@@ -77,21 +77,58 @@ if(!isset ($_SESSION['SESS_MEMBER_ID']))
 
     <div id="header-down">
 
-        <div id="horizontal-menu">
+        <nav>
             <ul>
-                <li><a href="index.php">Home</a> </li>
-                <li><a href="newsList.php">Vijesti</a> </li>
-                <li><a href="suggestionList.php">Prijedlozi</a> </li>
-                <li><a href="decisionList.php">Odluke</a> </li>
-                <li><a href="userList.php">Korisnici</a> </li>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="newsList.php">Vijesti</a></li>
+                <?php
+
+                if(isset ($_SESSION['SESS_MEMBER_ID'])){
+                    echo'<li><a href="suggestionList.php">Prijedlozi</a>';
+                    echo'<ul>';
+
+                    $sqlCat = "SELECT idcategory, name FROM category WHERE idcategory != '1'";
+                    $resultCat=mysql_query($sqlCat, $conn);
+                    while($rowCat = mysql_fetch_assoc($resultCat)){
+                        echo '<li>';
+                        echo '<a href="suggestionList.php?id='.$rowCat['idcategory'].'">'.$rowCat["name"].'</a>';
+                        echo '<ul>';
+
+                        $idcategory = $rowCat['idcategory'];
+                        $sqlSub = "SELECT idcategory, name FROM subcategory WHERE idcategory = $idcategory";
+                        $resSub=mysql_query($sqlSub, $conn);
+                        while($rowSub =mysql_fetch_assoc ($resSub)){
+                            echo '<li>';
+                            echo '<a href="suggestionList.php?id='.$rowSub['idcategory'].'">'.$rowSub["name"].'</a>';
+                            echo '</li>';
+                        }
+                        echo '<li>';
+                        echo '<a href="addSubcategory.php">+ Nova potkategorija</a>';
+                        echo '</li>';
+                        echo '<li>';
+                        echo '<a href="addSuggestion.php">+ Novi prijedlog</a>';
+                        echo '</li>';
+
+                        echo '</ul>';
+
+                        echo '</li>';}
+                    ?>
+
+                    <?php echo'</ul>';?>
+                    <?php echo'</li>';?>
+
+                    <li><a href="decisionList.php">Odluke</a></li>
+                    <li><a href="userList.php">Korisnici</a></li>
+                <?php }
+                ?>
+
 
             </ul>
-
-        </div><!--horizontal-menu-->
+        </nav><!--horizontal-menu--><!--horizontal-menu-->
 
         <div id="search">
             <div id="search-down">
-                <a href="search.php"><div id="img-search">
+                <a href="search.php?id=<?php $string ?>"><div id="img-search">
                     </div></a><!--img-search-->
 
                 <input type="text" name="search" >
@@ -168,16 +205,17 @@ if(!isset ($_SESSION['SESS_MEMBER_ID']))
 
             /******  build the pagination links ******/
             // range of num links to show
+            echo"<div id='pagination'>";
             $range = 3;
 
             // if not on page 1, don't show back links
             if ($currentpage > 1) {
                 // show << link to go back to page 1
-                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=1'><<</a> ";
+                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=1' id='ff-prev'></a> ";
                 // get previous page num
                 $prevpage = $currentpage - 1;
                 // show < link to go back to 1 page
-                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$prevpage'><</a> ";
+                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$prevpage'  id='previous'></a> ";
             } // end if
 
             // loop to show links to range of pages around current page
@@ -187,7 +225,7 @@ if(!isset ($_SESSION['SESS_MEMBER_ID']))
                     // if we're on current page...
                     if ($x == $currentpage) {
                         // 'highlight' it but don't make a link
-                        echo " [<b>$x</b>] ";
+                        echo "<a href='#' class='blue'>$x</a> ";
                         // if not current page...
                     } else {
                         // make it a link
@@ -201,21 +239,15 @@ if(!isset ($_SESSION['SESS_MEMBER_ID']))
                 // get next page
                 $nextpage = $currentpage + 1;
                 // echo forward link for next page
-                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$nextpage'>></a> ";
+                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$nextpage' id='next'></a> ";
                 // echo forward link for lastpage
-                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$totalpages'>>></a> ";
+                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$totalpages' id='ff-next' ></a> ";
             } // end if
             /****** end build pagination links ******/
             /******  build the pagination links ******/
             // if not on page 1, don't show back links
-            if ($currentpage > 1) {
-                // show << link to go back to page 1
-                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=1'><<</a> ";
-                // get previous page num
-                $prevpage = $currentpage - 1;
-                // show < link to go back to 1 page
-                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$prevpage'><</a> ";
-            } // end if
+
+            echo "</div><!--pagination-->";
             ?>
 
 
