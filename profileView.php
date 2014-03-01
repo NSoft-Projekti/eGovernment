@@ -172,13 +172,13 @@ if(!isset ($_SESSION['SESS_MEMBER_ID']))
 
         <div id="cleft-data">
 
-            <form action="" method="post">
+            <form action="" method="get">
 
                 <table>
                     <tr> <td>Ime:</td>       <td> <?php echo $firstname;?> </td> </tr>
                     <tr> <td>Prezime:</td>   <td> <?php echo $lastname;?> </td> </tr>
                     <tr> <td>Username:</td>   <td> <?php echo $username;?> </td> </tr>
-                    <tr> <td>E-mail:</td>     <td> <?php echo $email;?>"  </td> </tr>
+                    <tr> <td>E-mail:</td>     <td> <?php echo $email;?>  </td> </tr>
 
                 </table>
                 <?php
