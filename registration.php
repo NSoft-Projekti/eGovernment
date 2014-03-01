@@ -37,24 +37,6 @@ session_start();
             <a href="index.php"><img src="img/logo.png"></a>
         </div><!--header-logo-->
 
-
-        <div id="reg-prijava">
-
-            <?php
-            if(!isset ($_SESSION['SESS_MEMBER_ID'])){
-
-
-                require_once('loginPopup.php');
-                echo '<a class="login-window" href="#loginPopup.php">Prijava</a>';
-
-                echo'<a title="registracija" href="registration.php">Registracija</a>';
-            }
-            ?>
-
-        </div><!--reg-prijava-->
-
-
-
     </div><!--header-up-->
 
     <div id="header-down">
