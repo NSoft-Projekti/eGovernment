@@ -1,22 +1,30 @@
 <html>
 <head>
-    <meta name="description" content="Design Android applications" />
-    <meta name="keywords" content="android, design, technics" />
-    <meta charset="UTF-8">
-    <meta name="author" content="Jelena" />
-    <title>eGovernment :: Home</title>
+    <meta name="description" content="eGovernment" />
+    <meta name="keywords" content="design, egovernment" />
+    <meta name="author" content="Tim4" />
+    <title>eGovernment :: Pretraga</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
+    <link href="style/postList.css" rel="stylesheet" type="text/css" />
     <link href="style/search.css" rel="stylesheet" type="text/css">
+    <link href="style/login-popup.css" rel="stylesheet" type="text/css" />    <!--css style from a login-popup form-->
+    <script src="jq.js" type="text/javascript"></script> <!--script from a login-popup form-->
+
+    <meta charset="utf-8">
 
 </head>
 
 <?php
 include('connect.php');
-
+session_start();
 ?>
 
 <body>
+
+<?php require_once('loginPopup.php'); ?>
+
+
 <div id="wrapper" >
 
     <div id="header">
@@ -24,15 +32,44 @@ include('connect.php');
         <div id="header-up">
 
             <div id="header-logo">
-                <h1>LOGO STRANICE</h1>
+                <a href="index.php"><img src="img/logo.png"></a>
             </div><!--header-logo-->
 
 
             <div id="reg-prijava">
 
-                <a title="prijava" href="#">Prijava</a>
+                <?php
 
-                <a title="registracija" href="registracija.html">Registracija</a>
+                //checks if user is logged in
+                if(isset ($_SESSION['SESS_MEMBER_ID'])){
+                    $sesija=$_SESSION['SESS_MEMBER_ID'];
+                    $result=mysql_query("SELECT iduser, gender FROM user WHERE user.iduser='$sesija' ");
+                    $row=mysql_fetch_assoc($result);
+                    $gender=$row["gender"];
+
+                    //checking gender and displaying matching picture
+                    if($gender=='M'){
+                        echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                        echo '<img class="logo" src="img/men.png">';
+                        echo '</br>';
+                        echo'<a title="odjava" href="logout.php">Odjava</a>';
+                    }
+
+                    //if it's not male gender, it displays female image
+                    else {
+                        echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                        echo '<img class="logo" src="img/girl.png">';
+                        echo '</br>';
+                        echo'<a title="odjava" href="logout.php">Odjava</a>';
+                    }
+                }
+
+                //includes login popup form
+                else {
+                    echo '<a class="login-window" href="#loginPopup.php">Prijava</a>';
+                    echo'<a title="registracija" href="registration.php">Registracija</a>';
+                }
+                ?>
 
 
             </div><!--reg-prijava-->
@@ -43,22 +80,59 @@ include('connect.php');
 
         <div id="header-down">
 
-            <div id="horizontal-menu">
+            <nav>
                 <ul>
-                    <li><a href="home.php">Home</a> </li>
-                    <li><a href="#footer">Vijesti</a> </li>
-                    <li><a href="#footer">Prijedlozi</a> </li>
-                    <li><a href="#footer">Odluke</a> </li>
-                    <li><a href="#footer">Korisnici</a> </li>
+                    <li class="currentTab"><a href="index.php">Home</a></li>
+                    <li><a href="newsList.php">Vijesti</a></li>
+                    <?php
+
+                    if(isset ($_SESSION['SESS_MEMBER_ID'])){
+                        echo'<li><a href="suggestionList.php">Prijedlozi</a>';
+                        echo'<ul>';
+
+                        $sqlCat = "SELECT idcategory, name FROM category WHERE idcategory != '1'";
+                        $resultCat=mysql_query($sqlCat, $conn);
+                        while($rowCat = mysql_fetch_assoc($resultCat)){
+                            echo '<li>';
+                            echo '<a href="suggestionList.php?id='.$rowCat['idcategory'].'">'.$rowCat["name"].'</a>';
+                            echo '<ul>';
+
+                            $idcategory = $rowCat['idcategory'];
+                            $sqlSub = "SELECT idcategory, name FROM subcategory WHERE idcategory = $idcategory";
+                            $resSub=mysql_query($sqlSub, $conn);
+                            while($rowSub =mysql_fetch_assoc ($resSub)){
+                                echo '<li>';
+                                echo '<a href="suggestionList.php?id='.$rowSub['idcategory'].'">'.$rowSub["name"].'</a>';
+                                echo '</li>';
+                            }
+                            echo '<li>';
+                            echo '<a href="addSubcategory.php">+ Nova potkategorija</a>';
+                            echo '</li>';
+                            echo '<li>';
+                            echo '<a href="addSuggestion.php">+ Novi prijedlog</a>';
+                            echo '</li>';
+
+                            echo '</ul>';
+
+                            echo '</li>';}
+                        ?>
+
+                        <?php echo'</ul>';?>
+                        <?php echo'</li>';?>
+
+                        <li><a href="decisionList.php">Odluke</a></li>
+                        <li><a href="userList.php">Korisnici</a></li>
+                    <?php }
+                    ?>
+
 
                 </ul>
+            </nav><!--horizontal menu-->
 
-            </div><!--horizontal-menu-->
-
-<?php $string=$_GET['id']?>
+            <?php $string=$_GET['id']?>
             <div id="search">
                 <div id="search-down">
-                   <a href="search.php?id=<?php $string ?>"><div id="img-search">
+                    <a href="search.php?id=<?php $string ?>"><div id="img-search">
                         </div></a><!--img-search-->
 
                     <input type="text" name="search" >
@@ -83,7 +157,7 @@ include('connect.php');
             ini_set('display_errors', '1');
             $search_output = "";
             if(isset($_POST['searchquery']) && $_POST['searchquery'] != ""){
-            $searchquery = preg_replace('#[^a-z 0-9?!]#i', '', $_POST['searchquery']);
+                $searchquery = preg_replace('#[^a-z 0-9?!]#i', '', $_POST['searchquery']);
 
                 $searchquery=$_POST['searchquery'];
                 $sqlCommand=("SELECT * FROM post WHERE (`title` LIKE '%$searchquery%' ) OR (`content` LIKE '%$searchquery%' )");
@@ -107,10 +181,10 @@ include('connect.php');
 
             ?>
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-                Search For:
+                Traženi pojam:
                 <input name="searchquery" type="text" size="44" maxlength="88">
-                <input name="myBtn" type="submit">
-                <br />
+                <input name="myBtn" type="submit" value="Pretraži">
+                <br>
             </form>
             <div>
                 <?php echo $search_output; ?>
@@ -127,7 +201,7 @@ include('connect.php');
         <div id="footer-up">
 
             <div id="footer-logo">
-                <h1>LOGO</h1>
+                <a href="index.php"><img src="img/logo.png"></a>
             </div><!--footer-logo-->
 
             <div id="icons">
@@ -156,4 +230,3 @@ include('connect.php');
 
 </body>
 </html>
-
