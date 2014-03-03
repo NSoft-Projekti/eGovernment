@@ -2,16 +2,18 @@
 <head>
     <meta name="description" content="eGovernment" />
     <meta name="author" content="Ajda" />
-    <title>eGovernment :: Home</title>
+    <title>eGovernment :: Potkategorija</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
-    <link href="style/postList.css" rel="stylesheet" type="text/css" />
     <link href="style/addNews.css" rel="stylesheet" type="text/css" />
+    <link href="style/postList.css" rel="stylesheet" type="text/css" />
+    <link href="style/profile.css" rel="stylesheet" type="text/css" />
+
     <meta charset="utf-8">
 </head>
 
 <?php
-include "connect.php";
+include('connect.php');
 session_start();
 if(!isset ($_SESSION['SESS_MEMBER_ID']))
 {
@@ -32,39 +34,34 @@ if(!isset ($_SESSION['SESS_MEMBER_ID']))
 
             <div id="reg-prijava">
 
+                    <?php
 
-                <?php
+                    //checks if user is logged in
+                    if(isset ($_SESSION['SESS_MEMBER_ID'])){
+                        $sesija=$_SESSION['SESS_MEMBER_ID'];
+                        $result=mysql_query("SELECT gender, iduser FROM user WHERE user.iduser='$sesija' ");
+                        $row=mysql_fetch_assoc($result);
+                        $gender=$row["gender"];
 
-                //checks if user is logged in
-                if(isset ($_SESSION['SESS_MEMBER_ID'])){
-                    $sesija=$_SESSION['SESS_MEMBER_ID'];
-                    $result=mysql_query("SELECT * FROM user WHERE user.iduser='$sesija' ");
-                    $row=mysql_fetch_assoc($result);
-                    $gender=$row["gender"];
+                        //checking gender and displaying matching picture
+                        if($gender=='M'){
+                            echo '<a href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                            echo '<img class="logo" src="img/men.png">';
+                            echo '</br>';
+                            echo '<a href="logout.php">Odjava</a>';
+                        }
 
-                    //checking gender and displaying matching picture
-                    if($gender=='M'){
-                        echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
-                        echo '<img class="logo" src="img/men.png">';
-                        echo '</br>';
-                        echo'<a title="odjava" href="logout.php">Odjava</a>';
+                        //if it's not male gender, it displays female image
+                        else {
+                            echo '<a href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                            echo '<img class="logo" src="img/girl.png">';
+                            echo '</br>';
+                            echo '<a href="logout.php">Odjava</a>';
+                        }
                     }
+                    ?>
 
-                    //if it's not male gender, it displays female image
-                    else {
-                        echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
-                        echo '<img class="logo" src="img/girl.png">';
-                        echo '</br>';
-                        echo'<a title="odjava" href="logout.php">Odjava</a>';
-                    }
-                }
 
-                //includes login popup form
-                else {
-                    include_once("loginPopup.php");
-                    echo'<a title="registracija" href="registration.php">Registracija</a>';
-                }
-                ?>
 
             </div><!--reg-prijava-->
 
@@ -74,21 +71,58 @@ if(!isset ($_SESSION['SESS_MEMBER_ID']))
 
         <div id="header-down">
 
-            <div id="horizontal-menu">
+            <nav>
                 <ul>
                     <li><a href="index.php">Home</a> </li>
                     <li><a href="newsList.php">Vijesti</a> </li>
-                    <li><a href="suggestionList.php" class="currentTab">Prijedlozi</a> </li>
-                    <li><a href="decisionList.php">Odluke</a> </li>
-                    <li><a href="#footer">Korisnici</a> </li>
+                    <?php
+
+                    if(isset ($_SESSION['SESS_MEMBER_ID'])){
+                        echo'<li class="currentTab"><a href="suggestionList.php">Prijedlozi</a>';
+                        echo'<ul>';
+
+                        $sqlCat = "SELECT idcategory, name FROM category WHERE idcategory != '1'";
+                        $resultCat=mysql_query($sqlCat, $conn);
+                        while($rowCat = mysql_fetch_assoc($resultCat)){
+                            echo '<li>';
+                            echo '<a href="suggestionList.php?id='.$rowCat['idcategory'].'">'.$rowCat["name"].'</a>';
+                            echo '<ul>';
+
+                            $idcategory = $rowCat['idcategory'];
+                            $sqlSub = "SELECT idcategory, name FROM subcategory WHERE idcategory = $idcategory";
+                            $resSub=mysql_query($sqlSub, $conn);
+                            while($rowSub =mysql_fetch_assoc ($resSub)){
+                                echo '<li>';
+                                echo '<a href="suggestionList.php?id='.$rowSub['idcategory'].'">'.$rowSub["name"].'</a>';
+                                echo '</li>';
+                            }
+                            echo '<li>';
+                            echo '<a href="addSubcategory.php">+ Nova potkategorija</a>';
+                            echo '</li>';
+                            echo '<li>';
+                            echo '<a href="addSuggestion.php">+ Novi prijedlog</a>';
+                            echo '</li>';
+
+                            echo '</ul>';
+
+                            echo '</li>';}
+                        ?>
+
+                        <?php echo'</ul>';?>
+                        <?php echo'</li>';?>
+
+                        <li><a href="decisionList.php">Odluke</a></li>
+                        <li><a href="userList.php">Korisnici</a></li>
+                    <?php }
+                    ?>
 
                 </ul>
 
-            </div><!--horizontal-menu-->
+            </nav><!--horizontal-menu-->
 
             <div id="search">
                 <div id="search-down">
-                    <a href="#"><div id="img-search">
+                    <a href="search.php?id=<?php $string ?>"><div id="img-search">
                         </div></a><!--img-search-->
 
                     <input type="text" name="search" >
@@ -108,7 +142,7 @@ if(!isset ($_SESSION['SESS_MEMBER_ID']))
         <div class="news_container">
             <div id="title">
                 <form name="addSubcategory" action="addSubcategoryStore.php" method="post">
-                    <label >Unesite naslov podkategorije: </label><br>
+                    <label >Unesite naslov potkategorije: </label><br>
                     <input type="text" name="name" id="inputName"/>
             </div>
             <div id="datumPocetka">
@@ -120,7 +154,7 @@ if(!isset ($_SESSION['SESS_MEMBER_ID']))
                 <input type="date" name="datumK" id="datumK">
             </div>
             <hr>
-            <input type="submit" name="button" value="submit" class="button" />
+            <input type="submit" name="button" value="Spremi" class="button" />
             </form>
 
 
@@ -151,7 +185,7 @@ if(!isset ($_SESSION['SESS_MEMBER_ID']))
         </div><!--footer-up-->
 
         <div id="footer-down">
-            <p class="text">All design and content Copyright &copy; <span><?php echo date('Y');?></span>. All rights reserved.</p>
+            <p class="text">All design and content Copyright &copy; 2014.<span id="year"></span>. All rights reserved.</p>
         </div><!--footer-down-->
 
 
