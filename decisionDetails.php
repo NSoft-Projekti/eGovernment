@@ -1,9 +1,9 @@
 <html>
 <head>
-    <meta name="description" content="Design Android applications" />
-    <meta name="keywords" content="android, design, technics" />
-    <meta name="author" content="Jelena" />
-    <title>eGovernment :: Home</title>
+    <meta name="description" content="eGovernment" />
+    <meta name="keywords" content="design, egovernment" />
+    <meta name="author" content="Tim4" />
+    <title>eGovernment :: Odluke</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
     <link href="style/postList.css" rel="stylesheet" type="text/css" />
@@ -20,128 +20,132 @@ $idsubcategory = $_GET['id'];
 ?>
 
 <body>
+
 <div id="wrapper" >
 
-    <div id="header">
+<div id="header">
 
-        <div id="header-up">
+    <div id="header-up">
 
-            <div id="header-logo">
-                <a href="index.php"><img src="img/logo.png"></a>
-            </div><!--header-logo-->
+        <div id="header-logo">
+            <a href="index.php"><img src="img/logo.png"></a>
+        </div><!--header-logo-->
 
+        <div id="reg-prijava">
 
-            <div id="reg-prijava">
+            <?php
+
+            //checks if user is logged in
+            if(isset ($_SESSION['SESS_MEMBER_ID'])){
+                $sesija=$_SESSION['SESS_MEMBER_ID'];
+                $result=mysql_query("SELECT iduser, gender FROM user WHERE user.iduser='$sesija' ");
+                $row=mysql_fetch_assoc($result);
+                $gender=$row["gender"];
+
+                //checking gender and displaying matching picture
+                if($gender=='M'){
+                    echo '<a href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                    echo '<img class="logo" src="img/men.png">';
+                    echo '</br>';
+                    echo'<a href="logout.php">Odjava</a>';
+                }
+
+                //if it's not male gender, it displays female image
+                else {
+                    echo '<a href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                    echo '<img class="logo" src="img/girl.png">';
+                    echo '</br>';
+                    echo'<a href="logout.php">Odjava</a>';
+                }
+            }
+            ?>
+
+        </div><!--reg-prijava-->
+    </div><!--header-up-->
+
+    <div id="header-down">
+
+        <nav>
+            <ul>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="newsList.php">Vijesti</a></li>
                 <?php
 
-                //checks if user is logged in
                 if(isset ($_SESSION['SESS_MEMBER_ID'])){
-                    $sesija=$_SESSION['SESS_MEMBER_ID'];
-                    $result=mysql_query("SELECT gender, iduser FROM user WHERE user.iduser='$sesija' ");
-                    $row=mysql_fetch_assoc($result);
-                    $gender=$row["gender"];
+                    echo'<li><a href="suggestionList.php">Prijedlozi</a>';
+                    echo'<ul>';
 
-                    //checking gender and displaying matching picture
-                    if($gender=='M'){
-                        echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
-                        echo '<img class="logo" src="img/men.png">';
-                        echo '</br>';
-                        echo '<a title="odjava" href="logout.php">Odjava</a>';
-                    }
+                    $sqlCat = "SELECT idcategory, name FROM category WHERE idcategory != '1'";
+                    $resultCat=mysql_query($sqlCat, $conn);
+                    while($rowCat = mysql_fetch_assoc($resultCat)){
+                        echo '<li>';
+                        echo '<a href="suggestionList.php?id='.$rowCat['idcategory'].'">'.$rowCat["name"].'</a>';
+                        echo '<ul>';
 
-                    //if it's not male gender, it displays female image
-                    else {
-                        echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
-                        echo '<img class="logo" src="img/girl.png">';
-                        echo '</br>';
-                        echo '<a title="odjava" href="logout.php">Odjava</a>';
-                    }
-                }
-                ?>
-
-            </div><!--reg-prijava-->
-
-
-
-        </div><!--header-up-->
-
-        <div id="header-down">
-
-            <div id="horizontal-menu">
-                <ul>
-                    <li><a href="index.php">Home</a> </li>
-                    <li><a href="newsList.php">Vijesti</a> </li>
-                    <?php
-
-                    if(isset ($_SESSION['SESS_MEMBER_ID'])){
-                        echo'<li><a href="suggestionList.php" id="category" >Prijedlozi</a>
-                        <ul id="ulCategoryIzgradnja" class="hide">';
-
-                        $sqlCat = "SELECT idcategory, name FROM category WHERE idcategory != '1'";
-                        $resultCat=mysql_query($sqlCat, $conn);
-                        while($rowCat = mysql_fetch_assoc($resultCat)){
-
-                            echo '<li id="liCategoryIzgradnja">';
-                            echo '<a href="suggestionList.php?id='.$rowCat['idcategory'].'"  id="aCategoryIzgradnja" class="show">'.$rowCat["name"].'</a>';
-                            $sqlSub = "SELECT idsubcategory, name, idcategory, startDate FROM subcategory WHERE name != 'Vijest' and idcategory = 2 ORDER BY startDate DESC";
-                            $resultSub=mysql_query($sqlSub, $conn);
-                            echo '<ul id="ulSubcategoryIzgradnja" class="hide">';
-                            while($rowSub = mysql_fetch_assoc($resultSub)){
-
-                                echo '<li id="liSubcategoryIzgradnja">';
-                                echo '<a href="suggestionListBySub.php?id='.$rowSub['idsubcategory'].'" id="aSubcategoryIzgradnja">'.$rowSub["name"].'</a>';
-                                echo '</li></br>';
-                            }
-                            echo '<li id="liSubcategoryIzgradnja">';
-                            echo '<a href="addSuggestion.php" id="aSubcategoryIzgradnja">Dodaj prijedlog</a>';
-                            echo '</li></br>';
-                            echo '<li id="liSubcategoryIzgradnja">';
-                            echo '<a href="addSubcategory.php" id="aSubcategoryIzgradnja">Dodaj temu</a>';
-                            echo '</li></br>';
-                            echo '</ul>';
-                            echo '</li></br>';
-
+                        $idcategory = $rowCat['idcategory'];
+                        $sqlSub = "SELECT idcategory, name FROM subcategory WHERE idcategory = $idcategory";
+                        $resSub=mysql_query($sqlSub, $conn);
+                        while($rowSub =mysql_fetch_assoc ($resSub)){
+                            echo '<li>';
+                            echo '<a href="suggestionList.php?id='.$rowSub['idcategory'].'">'.$rowSub["name"].'</a>';
+                            echo '</li>';
                         }
-                        echo '</ul></li>';
+                        echo '<li>';
+                        echo '<a href="addSubcategory.php">+ Nova potkategorija</a>';
+                        echo '</li>';
+                        echo '<li>';
+                        echo '<a href="addSuggestion.php">+ Novi prijedlog</a>';
+                        echo '</li>';
 
-                        echo '<li><a href="decisionList.php">Odluke</a></li>';
-                        echo '<li><a href="userList.php">Korisnici</a> </li>';
-                    }
+                        echo '</ul>';
+
+                        echo '</li>';}
                     ?>
 
-                </ul>
+                    <?php echo'</ul>';?>
+                    <?php echo'</li>';?>
 
-            </div><!--horizontal-menu-->
-
-            <div id="search">
-                <div id="search-down">
-                    <a href="search.php"><div id="img-search">
-                        </div></a><!--img-search-->
-
-                    <input type="text" name="search" >
+                    <li class="currentTab"><a href="decisionList.php">Odluke</a></li>
+                    <li><a href="userList.php">Korisnici</a></li>
+                <?php }
+                ?>
 
 
-                </div>
-
-            </div><!--search-->
-
-        </div><!--header-down-->
+            </ul>
+        </nav>
 
 
-    </div><!--header--->
+
+
+        <div id="search">
+            <div id="search-down">
+                <a href="search.php?id=<?php $string ?>"><div id="img-search">
+                    </div></a><!--img-search-->
+
+                <input type="text" name="search" >
+
+
+            </div>
+
+        </div><!--search-->
+
+    </div><!--header-down-->
+
+
+</div><!--header--->
 
     <div id="container">
         <div class="news_container">
             <?php
-            $result = mysql_query("select post.title,post.content,post.date_time, post.idsubcategory, post.idpost from post inner join subcategory on post.idsubcategory = subcategory.idsubcategory where post.idsubcategory = $idsubcategory and post.idpost_type = 2");
-            $idpost = 0;
+            $idpost = $_GET['id'];
+            $result = mysql_query("select title,content,date_time from post where post.idpost = $idpost");
+
             if($result == FALSE) {
                 die(mysql_error());
             }
 
             while($row = mysql_fetch_array($result))
             {
-                $idpost = $row['idpost'];
                 echo '<h2 id="title">'.$row["title"].'</h2>';
                 echo '<p class="meta"><span class="date">'.$row["date_time"].'</span></p>';
                 echo ' <div class="entry"><p>'.$row["content"].'</p></div>';
@@ -152,7 +156,6 @@ $idsubcategory = $_GET['id'];
         <div class="existingComments_container">
             <h2>Komentari</h2>
             <?php
-
             $sql = mysql_query("SELECT comment.content, user.username, comment.date_time, comment.iduser, comment.idpost FROM comment inner join user on comment.iduser = user.iduser
             WHERE comment.idpost = $idpost");
             while($row2 = mysql_fetch_array($sql)){
@@ -187,7 +190,7 @@ $idsubcategory = $_GET['id'];
 
                         <textarea name="comment_text" id="comment_text" cols="50" rows="7" placeholder="Unesite komentar"></textarea>
 
-                        <input type="submit" value="Submit" />
+                        <input type="submit" value="Komentiraj" />
 
                     </form>
 
