@@ -7,14 +7,11 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
     <link href="style/postList.css" rel="stylesheet" type="text/css" />
-    <link href="style/userList.css" rel="stylesheet" type="text/css" />
-
 
     <meta charset="utf-8">
 
     <link href="style/login-popup.css" rel="stylesheet" type="text/css" />    <!--css style from a login-popup form-->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script> <!--script from a login-popup form-->
-
 
 
 </head>
@@ -27,6 +24,10 @@ session_start();
 ?>
 
 <body>
+
+<?php require_once('loginPopup.php'); ?>
+
+
 <div id="wrapper" >
 
 <div id="header">
@@ -44,7 +45,7 @@ session_start();
             //checks if user is logged in
             if(isset ($_SESSION['SESS_MEMBER_ID'])){
                 $sesija=$_SESSION['SESS_MEMBER_ID'];
-                $result=mysql_query("SELECT * FROM user WHERE user.iduser='$sesija' ");
+                $result=mysql_query("SELECT iduser, gender FROM user WHERE user.iduser='$sesija' ");
                 $row=mysql_fetch_assoc($result);
                 $gender=$row["gender"];
 
@@ -67,7 +68,7 @@ session_start();
 
             //includes login popup form
             else {
-                include_once("loginPopup.php");
+                echo '<a class="login-window" href="#loginPopup.php">Prijava</a>';
                 echo'<a title="registracija" href="registration.php">Registracija</a>';
             }
             ?>
@@ -77,56 +78,61 @@ session_start();
 
     <div id="header-down">
 
-        <div id="horizontal-menu">
+        <nav>
             <ul>
-                <li><a href="index.php" class="currentTab">Home</a> </li>
-                <li><a href="newsList.php">Vijesti</a> </li>
+                <li class="currentTab"><a href="index.php">Home</a></li>
+                <li><a href="newsList.php">Vijesti</a></li>
                 <?php
 
                 if(isset ($_SESSION['SESS_MEMBER_ID'])){
-                    echo'<li><a href="suggestionList.php" id="category" >Prijedlozi</a>
-                        <ul id="ulCategoryIzgradnja" class="hide">';
+                    echo'<li><a href="suggestionList.php">Prijedlozi</a>';
+                    echo'<ul>';
 
                     $sqlCat = "SELECT idcategory, name FROM category WHERE idcategory != '1'";
                     $resultCat=mysql_query($sqlCat, $conn);
                     while($rowCat = mysql_fetch_assoc($resultCat)){
+                        echo '<li>';
+                        echo '<a href="suggestionList.php?id='.$rowCat['idcategory'].'">'.$rowCat["name"].'</a>';
+                        echo '<ul>';
 
-                        echo '<li id="liCategoryIzgradnja">';
-                        echo '<a href="suggestionList.php?id='.$rowCat['idcategory'].'"  id="aCategoryIzgradnja" class="show">'.$rowCat["name"].'</a>';
-                        $sqlSub = "SELECT idsubcategory, name, idcategory, startDate FROM subcategory WHERE name != 'Vijest' and idcategory = 2 ORDER BY startDate DESC";
-                        $resultSub=mysql_query($sqlSub, $conn);
-                        echo '<ul id="ulSubcategoryIzgradnja" class="hide">';
-                        while($rowSub = mysql_fetch_assoc($resultSub)){
-
-                            echo '<li id="liSubcategoryIzgradnja">';
-                            echo '<a href="suggestionListBySub.php?id='.$rowSub['idsubcategory'].'" id="aSubcategoryIzgradnja">'.$rowSub["name"].'</a>';
-                            echo '</li></br>';
+                        $idcategory = $rowCat['idcategory'];
+                        $sqlSub = "SELECT idcategory, name FROM subcategory WHERE idcategory = $idcategory";
+                        $resSub=mysql_query($sqlSub, $conn);
+                        while($rowSub =mysql_fetch_assoc ($resSub)){
+                            echo '<li>';
+                            echo '<a href="suggestionList.php?id='.$rowSub['idcategory'].'">'.$rowSub["name"].'</a>';
+                            echo '</li>';
                         }
-                        echo '<li id="liSubcategoryIzgradnja">';
-                        echo '<a href="addSuggestion.php" id="aSubcategoryIzgradnja">Dodaj prijedlog</a>';
-                        echo '</li></br>';
-                        echo '<li id="liSubcategoryIzgradnja">';
-                        echo '<a href="addSubcategory.php" id="aSubcategoryIzgradnja">Dodaj temu</a>';
-                        echo '</li></br>';
+                        echo '<li>';
+                        echo '<a href="addSubcategory.php">+ Nova potkategorija</a>';
+                        echo '</li>';
+                        echo '<li>';
+                        echo '<a href="addSuggestion.php">+ Novi prijedlog</a>';
+                        echo '</li>';
+
                         echo '</ul>';
-                        echo '</li></br>';
 
-                    }
-                    echo '</ul></li>';
-                    echo '<li><a href="decisionList.php">Odluke</a> </li>';
-                    echo '<li><a href="userList.php">Korisnici</a> </li>';
-                }
+                        echo '</li>';}
+                    ?>
 
+                    <?php echo'</ul>';?>
+                    <?php echo'</li>';?>
+
+                    <li><a href="decisionList.php">Odluke</a></li>
+                    <li><a href="userList.php">Korisnici</a></li>
+                <?php }
                 ?>
 
 
             </ul>
+        </nav>
 
-        </div><!--horizontal-menu-->
+
+
 
         <div id="search">
             <div id="search-down">
-                <a href="search.php"><div id="img-search">
+                <a href="search.php?id=<?php $string ?>"><div id="img-search">
                     </div></a><!--img-search-->
 
                 <input type="text" name="search" >
@@ -190,9 +196,10 @@ session_start();
     // while there are rows to be fetched...
     while ($row = mysql_fetch_assoc($result)) {
         $idpost=$row['idpost'];
+        $iduserNews=$row['iduser'];
         echo '<h2 id="title"><a href="newsDetails.php?id='.$idpost.'">'.$row["title"].'</a></h2>';
         echo '<p class="meta"><span class="date">'.$row["date_time"].'</span></p>';
-        echo '<p><span class="posted">postavio/la <a class="user_link" href="#">'.$row["username"].'</a></span></p>';
+        echo '<p><span class="posted">postavio/la <a class="user_link" href="profileView.php?id='.$iduserNews.'">'.$row["username"].'</a></span></p>';
         echo ' <div class="entry"><p>'.$row["summary"].'</p></div>';
         echo '<p class="links"><a href="newsDetails.php?id='.$idpost.'" class="right">Pročitaj više</a></p></br>';
         $sql2 = mysql_query("SELECT * FROM vote WHERE idpost = $idpost");
@@ -250,16 +257,7 @@ session_start();
     /****** end build pagination links ******/
     /******  build the pagination links ******/
     // if not on page 1, don't show back links
-    /*
-        if ($currentpage > 1) {
-            // show << link to go back to page 1
-           echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=1'><img src='img/ff-p-button.png'></a> ";
-            // get previous page num
-            $prevpage = $currentpage - 1;
-            // show < link to go back to 1 page
-           echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$prevpage'><img src='img/prev-button.png'></a> ";
-        } // end if
-    */
+
     echo "</div><!--pagination-->";
     ?>
 
@@ -321,11 +319,12 @@ session_start();
             // while there are rows to be fetched...
             while ($row = mysql_fetch_assoc($result)) {
                 $idpost=$row['idpost'];
+                $iduser=$row['iduser'];
                 echo '<h3 id="title"><a href="suggestionDetails.php?id='.$idpost.'">'.$row["content"].'</a></h3>';
                 echo '<p><span>'.$row["date_time"].'</span></p>';
-                echo '<p><span class="posted">postavio/la <a class="user_link" href="#">'.$row["username"].'</a></span></p><br>';
+                echo '<p><span class="posted">postavio/la <a class="user_link" href="profileView.php?id='.$iduser.'">'.$row["username"].'</a></span></p><br>';
 //                  echo ' <div class="entry"><p>'.$row["content"].'</p></div>';
-//                    echo '<p class="links"><a href="suggestionDetails.php?id='.$idpost.'" class="right">Pročitaj više</a></p></br>';
+//                  echo '<p class="links"><a href="suggestionDetails.php?id='.$idpost.'" class="right">Pročitaj više</a></p></br>';
                 $sql2 = mysql_query("SELECT * FROM vote WHERE idpost = $idpost");
                 $a = false;
                 while($row2 = mysql_fetch_assoc($sql2))
@@ -345,16 +344,17 @@ session_start();
 
             /******  build the pagination links ******/
             // range of num links to show
+            echo"<div id='pagination'>";
             $range = 3;
 
             // if not on page 1, don't show back links
             if ($currentpage > 1) {
                 // show << link to go back to page 1
-                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=1'><img src='img/ff-p-button.png'></a> ";
+                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=1' id='ff-prev'></a> ";
                 // get previous page num
                 $prevpage = $currentpage - 1;
                 // show < link to go back to 1 page
-                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$prevpage'><img src='img/prev-button.png'></a> ";
+                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$prevpage'  id='previous'></a> ";
             } // end if
 
             // loop to show links to range of pages around current page
@@ -364,7 +364,7 @@ session_start();
                     // if we're on current page...
                     if ($x == $currentpage) {
                         // 'highlight' it but don't make a link
-                        echo " [<b>$x</b>] ";
+                        echo "<a href='#' class='blue'>$x</a> ";
                         // if not current page...
                     } else {
                         // make it a link
@@ -378,24 +378,15 @@ session_start();
                 // get next page
                 $nextpage = $currentpage + 1;
                 // echo forward link for next page
-                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$nextpage'><img src='img/next-btn.png'></a> ";
+                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$nextpage' id='next'></a> ";
                 // echo forward link for lastpage
-                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$totalpages'><img src='img/ff-n-btn.png'></a> ";
+                echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$totalpages' id='ff-next' ></a> ";
             } // end if
             /****** end build pagination links ******/
             /******  build the pagination links ******/
             // if not on page 1, don't show back links
-            /*
-              if ($currentpage > 1) {
-                  // show << link to go back to page 1
-                  echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=1'><<</a> ";
-                  // get previous page num
-                  $prevpage = $currentpage - 1;
-                  // show < link to go back to 1 page
-                  echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$prevpage'><img src='img/prev-button.png'></a> ";
-              } // end if
-                */
 
+            echo "</div><!--pagination-->";
         }
         ?>
 
@@ -437,8 +428,6 @@ session_start();
 
 
 </div><!--wrapper-->
-
-<script src="dropDownMenu.js" type="text/javascript"></script>
 
 </body>
 
