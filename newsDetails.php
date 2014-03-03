@@ -17,6 +17,9 @@ session_start();
 ?>
 
 <body>
+
+<?php require_once('loginPopup.php'); ?>
+
 <div id="wrapper" >
 
     <div id="header">
@@ -35,30 +38,30 @@ session_start();
                 //checks if user is logged in
                 if(isset ($_SESSION['SESS_MEMBER_ID'])){
                     $sesija=$_SESSION['SESS_MEMBER_ID'];
-                    $result=mysql_query("SELECT * FROM user WHERE user.iduser='$sesija' ");
+                    $result=mysql_query("SELECT iduser, gender FROM user WHERE user.iduser='$sesija' ");
                     $row=mysql_fetch_assoc($result);
                     $gender=$row["gender"];
 
                     //checking gender and displaying matching picture
                     if($gender=='M'){
-                        echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                        echo '<a href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
                         echo '<img class="logo" src="img/men.png">';
                         echo '</br>';
-                        echo'<a title="odjava" href="logout.php">Odjava</a>';
+                        echo'<a href="logout.php">Odjava</a>';
                     }
 
                     //if it's not male gender, it displays female image
                     else {
-                        echo '<a title="prijava" href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
+                        echo '<a href="profile.php">'.$_SESSION["SESS_FIRST_NAME"].'</a>';
                         echo '<img class="logo" src="img/girl.png">';
                         echo '</br>';
-                        echo'<a title="odjava" href="logout.php">Odjava</a>';
+                        echo'<a href="logout.php">Odjava</a>';
                     }
                 }
 
                 //includes login popup form
                 else {
-                    include_once("loginPopup.php");
+                    echo '<a class="login-window" href="#loginPopup.php">Prijava</a>';
                     echo'<a title="registracija" href="registration.php">Registracija</a>';
                 }
                 ?>
@@ -69,30 +72,60 @@ session_start();
 
         <div id="header-down">
 
-            <div id="horizontal-menu">
+            <nav id="horizontal-menu">
                 <ul>
                     <li><a href="index.php">Home</a> </li>
                     <li><a href="newsList.php" class="currentTab">Vijesti</a> </li>
                     <?php
 
-
                     if(isset ($_SESSION['SESS_MEMBER_ID'])){
-                    echo'<li><a href="suggestionList.php">Prijedlozi</a> </li>';
-                    echo '<li><a href="decisionList.php">Odluke</a> </li>';
-                    echo '<li><a href="userList.php">Korisnici</a> </li>';
-                    }
+                        echo'<li><a href="suggestionList.php">Prijedlozi</a>';
+                        echo'<ul>';
 
+                        $sqlCat = "SELECT idcategory, name FROM category WHERE idcategory != '1'";
+                        $resultCat=mysql_query($sqlCat, $conn);
+                        while($rowCat = mysql_fetch_assoc($resultCat)){
+                            echo '<li>';
+                            echo '<a href="suggestionList.php?id='.$rowCat['idcategory'].'">'.$rowCat["name"].'</a>';
+                            echo '<ul>';
+
+                            $idcategory = $rowCat['idcategory'];
+                            $sqlSub = "SELECT idcategory, name FROM subcategory WHERE idcategory = $idcategory";
+                            $resSub=mysql_query($sqlSub, $conn);
+                            while($rowSub =mysql_fetch_assoc ($resSub)){
+                                echo '<li>';
+                                echo '<a href="suggestionList.php?id='.$rowSub['idcategory'].'">'.$rowSub["name"].'</a>';
+                                echo '</li>';
+                            }
+                            echo '<li>';
+                            echo '<a href="addSubcategory.php">+ Nova potkategorija</a>';
+                            echo '</li>';
+                            echo '<li>';
+                            echo '<a href="addSuggestion.php">+ Novi prijedlog</a>';
+                            echo '</li>';
+
+                            echo '</ul>';
+
+                            echo '</li>';}
+                        ?>
+
+                        <?php echo'</ul>';?>
+                        <?php echo'</li>';?>
+
+                        <li><a href="decisionList.php">Odluke</a></li>
+                        <li><a href="userList.php">Korisnici</a></li>
+                    <?php }
                     ?>
 
 
 
                 </ul>
 
-            </div><!--horizontal-menu-->
+            </nav><!--horizontal-menu-->
 
             <div id="search">
                 <div id="search-down">
-                    <a href="search.php"><div id="img-search">
+                    <a href="search.php?id=<?php $string ?>"><div id="img-search">
                     </div></a><!--img-search-->
 
                     <input type="text" name="search" >
@@ -128,12 +161,13 @@ session_start();
         <div class="existingComments_container">
         <h2>Komentari</h2></br>
             <?php
-            $sql = mysql_query("SELECT content, username, date_time, user.iduser FROM comment inner join user on comment.iduser = user.iduser
+            $sql = mysql_query("SELECT content, username, date_time FROM comment inner join user on comment.iduser = user.iduser
             WHERE comment.idpost=$idpost");
             while($row2 = mysql_fetch_array($sql)){
-                $iduser = $row2['iduser'];
-                echo '<p><span class="posted"><a class="user_link" href="profileView.php?id='.$iduser.'">'.$row2["username"].' </a></span>'.$row2["content"].'</p>';
-                echo '<span class="date">'.date("d.\tm.\tY. \tH:\ti", strtotime($row2["date_time"])).'</span>';
+                echo '<span>'.$row2["content"].'<span></br>';
+//                echo '<span id="username">'.$row2["username"].'</span></br>';
+                echo '<p><span class="posted">postavio/la <a class="user_link" href="profileView.php?id='.$iduser.'">'.$_SESSION["SESS_FIRST_NAME"].'</a></span></p>';
+                echo '<span class="date">'.date("d.\tm.\tY. \tH:\ti", strtotime($row2["date_time"])).'</span></br></br>';
                 echo '<hr>';
             }
 
@@ -159,9 +193,9 @@ session_start();
 
                <form action="addcomment.php?id=<?php echo $idpost ?>" method="post"><br />
 
-               <textarea name="comment_text" id="comment_text" cols="30" rows="7" placeholder="Unesite komentar"></textarea>
+               <textarea name="comment_text" id="comment_text" placeholder="Unesite komentar"></textarea>
 
-               <input type="submit" value="Submit" />
+               <input type="submit" value="Komentiraj" />
 
                 </form>
 
