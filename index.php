@@ -96,11 +96,12 @@ session_start();
                         echo '<ul>';
 
                         $idcategory = $rowCat['idcategory'];
-                        $sqlSub = "SELECT idcategory, name FROM subcategory WHERE idcategory = $idcategory";
+                        $sqlSub = "SELECT idcategory,idsubcategory ,name FROM subcategory WHERE idcategory = $idcategory";
                         $resSub=mysql_query($sqlSub, $conn);
                         while($rowSub =mysql_fetch_assoc ($resSub)){
+                            $idsubcategory=$rowSub['idsubcategory'];
                             echo '<li>';
-                            echo '<a href="suggestionList.php?id='.$rowSub['idcategory'].'">'.$rowSub["name"].'</a>';
+                            echo '<a href="suggestionListBySub.php?id='.$idsubcategory.'">'.$rowSub["name"].'</a>';
                             echo '</li>';
                         }
                         echo '<li>';
@@ -210,7 +211,13 @@ session_start();
                 $a = true;
             }
         }
+        echo '<form name="addVote" action="addVoteStore.php?id='.$idpost.'" method="post">';
+        if($a == true){
 
+            echo '<button id="voteButtonFalse" name="submit" value="submit"  disabled>Glasaj</button> </br>';
+        }
+        else
+            echo '<button id="voteButton" name="submit" value="submit">Glasaj</button> </br>';
         echo '</form>';
     } // end while
 
