@@ -129,7 +129,6 @@ session_start();
                 </ul>
             </nav><!--horizontal menu-->
 
-            <?php $string=$_GET['id']?>
             <div id="search">
                 <div id="search-down">
                     <a href="search.php?id=<?php $string ?>"><div id="img-search">
