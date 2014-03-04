@@ -223,7 +223,7 @@ $idsubcategory = $_GET['id'];
         </div><!--footer-up-->
 
         <div id="footer-down">
-            <p class="text">All design and content Copyright &copy; 2014.<span id="year"></span>. All rights reserved.</p>
+                <p class="text">All design and content Copyright &copy; <span><?php echo date('Y');?></span>. All rights reserved.</p>
         </div><!--footer-down-->
 
 
