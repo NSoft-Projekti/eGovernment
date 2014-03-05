@@ -74,6 +74,8 @@ body {
     background-position: 0 -29px;
     float: right;
     margin: 15px 15px;
+    padding:0;
+    border:none;
 }
 
 #search input {
