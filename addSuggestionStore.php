@@ -11,7 +11,7 @@ if(!empty($_POST['contentPrijedlog']))
     $inputContent=mysql_real_escape_string($_POST['contentPrijedlog']);
     mysql_query("INSERT INTO post (content, date_time, iduser, idpost_type, idsubcategory)
     VALUES ('".$inputContent."','".$date_time."', $iduser, 3, $idsubcategory)");
-    //header("location: suggestionList.php");
+    header("location: suggestionList.php");
     echo mysql_error();
 }
 ?>

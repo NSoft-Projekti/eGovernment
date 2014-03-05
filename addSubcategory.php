@@ -89,11 +89,11 @@ if(!isset ($_SESSION['SESS_MEMBER_ID']))
                             echo '<ul>';
 
                             $idcategory = $rowCat['idcategory'];
-                            $sqlSub = "SELECT idcategory, name FROM subcategory WHERE idcategory = $idcategory";
+                            $sqlSub = "SELECT idcategory,idsubcategory, name FROM subcategory WHERE idcategory = $idcategory";
                             $resSub=mysql_query($sqlSub, $conn);
                             while($rowSub =mysql_fetch_assoc ($resSub)){
                                 echo '<li>';
-                                echo '<a href="suggestionList.php?id='.$rowSub['idcategory'].'">'.$rowSub["name"].'</a>';
+                                echo '<a href="suggestionListBySub.php?id='.$rowSub['idsubcategory'].'">'.$rowSub["name"].'</a>';
                                 echo '</li>';
                             }
                             echo '<li>';
