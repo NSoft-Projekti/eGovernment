@@ -129,15 +129,15 @@ session_start();
         </nav>
 
 
-
+        <!-- href="search.php?id=<"-->
 
         <div id="search">
             <div id="search-down">
-                <a href="search.php?id=<?php $string ?>"><div id="img-search">
-                    </div></a><!--img-search-->
+<form method="post" action="search.php">
+<input type="submit" id="img-search" value="">
+                <input type="text" name="searchquery" >
 
-                <input type="text" name="search" >
-
+</form>
 
             </div>
 
