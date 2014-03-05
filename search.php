@@ -98,11 +98,11 @@ session_start();
                             echo '<ul>';
 
                             $idcategory = $rowCat['idcategory'];
-                            $sqlSub = "SELECT idcategory, name FROM subcategory WHERE idcategory = $idcategory";
+                            $sqlSub = "SELECT idcategory,idsubcategory, name FROM subcategory WHERE idcategory = $idcategory";
                             $resSub=mysql_query($sqlSub, $conn);
                             while($rowSub =mysql_fetch_assoc ($resSub)){
                                 echo '<li>';
-                                echo '<a href="suggestionList.php?id='.$rowSub['idcategory'].'">'.$rowSub["name"].'</a>';
+                                echo '<a href="suggestionListBySub.php?id='.$rowSub['idsubcategory'].'">'.$rowSub["name"].'</a>';
                                 echo '</li>';
                             }
                             echo '<li>';
@@ -131,10 +131,11 @@ session_start();
 
             <div id="search">
                 <div id="search-down">
-                    <a href="search.php?id=<?php $string ?>"><div id="img-search">
-                        </div></a><!--img-search-->
+                    <form method="post" action="search.php">
+                        <input type="submit" id="img-search" value="">
+                        <input type="text" name="searchquery" >
 
-                    <input type="text" name="search" >
+                    </form>
 
 
                 </div>
@@ -179,12 +180,7 @@ session_start();
 
 
             ?>
-            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-                Traženi pojam:
-                <input name="searchquery" type="text" size="44" maxlength="88">
-                <input name="myBtn" type="submit" value="Pretraži">
-                <br>
-            </form>
+
             <div>
                 <?php echo $search_output; ?>
             </div>
