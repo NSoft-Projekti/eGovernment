@@ -7,6 +7,8 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="style/DefaultStyle.css" rel="stylesheet" type="text/css" />
     <link href="style/postList.css" rel="stylesheet" type="text/css">
+    <link href="style/addNews.css" rel="stylesheet" type="text/css">
+    <link href="style/profile.css" rel="stylesheet" type="text/css">
     <meta charset="utf-8">
 </head>
 
@@ -241,7 +243,7 @@ $idsubcategory = $_GET['id'];
 
         if($endDate > $currentDate){
 
-            echo '<input type="submit" name="racunaj" value="Donesi odluku" class="button_vijest_false" float="right" disabled></br></br></br></br>';
+            echo '<input type="submit" name="racunaj" value="Donesi odluku" class="button_vijest" float="right" disabled></br></br></br></br>';
         }
         else if($decision==false){
             echo '<form name="formOdluka" method="post" action="addDecision.php?id='.$idsubcategory.'">';

@@ -203,6 +203,7 @@ session_start();
         echo '<p><span class="posted">postavio/la <a class="user_link" href="profileView.php?id='.$iduserNews.'">'.$row["username"].'</a></span></p>';
         echo ' <div class="entry"><p>'.$row["summary"].'</p></div>';
         echo '<p class="links"><a href="newsDetails.php?id='.$idpost.'" class="right">Pročitaj više</a></p></br>';
+    if(isset ($_SESSION['SESS_MEMBER_ID']) and $row['idpost_type']!=1){
         $sql2 = mysql_query("SELECT * FROM vote WHERE idpost = $idpost");
         $a = false;
         while($row2 = mysql_fetch_assoc($sql2))
@@ -219,6 +220,7 @@ session_start();
         else
             echo '<button id="voteButton" name="submit" value="submit">Glasaj</button> </br>';
         echo '</form>';
+    }
     } // end while
 
     /******  build the pagination links ******/
